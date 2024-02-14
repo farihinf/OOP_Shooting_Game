@@ -6,31 +6,53 @@ import com.badlogic.gdx.Game;
 import com.badlogic.gdx.utils.ScreenUtils;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
-public class GameManager extends Game{
-	
+public class GameManager extends Game
+{
 	private SpriteBatch batch;
-	private EntityManager em;
+	private GameScreen gamescreen;
+	private EntityManager1 em;
+	private SceneManager sm;
 	private Player player;
 	private Enemy enemy;
-	private SceneManager sm;
 	
-	@Override
-	public void create() {
+	public void create() 
+	{
 		batch = new SpriteBatch();
-		em = new EntityManager(batch);
-
-		player = em.SpawnPlayer();
-		enemy = em.SpawnEnemy();
+        em = new EntityManager1(batch);
+        sm = new SceneManager(batch);
+        
+        sm.changeScene(new MainMenu(sm));
+        sm.mainmenu.draw();
+        
+        player = em.SpawnPlayer();
+        enemy = em.SpawnEnemy();
 	}
 	
-	@Override
-	public void render() {
-		ScreenUtils.clear(0, 0, 0.2f, 1);
-		enemy.Move();
-		player.Move();
-		batch.begin();
-			player.Draw();
-			enemy.Draw();
-		batch.end();
+	public void render() 
+	{
+	    Screen currentScreen = sm.getScreen();
+	    if (currentScreen != null) 
+	    {
+	        if (currentScreen instanceof MainMenu) 
+	        {
+	            ((MainMenu) currentScreen).initialise();
+	        } 
+	        else 
+	        {
+	        	gamescreen = (GameScreen) currentScreen;
+	        	
+	        	gamescreen.initialise();
+	        	
+	        	if(!gamescreen.isPaused()) 
+	        	{
+	        		batch.begin();
+	        		player.Draw();
+	        		enemy.Draw();
+	        		enemy.Move();
+	        		player.Move();
+	        		batch.end();
+	        	}
+	        }
+	    }
 	}
 }
