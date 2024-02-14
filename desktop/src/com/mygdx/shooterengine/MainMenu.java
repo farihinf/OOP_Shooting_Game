@@ -8,9 +8,8 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.utils.viewport.StretchViewport;
 
-public class MainMenu implements Screen 
+public class MainMenu extends Scene
 {
-    private final GameManager game;
     private SpriteBatch batch;
     private Texture background;
     private Texture title_logo;
@@ -23,6 +22,8 @@ public class MainMenu implements Screen
     private float optionsButtonX;
     private float optionsButtonY;
     
+    private SceneManager sceneManager;
+    
     private Texture overlayImage;
     private boolean showOverlay = false;
     
@@ -31,22 +32,22 @@ public class MainMenu implements Screen
     float overlayX;
     float overlayY;
     
-    public MainMenu(final GameManager gameManager, SpriteBatch b) 
+    MainMenu(SceneManager sceneManager) 
     {
-        this.game = gameManager;
-        batch = b;
-        background = new Texture("ScreenImages\\MainMenu.png");
-        title_logo = new Texture("ScreenImages\\Logo.png");
-        startButton = new Texture("ScreenImages\\StartButton.png");
-        optionsButton = new Texture("ScreenImages\\OptionsButton.png");
+        batch = new SpriteBatch();
+        background = new Texture("MainMenu.png");
+        title_logo = new Texture("Logo.png");
+        startButton = new Texture("StartButton.png");
+        optionsButton = new Texture("OptionsButton.png");
         viewport = new StretchViewport(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
         viewport.apply();
         
-        overlayImage = new Texture("ScreenImages\\Interface.png");  
-
+        overlayImage = new Texture("Interface.png");  
+        
+        this.sceneManager = sceneManager;
     }
 
-    public void render(float delta) 
+	public void initialise() 
     {
         handleInput();  
 
@@ -54,7 +55,12 @@ public class MainMenu implements Screen
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
         batch.setProjectionMatrix(viewport.getCamera().combined);
-        batch.begin();
+        draw();
+    }
+    
+    public void draw() 
+    {
+    	batch.begin();
 
         batch.draw(background, 0, 0, viewport.getWorldWidth(), viewport.getWorldHeight());
 
@@ -97,16 +103,15 @@ public class MainMenu implements Screen
 
             if (isButtonClicked(startButton, startButton_posX, startButton_posY, startButton.getWidth() / 2, startButton.getHeight() / 2, touchPos.x, touchPos.y)) 
             {
-                game.setScreen(new GameScreen(batch));
+                sceneManager.changeScene(new GameScreen(sceneManager));
             }
 
             if (isButtonClicked(optionsButton, optionsButtonX, optionsButtonY, optionsButton.getWidth() / 2, optionsButton.getHeight() / 2, touchPos.x, touchPos.y)) 
             {
-            	showOverlay = !showOverlay;
+                showOverlay = !showOverlay;
             }
         }
     }
-
 
     private boolean isButtonClicked(Texture button, float buttonX, float buttonY, float buttonWidth, float buttonHeight, float touchX, float touchY) 
     {
@@ -124,29 +129,9 @@ public class MainMenu implements Screen
         viewport.update(width, height, true);
     }
 
-	@Override
-	public void show() 
-	{
-		// TODO Auto-generated method stub
-		
-	}
 
 	@Override
-	public void pause() 
-	{
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void resume() 
-	{
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void hide() 
+	public void render(float delta) 
 	{
 		// TODO Auto-generated method stub
 		
@@ -156,7 +141,6 @@ public class MainMenu implements Screen
     public void dispose() 
     {
         batch.dispose();
-        background.dispose();
         title_logo.dispose();
         startButton.dispose();
         optionsButton.dispose();
