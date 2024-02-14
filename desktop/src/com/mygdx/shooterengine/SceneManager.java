@@ -5,33 +5,42 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 //import com.badlogic.gdx.Game;
 //import com.badlogic.gdx.Gdx;
 
-public class SceneManager 
+public class SceneManager extends Game
 {
-	private SpriteBatch b;
-    public void resize(int width, int height) 
+    private Scene currentScene;
+    private Texture background;
+    private SpriteBatch batch;
+    public MainMenu mainmenu;
+    
+    SceneManager(SpriteBatch batch)
+    {
+    	this.batch = batch;
+    	mainmenu = new MainMenu(this);
+    }
+    
+    public void changeScene(Scene scene) 
 	{
-
-	}
-
-	public void pause() 
-	{
-	
-	}
-
-	public void resume() 
-	{
+		if (currentScene != null) 
+    	{
+            currentScene.dispose();
+        }
+    	 currentScene = scene;
+         currentScene.show();
+         setScreen((Screen) currentScene);
+    }
+    
+    @Override
+	public void create() 
+    {
 		
 	}
-	
-	 
-	public void show() 
+    
+	public void dispose() 
 	{
-	
+		if (background != null) 
+		{
+	        background.dispose();
+	    }    
 	}
-
-	public void hide() 
-	{
-		
-	}
-
 }
+
