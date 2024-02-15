@@ -1,4 +1,4 @@
-package com.mygdx.game;
+package com.mygdx.shooterengine;
 
 import com.badlogic.gdx.Screen;
 

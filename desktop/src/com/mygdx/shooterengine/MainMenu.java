@@ -1,9 +1,9 @@
 package com.mygdx.shooterengine;
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Screen;
+// import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.Sprite;
+// import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.utils.viewport.StretchViewport;
@@ -35,15 +35,16 @@ public class MainMenu extends Scene
     MainMenu(SceneManager sceneManager) 
     {
         batch = new SpriteBatch();
-        background = new Texture("MainMenu.png");
-        title_logo = new Texture("Logo.png");
-        startButton = new Texture("StartButton.png");
-        optionsButton = new Texture("OptionsButton.png");
+        background = new Texture(Gdx.files.internal("ScreenImages\\MainMenu.png"));
+        title_logo = new Texture(Gdx.files.internal("ScreenImages\\Logo.png"));
+        startButton = new Texture(Gdx.files.internal("ScreenImages\\StartButton.png"));
+        optionsButton = new Texture(Gdx.files.internal("ScreenImages\\OptionsButton.png"));
+
         viewport = new StretchViewport(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
         viewport.apply();
         
-        overlayImage = new Texture("Interface.png");  
-        
+        overlayImage = new Texture(Gdx.files.internal("ScreenImages\\Interface.png"));
+
         this.sceneManager = sceneManager;
     }
 

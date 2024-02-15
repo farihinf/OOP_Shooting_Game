@@ -10,7 +10,8 @@ public class EntityManager {
 	private SpriteBatch batch;
 	private Player player;
 	private Enemy enemy;
-	
+	private PlayerControlManager playerMovement;
+
 	EntityManager(SpriteBatch sb){
 		batch = sb;
 		playerTexture = new Texture(Gdx.files.internal("EntitySprites\\player.png"));
@@ -25,5 +26,10 @@ public class EntityManager {
 	public Enemy SpawnEnemy() {
 		enemy = new Enemy(100, 10, 200f, enemyTexture, batch, 300f, 400f);
 		return enemy;
+	}
+
+	public PlayerControlManager PlayerControls() {
+		playerMovement = new PlayerControlManager(100, 10, 200f, playerTexture, batch, 300f, 100f);
+		return playerMovement;
 	}
 }

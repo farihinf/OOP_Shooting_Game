@@ -1,31 +1,35 @@
 package com.mygdx.shooterengine;
 
 import com.badlogic.gdx.Game;
-
-//import com.badlogic.gdx.ApplicationAdapter;
-import com.badlogic.gdx.utils.ScreenUtils;
+import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 public class GameManager extends Game
 {
 	private SpriteBatch batch;
 	private GameScreen gamescreen;
-	private EntityManager1 em;
+	private EntityManager em;
 	private SceneManager sm;
-	private Player player;
+	// private Player player;
 	private Enemy enemy;
+	private PlayerControlManager playerMovement;
+
 	
 	public void create() 
 	{
 		batch = new SpriteBatch();
-        em = new EntityManager1(batch);
+        em = new EntityManager(batch);
         sm = new SceneManager(batch);
         
         sm.changeScene(new MainMenu(sm));
         sm.mainmenu.draw();
         
-        player = em.SpawnPlayer();
+        // player = em.SpawnPlayer();
         enemy = em.SpawnEnemy();
+
+		//control movement of Player1
+		playerMovement = em.PlayerControls();
+		InputHandler.setPlayerControl(playerMovement);
 	}
 	
 	public void render() 
@@ -46,10 +50,13 @@ public class GameManager extends Game
 	        	if(!gamescreen.isPaused()) 
 	        	{
 	        		batch.begin();
-	        		player.Draw();
+	        		// player.Draw();
 	        		enemy.Draw();
 	        		enemy.Move();
-	        		player.Move();
+	        		// player.Move();
+					InputHandler.checkInput();
+					playerMovement.Move(false, false, false, false);
+					playerMovement.Draw();
 	        		batch.end();
 	        	}
 	        }

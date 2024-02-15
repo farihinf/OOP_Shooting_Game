@@ -1,20 +1,20 @@
 package com.mygdx.shooterengine;
 
+import com.badlogic.gdx.Game;
+import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
-//import com.badlogic.gdx.Game;
 //import com.badlogic.gdx.Gdx;
 
 public class SceneManager extends Game
 {
     private Scene currentScene;
     private Texture background;
-    private SpriteBatch batch;
     public MainMenu mainmenu;
     
     SceneManager(SpriteBatch batch)
     {
-    	this.batch = batch;
     	mainmenu = new MainMenu(this);
     }
     

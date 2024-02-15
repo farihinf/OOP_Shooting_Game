@@ -3,11 +3,11 @@ package com.mygdx.shooterengine;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputAdapter;
-import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.utils.viewport.StretchViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 
@@ -54,12 +54,13 @@ public class GameScreen extends Scene
         viewport = new StretchViewport(SCENE_WIDTH, SCENE_HEIGHT, camera);
         batch = new SpriteBatch();
 
-        background = new Texture("SpaceShooter_Background.png");
+        background = new Texture(Gdx.files.internal("ScreenImages\\SpaceShooter_Background.png"));
+        
         backgroundOffset = 0;
-        pauselogo = new Texture("PauseLogo.png");
-        back2mainmenuButton = new Texture("BackMainMenuButton.png");
-        resumeButton = new Texture("ResumeButton.png");
-        overlayTexture = new Texture("PauseBackGround.jpg");
+        pauselogo = new Texture(Gdx.files.internal("ScreenImages\\PauseLogo.png"));
+        back2mainmenuButton = new Texture(Gdx.files.internal("ScreenImages\\BackMainMenuButton.png"));
+        resumeButton = new Texture(Gdx.files.internal("ScreenImages\\ResumeButton.png"));
+        overlayTexture = new Texture(Gdx.files.internal("ScreenImages\\PauseBackGround.jpg"));
         
         back2MainMenuButtonPosX = (SCENE_WIDTH - BUTTON_WIDTH) / 2;
         back2MainMenuButtonPosY = (SCENE_HEIGHT / 2) - 20 - BUTTON_HEIGHT;
