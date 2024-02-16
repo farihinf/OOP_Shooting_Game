@@ -3,7 +3,7 @@ package com.mygdx.shooterengine;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.Keys;
 
-public class InputHandler {
+public class IOManager {
     private static PlayerControlManager playerControlManager;
 
     public static void setPlayerControl(PlayerControlManager pcm) {

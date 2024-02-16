@@ -29,7 +29,7 @@ public class GameManager extends Game
 
 		//control movement of Player1
 		playerMovement = em.PlayerControls();
-		InputHandler.setPlayerControl(playerMovement);
+		IOManager.setPlayerControl(playerMovement);
 	}
 	
 	public void render() 
@@ -54,7 +54,7 @@ public class GameManager extends Game
 	        		enemy.Draw();
 	        		enemy.Move();
 	        		// player.Move();
-					InputHandler.checkInput();
+					IOManager.checkInput();
 					playerMovement.Move(false, false, false, false);
 					playerMovement.Draw();
 	        		batch.end();
