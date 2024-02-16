@@ -12,7 +12,7 @@ public class GameManager extends Game
 	private SceneManager sm;
 	// private Player player;
 	private Enemy enemy;
-	private PlayerControlManager playerMovement;
+	private PlayerMovementManager playerMovement;
 
 	
 	public void create() 

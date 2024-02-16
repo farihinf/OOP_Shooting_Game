@@ -4,9 +4,9 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.Keys;
 
 public class IOManager {
-    private static PlayerControlManager playerControlManager;
+    private static PlayerMovementManager playerControlManager;
 
-    public static void setPlayerControl(PlayerControlManager pcm) {
+    public static void setPlayerControl(PlayerMovementManager pcm) {
         playerControlManager = pcm;
     }
 

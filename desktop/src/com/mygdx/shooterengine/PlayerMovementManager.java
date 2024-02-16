@@ -3,11 +3,11 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
-public class PlayerControlManager extends Entity{
+public class PlayerMovementManager extends Entity{
 
 	private float currX;
 
-	public PlayerControlManager(int health, int damage, float speed, Texture texture, SpriteBatch sb, float x, float y) {
+	public PlayerMovementManager(int health, int damage, float speed, Texture texture, SpriteBatch sb, float x, float y) {
 		super(damage, speed, texture, sb, x, y);
 		currX = getX();
 	}
