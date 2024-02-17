@@ -12,7 +12,7 @@ public class CollisionRect {
         this.y = y;
         this.width = width;
         this.height = height;
-        collidedWith = false;
+        this.collidedWith = false;
     }
 
     public void attachRect(float x, float y)
@@ -29,14 +29,7 @@ public class CollisionRect {
             {
                 return collidedWith = true;
             }         
-
         }
         return false;
-          
     }
-
-
-
-
-    
 }

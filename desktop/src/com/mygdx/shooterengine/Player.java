@@ -13,7 +13,6 @@ public class Player extends Entity implements iEntity{
 	private int health;
 
 	private PlayerMovementManager movement = new PlayerMovementManager();
-	private IOManager ioManager = new IOManager();
 	private ArrayList<Bullet> bulletList = new ArrayList<>();
 
 

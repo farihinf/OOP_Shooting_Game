@@ -26,7 +26,7 @@ public class GameManager extends Game
         
         player = em.SpawnPlayer();
 
-		for(int i = 0; i < em.totalEnemy; i++){
+		for(int i = 0; i < em.getTotalEnemy(); i++){
 			em.SpawnEnemy();
 		}
 
@@ -53,10 +53,10 @@ public class GameManager extends Game
 					player.Shoot();
 	        		player.Draw();
 	        		player.Move();			
-	        		if (em.enemyCount < em.totalEnemy){
+	        		if (em.getEnemyCount() < em.getTotalEnemy() ){
 						em.SpawnEnemy();
 					}
-					for(Enemy enemy : em.enemyList){
+					for(Enemy enemy : em.getEnemyList()){
 						enemy.Draw();
 						enemy.Move();
 					}
@@ -65,7 +65,7 @@ public class GameManager extends Game
 						Iterator<Bullet> iterator = player.GetBulletList().iterator();
 						while (iterator.hasNext()) {
 							Bullet bullets = iterator.next();
-							for(Enemy enemy : em.enemyList)
+							for(Enemy enemy : em.getEnemyList())
 							{
 								if (bullets.GetCollsionRect().CollidesWith(enemy.GetCollsionRect())) {
 									iterator.remove(); // Remove the current bullet using the iterator
@@ -78,5 +78,10 @@ public class GameManager extends Game
 	        	}
 	        }
 	    }
+	}
+
+	public void dispose(){
+		batch.dispose();
+		em.dispose();
 	}
 }

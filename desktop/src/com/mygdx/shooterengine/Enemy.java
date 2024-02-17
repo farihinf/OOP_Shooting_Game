@@ -12,7 +12,7 @@ public class Enemy extends Entity implements iEntity{
 
 	public Enemy(int health, int damage, float speed, Texture texture, SpriteBatch sb, float x, float y) {
 		super(damage, speed, texture, sb, x, y);
-		ai = new EnemyAI(50f, 600f, this);
+		ai = new EnemyAI(this);
 		this.health = health;
 		collisionRect = new CollisionRect(this.posX, this.posY, this.texture.getWidth(), this.texture.getHeight());
 	}

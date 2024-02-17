@@ -14,13 +14,11 @@ public class EntityManager {
 	private Player player;
 	private Enemy enemy;
 
-	public List<Enemy> enemyList = new ArrayList<>();
-	public int totalEnemy;
-	public int enemyCount;
+	private List<Enemy> enemyList = new ArrayList<>();
+	private int totalEnemy;
+	private int enemyCount;
 
 	private Random random;
-
-	private PlayerMovementManager playerMovement;
 
 	EntityManager(SpriteBatch sb){
 		batch = sb;
@@ -42,6 +40,24 @@ public class EntityManager {
 		enemyList.add(enemy);
 		enemyCount++;
 		return enemy;
+	}
+
+	public int getTotalEnemy(){
+		return totalEnemy;
+	}
+
+	public int getEnemyCount(){
+		return enemyCount;
+	}
+
+	public List<Enemy> getEnemyList(){
+		return enemyList;
+	}
+
+	public void dispose(){
+		playerTexture.dispose();
+		enemyTexture.dispose();
+		batch.dispose();
 	}
 
 	//public Bullet SpawnBullet(p)
