@@ -11,8 +11,8 @@ public class GameManager extends Game
 	private EntityManager em;
 	private SceneManager sm;
 	// private Player player;
-	private Enemy enemy;
 	private PlayerMovementManager playerMovement;
+
 
 	
 	public void create() 
@@ -25,7 +25,9 @@ public class GameManager extends Game
         sm.mainmenu.draw();
         
         // player = em.SpawnPlayer();
-        enemy = em.SpawnEnemy();
+		for(int i = 0; i < em.totalEnemy; i++){
+			em.SpawnEnemy();
+		}
 
 		//control movement of Player1
 		playerMovement = em.PlayerControls();
@@ -50,9 +52,13 @@ public class GameManager extends Game
 	        	if(!gamescreen.isPaused()) 
 	        	{
 	        		batch.begin();
-	        		// player.Draw();
-	        		enemy.Draw();
-	        		enemy.Move();
+	        		if (em.enemyCount < em.totalEnemy){
+						em.SpawnEnemy();
+					}
+					for(Enemy enemy : em.enemyList){
+						enemy.Draw();
+						enemy.Move();
+					}
 	        		// player.Move();
 					IOManager.checkInput();
 					playerMovement.Move(false, false, false, false);
