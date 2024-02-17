@@ -1,34 +1,29 @@
 package com.mygdx.shooterengine;
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
-public class PlayerMovementManager extends Entity{
+public class PlayerMovementManager{
 
-	private float currX;
+	private IOManager ioManager = new IOManager();
 
-	public PlayerMovementManager(int health, int damage, float speed, Texture texture, SpriteBatch sb, float x, float y) {
-		super(damage, speed, texture, sb, x, y);
-		currX = getX();
-	}
-	
-	public void Move(boolean moveLeft, boolean moveRight, boolean moveUp, boolean moveDown) {
+	public void Move(Player player) {
 
-        if (moveLeft) {
+		ioManager.checkInput();
+
+        if (ioManager.moveLeft()) {
             //playermoveLeft
-			setX(currX -= speed * Gdx.graphics.getDeltaTime());
+			player.setX(player.getX() - player.getSpeed() * Gdx.graphics.getDeltaTime());
         }
-        if (moveRight) {
+        if (ioManager.moveRight()) {
 			//playermoveRight
-			setX(currX += speed * Gdx.graphics.getDeltaTime());
+			player.setX(player.getX() + player.getSpeed() * Gdx.graphics.getDeltaTime());
         }
-        if (moveUp) {
+        if (ioManager.moveUp()) {
 			//playermoveUp
-			setY(getY() + speed * Gdx.graphics.getDeltaTime());
+			player.setY(player.getY() + player.getSpeed() * Gdx.graphics.getDeltaTime());
         }
-        if (moveDown) {
+        if (ioManager.moveDown()) {
 			//playermoveDown
-			setY(getY() - speed * Gdx.graphics.getDeltaTime());
+			player.setY(player.getY() - player.getSpeed() * Gdx.graphics.getDeltaTime());
         }
 
     }

@@ -1,5 +1,7 @@
 package com.mygdx.shooterengine;
 
+import java.util.Iterator;
+
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -10,9 +12,9 @@ public class GameManager extends Game
 	private GameScreen gamescreen;
 	private EntityManager em;
 	private SceneManager sm;
-	// private Player player;
+	private Player player;
 	private Enemy enemy;
-	private PlayerMovementManager playerMovement;
+	//private PlayerMovementManager playerMovement;
 
 	
 	public void create() 
@@ -24,12 +26,9 @@ public class GameManager extends Game
         sm.changeScene(new MainMenu(sm));
         sm.mainmenu.draw();
         
-        // player = em.SpawnPlayer();
+        player = em.SpawnPlayer();
         enemy = em.SpawnEnemy();
 
-		//control movement of Player1
-		playerMovement = em.PlayerControls();
-		IOManager.setPlayerControl(playerMovement);
 	}
 	
 	public void render() 
@@ -50,14 +49,23 @@ public class GameManager extends Game
 	        	if(!gamescreen.isPaused()) 
 	        	{
 	        		batch.begin();
-	        		// player.Draw();
+					player.Shoot();
+	        		player.Draw();
 	        		enemy.Draw();
 	        		enemy.Move();
-	        		// player.Move();
-					IOManager.checkInput();
-					playerMovement.Move(false, false, false, false);
-					playerMovement.Draw();
+	        		player.Move();			
 	        		batch.end();
+					if (!player.GetBulletList().isEmpty()) {
+						Iterator<Bullet> iterator = player.GetBulletList().iterator();
+						while (iterator.hasNext()) {
+							Bullet bullets = iterator.next();
+							if (bullets.GetCollsionRect().CollidesWith(enemy.GetCollsionRect())) {
+								iterator.remove(); // Remove the current bullet using the iterator
+								System.out.println("Hit" + enemy.GetCollsionRect());
+							}
+						}
+					}
+					
 	        	}
 	        }
 	    }

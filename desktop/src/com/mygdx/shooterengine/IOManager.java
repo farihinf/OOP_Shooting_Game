@@ -4,21 +4,43 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.Keys;
 
 public class IOManager {
-    private static PlayerMovementManager playerControlManager;
 
-    public static void setPlayerControl(PlayerMovementManager pcm) {
-        playerControlManager = pcm;
+    private boolean moveLeft = false;
+    private boolean moveRight = false;
+    private boolean moveUp = false;
+    private boolean moveDown = false;
+
+    private boolean shootButton = false;
+
+
+    public void checkInput() {
+        moveLeft = Gdx.input.isKeyPressed(Keys.LEFT) || Gdx.input.isKeyPressed(Keys.A);
+        moveRight = Gdx.input.isKeyPressed(Keys.RIGHT) || Gdx.input.isKeyPressed(Keys.D);
+        moveUp = Gdx.input.isKeyPressed(Keys.UP) || Gdx.input.isKeyPressed(Keys.W);
+        moveDown = Gdx.input.isKeyPressed(Keys.DOWN) || Gdx.input.isKeyPressed(Keys.S);
     }
 
-    public static void checkInput() {
-        boolean moveLeft = Gdx.input.isKeyPressed(Keys.LEFT) || Gdx.input.isKeyPressed(Keys.A);
-        boolean moveRight = Gdx.input.isKeyPressed(Keys.RIGHT) || Gdx.input.isKeyPressed(Keys.D);
-        boolean moveUp = Gdx.input.isKeyPressed(Keys.UP) || Gdx.input.isKeyPressed(Keys.W);
-        boolean moveDown = Gdx.input.isKeyPressed(Keys.DOWN) || Gdx.input.isKeyPressed(Keys.S);
+    public boolean isShooting(){
+        return shootButton = Gdx.input.isKeyPressed(Keys.SPACE);
+    }
 
-        //call playercontrol class
-        playerControlManager.Move(moveLeft, moveRight, moveUp, moveDown);
-        
-       
+    public boolean moveLeft()
+    {
+        return moveLeft;
+    }
+
+    public boolean moveRight()
+    {
+        return moveRight;
+    }
+
+    public boolean moveUp()
+    {
+        return moveUp;
+    }
+
+    public boolean moveDown()
+    {
+        return moveDown;
     }
 }

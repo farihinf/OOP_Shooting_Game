@@ -10,7 +10,6 @@ public class EntityManager {
 	private SpriteBatch batch;
 	private Player player;
 	private Enemy enemy;
-	private PlayerMovementManager playerMovement;
 
 	EntityManager(SpriteBatch sb){
 		batch = sb;
@@ -28,8 +27,5 @@ public class EntityManager {
 		return enemy;
 	}
 
-	public PlayerMovementManager PlayerControls() {
-		playerMovement = new PlayerMovementManager(100, 10, 200f, playerTexture, batch, 300f, 100f);
-		return playerMovement;
-	}
+	//public Bullet SpawnBullet(p)
 }
