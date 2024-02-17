@@ -16,6 +16,7 @@ public class GameManager extends Game
 	private Enemy enemy;
 	//private PlayerMovementManager playerMovement;
 
+
 	
 	public void create() 
 	{
@@ -27,7 +28,11 @@ public class GameManager extends Game
         sm.mainmenu.draw();
         
         player = em.SpawnPlayer();
-        enemy = em.SpawnEnemy();
+        //enemy = em.SpawnEnemy();
+        // player = em.SpawnPlayer();
+		for(int i = 0; i < em.totalEnemy; i++){
+			em.SpawnEnemy();
+		}
 
 	}
 	
@@ -51,9 +56,14 @@ public class GameManager extends Game
 	        		batch.begin();
 					player.Shoot();
 	        		player.Draw();
-	        		enemy.Draw();
-	        		enemy.Move();
 	        		player.Move();			
+	        		if (em.enemyCount < em.totalEnemy){
+						em.SpawnEnemy();
+					}
+					for(Enemy enemy : em.enemyList){
+						enemy.Draw();
+						enemy.Move();
+					}
 	        		batch.end();
 					if (!player.GetBulletList().isEmpty()) {
 						Iterator<Bullet> iterator = player.GetBulletList().iterator();
