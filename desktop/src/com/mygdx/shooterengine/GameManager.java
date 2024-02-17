@@ -13,9 +13,6 @@ public class GameManager extends Game
 	private EntityManager em;
 	private SceneManager sm;
 	private Player player;
-	private Enemy enemy;
-	//private PlayerMovementManager playerMovement;
-
 
 	
 	public void create() 
@@ -28,8 +25,7 @@ public class GameManager extends Game
         sm.mainmenu.draw();
         
         player = em.SpawnPlayer();
-        //enemy = em.SpawnEnemy();
-        // player = em.SpawnPlayer();
+
 		for(int i = 0; i < em.totalEnemy; i++){
 			em.SpawnEnemy();
 		}
@@ -69,9 +65,12 @@ public class GameManager extends Game
 						Iterator<Bullet> iterator = player.GetBulletList().iterator();
 						while (iterator.hasNext()) {
 							Bullet bullets = iterator.next();
-							if (bullets.GetCollsionRect().CollidesWith(enemy.GetCollsionRect())) {
-								iterator.remove(); // Remove the current bullet using the iterator
-								System.out.println("Hit" + enemy.GetCollsionRect());
+							for(Enemy enemy : em.enemyList)
+							{
+								if (bullets.GetCollsionRect().CollidesWith(enemy.GetCollsionRect())) {
+									iterator.remove(); // Remove the current bullet using the iterator
+									System.out.println("Hit" + enemy.GetCollsionRect());
+								}
 							}
 						}
 					}

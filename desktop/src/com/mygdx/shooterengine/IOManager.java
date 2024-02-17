@@ -10,18 +10,12 @@ public class IOManager {
     private boolean moveUp = false;
     private boolean moveDown = false;
 
-    private boolean shootButton = false;
-
 
     public void checkInput() {
         moveLeft = Gdx.input.isKeyPressed(Keys.LEFT) || Gdx.input.isKeyPressed(Keys.A);
         moveRight = Gdx.input.isKeyPressed(Keys.RIGHT) || Gdx.input.isKeyPressed(Keys.D);
         moveUp = Gdx.input.isKeyPressed(Keys.UP) || Gdx.input.isKeyPressed(Keys.W);
         moveDown = Gdx.input.isKeyPressed(Keys.DOWN) || Gdx.input.isKeyPressed(Keys.S);
-    }
-
-    public boolean isShooting(){
-        return shootButton = Gdx.input.isKeyPressed(Keys.SPACE);
     }
 
     public boolean moveLeft()
