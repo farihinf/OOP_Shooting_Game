@@ -8,30 +8,26 @@ import com.badlogic.gdx.physics.bullet.collision.Collision;
 
 public class Bullet extends Entity{
 
-    CollisionRect collisionRect = null;
+    //CollisionRect collisionRect = null;
 
     public Bullet(int damage, float speed, Texture texture, SpriteBatch sb, float x, float y) {
 		super(damage, speed, texture, sb, x, y);
-        collisionRect = new CollisionRect(this.posX, this.posY, this.texture.getWidth(), this.texture.getHeight());
+        //collisionRect = new CollisionRect(this.posX, this.posY, this.texture.getWidth(), this.texture.getHeight());
 	}
 
-    public void UpdateBullet()
+    public void UpdateBullet(int direction)
     {
-        collisionRect.attachRect(posX, posY);
-        posY += speed * Gdx.graphics.getDeltaTime();
+        this.collisionRect.attachRect(posX, posY);
+        posY += direction * speed * Gdx.graphics.getDeltaTime();
     }
 
-    public void removeBullets(Bullet bullet)
+    public boolean OutOfBounds()
     {
-        if (posY > Gdx.graphics.getHeight())
-        {
-            //testing
+        if (posY > Gdx.graphics.getHeight() || posY < 0){
+            return true;
         }
-    }
 
-    public CollisionRect GetCollsionRect()
-    {
-        return collisionRect;
+        return false;
     }
 
 

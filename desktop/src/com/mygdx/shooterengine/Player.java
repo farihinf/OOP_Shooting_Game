@@ -28,13 +28,14 @@ public class Player extends Entity implements iEntity{
 	@Override
 	public void Move() {
 		movement.Move(this);
+		this.collisionRect.attachRect(posX, posY);
 	}
 
 	@Override
-	public void Shoot() {
+	public void Shoot(int direction) {
 		if (Gdx.input.isKeyJustPressed(Keys.SPACE)) {
 			//Bullet bullet = new Bullet(10, 10, this.texture, this.batch, 100, 100);
-			bulletList.add(new Bullet(10, 1000, this.texture, this.batch, posX, posY));
+			bulletList.add(new Bullet(this.damage, 1000, this.texture, this.batch, posX, posY));
 		}
 
 		if(!bulletList.isEmpty())
@@ -42,19 +43,24 @@ public class Player extends Entity implements iEntity{
 			for(Bullet bullet : bulletList)
 			{
 				bullet.Draw();
-				bullet.UpdateBullet();
+				bullet.UpdateBullet(direction);
 			}
 		}
 	
 	}
 
 	@Override
-	public void TakeDamage(){
-		
+	public void TakeDamage(int damage){
+		health -= damage;
+		System.out.println("Health: " + health);
 	}
 
 	public ArrayList<Bullet> GetBulletList()
 	{
 		return bulletList;	
+	}
+
+	public Texture GetTexture(){
+		return texture;
 	}
 }

@@ -3,6 +3,6 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 public interface iEntity {
     public void Move();
-    public void Shoot();
-    public void TakeDamage();
+    public void Shoot(int direction);
+    public void TakeDamage(int damage);
 }

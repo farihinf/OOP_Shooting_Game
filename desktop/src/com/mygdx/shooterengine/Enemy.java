@@ -1,5 +1,8 @@
 package com.mygdx.shooterengine;
 
+import java.util.ArrayList;
+
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.physics.bullet.softbody.btSoftColliders.CollideSDF_RS;
@@ -7,14 +10,16 @@ import com.badlogic.gdx.physics.bullet.softbody.btSoftColliders.CollideSDF_RS;
 public class Enemy extends Entity implements iEntity{
 	private EnemyAI ai;
 	private int health;
+	private float shootingCD = 2f;
+	private EntityManager em;
 	
-	private CollisionRect collisionRect = null;
 
-	public Enemy(int health, int damage, float speed, Texture texture, SpriteBatch sb, float x, float y) {
+	public Enemy(int health, int damage, float speed, Texture texture, SpriteBatch sb, float x, float y, EntityManager em) {
 		super(damage, speed, texture, sb, x, y);
 		ai = new EnemyAI(this);
 		this.health = health;
-		collisionRect = new CollisionRect(this.posX, this.posY, this.texture.getWidth(), this.texture.getHeight());
+		this.em = em;
+		//collisionRect = new CollisionRect(this.posX, this.posY, this.texture.getWidth(), this.texture.getHeight());
 	}
 
 	public int getHealth(){
@@ -28,17 +33,29 @@ public class Enemy extends Entity implements iEntity{
 	}
 
 	@Override
-	public void Shoot() {
+	public void Shoot(int direction) {
+		shootingCD -= Gdx.graphics.getDeltaTime();
+		if(shootingCD < 0)
+		{
+			em.SetBulletList(new Bullet(this.damage, 50, this.texture, this.batch, posX, posY));
+			shootingCD = 2f;
+		}
+
+		if(!em.GetBulletList().isEmpty())
+		{
+			for(Bullet bullet : em.GetBulletList())
+			{
+				bullet.Draw();
+				bullet.UpdateBullet(direction);
+			}
+		}
 
 	}
 
 	@Override
-	public void TakeDamage(){
-		
+	public void TakeDamage(int damage){
+		health -= damage;
+		System.out.println(health);
 	}
 
-	public CollisionRect GetCollsionRect()
-	{
-		return collisionRect;
-	}
 }

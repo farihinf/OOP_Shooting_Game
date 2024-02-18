@@ -23,12 +23,14 @@ public class CollisionRect {
 
     public boolean CollidesWith(CollisionRect rect)
     {
+
+        //return x < rect.x + rect.width && y < rect.y + rect.height && x + width > rect.x && y + height > rect.y;
         if(!collidedWith)
         {    
             if(x < rect.x + rect.width && y < rect.y + rect.height && x + width > rect.x && y + height > rect.y)
             {
                 return collidedWith = true;
-            }         
+            }       
         }
         return false;
     }

@@ -1,5 +1,6 @@
 package com.mygdx.shooterengine;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input.Keys;
 
 public class PlayerMovementManager{
 
@@ -7,23 +8,30 @@ public class PlayerMovementManager{
 
 	public void Move(Player player) {
 
-		ioManager.checkInput();
-
-        if (ioManager.moveLeft()) {
+        if (ioManager.CheckInput(Keys.LEFT) || ioManager.CheckInput(Keys.A)) {
             //playermoveLeft
-			player.setX(player.getX() - player.getSpeed() * Gdx.graphics.getDeltaTime());
+            if(player.getX() > 0){
+                player.setX(player.getX() - player.getSpeed() * Gdx.graphics.getDeltaTime());
+            }
+                
         }
-        if (ioManager.moveRight()) {
+        if (ioManager.CheckInput(Keys.RIGHT) || ioManager.CheckInput(Keys.D)) {
 			//playermoveRight
-			player.setX(player.getX() + player.getSpeed() * Gdx.graphics.getDeltaTime());
+            if(player.getX() < Gdx.graphics.getWidth() - player.GetTexture().getWidth()){
+                player.setX(player.getX() + player.getSpeed() * Gdx.graphics.getDeltaTime());
+            }
         }
-        if (ioManager.moveUp()) {
+        if (ioManager.CheckInput(Keys.UP) || ioManager.CheckInput(Keys.W)) {
 			//playermoveUp
-			player.setY(player.getY() + player.getSpeed() * Gdx.graphics.getDeltaTime());
+            if (player.getY() < Gdx.graphics.getHeight() - player.GetTexture().getHeight()) {
+                player.setY(player.getY() + player.getSpeed() * Gdx.graphics.getDeltaTime());  
+            }
         }
-        if (ioManager.moveDown()) {
+        if (ioManager.CheckInput(Keys.DOWN) || ioManager.CheckInput(Keys.S)) {
 			//playermoveDown
-			player.setY(player.getY() - player.getSpeed() * Gdx.graphics.getDeltaTime());
+            if (player.getY() > 0) {
+                player.setY(player.getY() - player.getSpeed() * Gdx.graphics.getDeltaTime());  
+            }
         }
 
     }

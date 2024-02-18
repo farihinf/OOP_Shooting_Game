@@ -2,6 +2,7 @@ package com.mygdx.shooterengine;
 
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.physics.bullet.softbody.btSoftColliders.CollideSDF_RS;
 
 public class Entity {
 	protected int damage;
@@ -10,6 +11,7 @@ public class Entity {
 	protected SpriteBatch batch;
 	protected float posX;
 	protected float posY;
+	protected CollisionRect collisionRect;
 	
 	public Entity(int damage, float speed, Texture texture, SpriteBatch sb, float x, float y) {
 		this.damage = damage;
@@ -18,6 +20,7 @@ public class Entity {
 		this.batch = sb;
 		this.posX = x;
 		this.posY = y;
+		collisionRect = new CollisionRect(x, y, texture.getWidth(), texture.getHeight());
 	}
 	
 	public float getX() {
@@ -38,8 +41,16 @@ public class Entity {
 	public float getSpeed() {
 		return speed;
 	}
+	public int getDamage(){
+		return damage;
+	}
+	
 
 	public void Draw() {
 		batch.draw(texture, posX, posY, texture.getWidth(), texture.getHeight());
+	}
+
+	public CollisionRect GetCollsionRect(){
+		return collisionRect;
 	}
 }
