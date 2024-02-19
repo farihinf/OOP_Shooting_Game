@@ -2,7 +2,6 @@ package com.mygdx.shooterengine;
 
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.physics.bullet.softbody.btSoftColliders.CollideSDF_RS;
 
 public class Entity {
 	protected int damage;

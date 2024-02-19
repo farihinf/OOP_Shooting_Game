@@ -1,11 +1,8 @@
 package com.mygdx.shooterengine;
 
-import java.util.ArrayList;
-
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.physics.bullet.softbody.btSoftColliders.CollideSDF_RS;
 
 public class Enemy extends Entity implements iEntity{
 	private EnemyAI ai;
@@ -49,7 +46,6 @@ public class Enemy extends Entity implements iEntity{
 				bullet.UpdateBullet(direction);
 			}
 		}
-
 	}
 
 	@Override
