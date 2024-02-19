@@ -25,11 +25,6 @@ public class GameManager extends Game
         sm.mainmenu.draw();
         
         player = em.SpawnPlayer();
-
-		for(int i = 0; i < em.getTotalEnemy(); i++){
-			em.SpawnEnemy();
-		}
-
 	}
 	
 	public void render() 
@@ -116,45 +111,7 @@ public class GameManager extends Game
 						}
 						
 					}
-
-					
-					// if(!em.getEnemyList().isEmpty()){
-					// 	//Iterator<Enemy> eIterator = em.getEnemyList().iterator();
-					// 	for(Enemy enemy : em.getEnemyList()){
-					// 		enemy.Draw();
-					// 		enemy.Move();
-					// 		// while (eIterator.hasNext()) {
-					// 		// 	Enemy enemyI = eIterator.next();
-					// 		// 	if (enemyI.getHealth() <= 0) {
-					// 		// 		eIterator.remove();
-					// 		// 	}
-				
-							
-					// 		// }
-							
-					// 		//Player Collision with Enemy
-					// 		if(enemy.GetCollsionRect().CollidesWith(player.GetCollsionRect())){
-					// 			System.out.println("Hit" + player.GetCollsionRect());
-					// 		}
-					// 		if (!player.GetBulletList().isEmpty()) {
-					// 			Iterator<Bullet> iterator = player.GetBulletList().iterator();
-					// 			//Bullet Collision with Enemy
-					// 			while (iterator.hasNext()) {
-					// 				Bullet bullets = iterator.next();
-					// 				if (bullets.GetCollsionRect().CollidesWith(enemy.GetCollsionRect())) {
-					// 					enemy.TakeDamage(bullets.getDamage());
-										
-					// 					iterator.remove(); // Remove the current bullet using the iterator									
-					// 					System.out.println("Hit" + enemy.GetCollsionRect());
-					// 				}
-					// 			}
-					// 		}
-					// 	}
-					// }
-		
 	        		batch.end();
-
-					
 	        	}
 	        }
 	    }
