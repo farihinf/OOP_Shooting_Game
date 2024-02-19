@@ -28,9 +28,8 @@ public class EntityManager {
 		totalEnemy = 5;
 	}
 	
-	public Player SpawnPlayer() {
+	public void SpawnPlayer() {
 		player = new Player(100, 50, 200f, playerTexture, batch, 300f, 100f);
-		return player;
 	}
 	
 	public Enemy SpawnEnemy() {
@@ -54,6 +53,10 @@ public class EntityManager {
 
 	public List<Enemy> getEnemyList(){
 		return enemyList;
+	}
+
+	public Player getPlayer(){
+		return player;
 	}
 
 	public void dispose(){

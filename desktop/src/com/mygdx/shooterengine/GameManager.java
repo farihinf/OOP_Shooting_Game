@@ -12,8 +12,6 @@ public class GameManager extends Game
 	private GameScreen gamescreen;
 	private EntityManager em;
 	private SceneManager sm;
-	private Player player;
-
 	
 	public void create() 
 	{
@@ -24,7 +22,7 @@ public class GameManager extends Game
         sm.changeScene(new MainMenu(sm));
         sm.mainmenu.draw();
         
-        player = em.SpawnPlayer();
+        em.SpawnPlayer();
 	}
 	
 	public void render() 
@@ -45,13 +43,13 @@ public class GameManager extends Game
 	        	if(!gamescreen.isPaused()) 
 	        	{
 	        		batch.begin();
-					if(player.getHealth() <= 0){
+					if(em.getPlayer().getHealth() <= 0){
 						//goodluck bryan :D
 					}
 					
-					player.Shoot(1);
-	        		player.Draw();
-	        		player.Move();			
+					em.getPlayer().Shoot(1);
+	        		em.getPlayer().Draw();
+	        		em.getPlayer().Move();			
 	        		if (em.getEnemyList().size() < em.getTotalEnemy() ){
 						em.SpawnEnemy();
 					}
@@ -67,9 +65,9 @@ public class GameManager extends Game
 						}
 
 						//Collision with player
-						if(enemy.GetCollsionRect().CollidesWith(player.GetCollsionRect())){
-							player.TakeDamage(50);
-							System.out.println(enemy.GetCollsionRect() + "Hit" + player.GetCollsionRect());
+						if(enemy.GetCollsionRect().CollidesWith(em.getPlayer().GetCollsionRect())){
+							em.getPlayer().TakeDamage(50);
+							System.out.println(enemy.GetCollsionRect() + "Hit" + em.getPlayer().GetCollsionRect());
 						}
 
 						if(!em.GetBulletList().isEmpty()){
@@ -82,18 +80,18 @@ public class GameManager extends Game
 									System.out.println("Enemy Bullet removed due to Out of bounds");
 								}
 
-								if(eBullet.GetCollsionRect().CollidesWith(player.GetCollsionRect())){
-									player.TakeDamage(eBullet.damage);
+								if(eBullet.GetCollsionRect().CollidesWith(em.getPlayer().GetCollsionRect())){
+									em.getPlayer().TakeDamage(eBullet.damage);
 									enemyI.remove();
-									System.out.println(eBullet.GetCollsionRect() + "Hit" + player.GetCollsionRect());
+									System.out.println(eBullet.GetCollsionRect() + "Hit" + em.getPlayer().GetCollsionRect());
 								}
 							}
 
 						}
 						
 						//Collision for player bullet
-						if (!player.GetBulletList().isEmpty()) {
-							Iterator<Bullet> iterator = player.GetBulletList().iterator();
+						if (!em.getPlayer().GetBulletList().isEmpty()) {
+							Iterator<Bullet> iterator = em.getPlayer().GetBulletList().iterator();
 							//Bullet Collision with Enemy
 							while (iterator.hasNext()) {
 								Bullet bullets = iterator.next();
