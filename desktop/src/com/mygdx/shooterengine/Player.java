@@ -1,7 +1,5 @@
 package com.mygdx.shooterengine;
 import java.util.ArrayList;
-
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -33,9 +31,10 @@ public class Player extends Entity implements iEntity{
 
 	@Override
 	public void Shoot(int direction) {
-		if (Gdx.input.isKeyJustPressed(Keys.SPACE)) {
+		if (IOManager.GetInstance().isKeyJustPressed(Keys.SPACE)) {
 			//Bullet bullet = new Bullet(10, 10, this.texture, this.batch, 100, 100);
 			bulletList.add(new Bullet(this.damage, 1000, this.texture, this.batch, posX, posY));
+			AudioManager.GetInstance().PlaySound("Audio\\Shoot.mp3");
 		}
 
 		if(!bulletList.isEmpty())

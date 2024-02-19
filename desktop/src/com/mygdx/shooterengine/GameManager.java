@@ -21,6 +21,7 @@ public class GameManager extends Game
         
         sm.changeScene(new MainMenu(sm));
         sm.mainmenu.draw();
+		AudioManager.GetInstance().PlayMusic("Audio\\MainMenuMusic.mp3");
         
         em.SpawnPlayer();
 	}

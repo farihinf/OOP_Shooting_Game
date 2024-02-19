@@ -1,17 +1,24 @@
 package com.mygdx.shooterengine;
-
-
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Input.Keys;
 
 public class IOManager {
 
-    public boolean CheckInput(int key)
+    private static IOManager instance;
+
+    public boolean isKeyPressed(int key)
     {
-        if(key == Keys.SPACE){
-            return Gdx.input.isKeyJustPressed(key);
-        }
         return Gdx.input.isKeyPressed(key);
+    }
+
+    public boolean isKeyJustPressed(int key){
+        return Gdx.input.isKeyJustPressed(key);
+    }
+
+    public static IOManager GetInstance(){
+        if(instance == null){
+            instance = new IOManager();
+        }
+        return instance;
     }
 
 }

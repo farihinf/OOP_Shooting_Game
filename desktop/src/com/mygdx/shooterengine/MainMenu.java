@@ -105,6 +105,7 @@ public class MainMenu extends Scene
             if (isButtonClicked(startButton, startButton_posX, startButton_posY, startButton.getWidth() / 2, startButton.getHeight() / 2, touchPos.x, touchPos.y)) 
             {
                 sceneManager.changeScene(new GameScreen(sceneManager));
+                AudioManager.GetInstance().PlayMusic("Audio\\GameMusic.mp3");
             }
 
             if (isButtonClicked(optionsButton, optionsButtonX, optionsButtonY, optionsButton.getWidth() / 2, optionsButton.getHeight() / 2, touchPos.x, touchPos.y)) 
