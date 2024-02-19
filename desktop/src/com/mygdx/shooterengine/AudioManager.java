@@ -41,5 +41,20 @@ public class AudioManager implements AudioAsset{
         soundEffect = (Sound) Gdx.audio.newSound(Gdx.files.internal(filePath));
         soundEffect.play();
     }
+
+    public static void Dispose(){
+        if(instance != null){
+            if(instance.currentMusic != null){
+                instance.currentMusic.stop();
+                instance.currentMusic.dispose();
+            }
+
+            if(instance.soundEffect != null){
+                instance.soundEffect.stop();
+                instance.soundEffect.dispose();
+            }
+        }
+
+    }
     
 }

@@ -119,5 +119,6 @@ public class GameManager extends Game
 	public void dispose(){
 		batch.dispose();
 		em.dispose();
+		AudioManager.Dispose();
 	}
 }
