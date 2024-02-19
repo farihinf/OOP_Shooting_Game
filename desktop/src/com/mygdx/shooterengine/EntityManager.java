@@ -62,8 +62,5 @@ public class EntityManager {
 	public void dispose(){
 		playerTexture.dispose();
 		enemyTexture.dispose();
-		batch.dispose();
 	}
-
-	//public Bullet SpawnBullet(p)
 }
