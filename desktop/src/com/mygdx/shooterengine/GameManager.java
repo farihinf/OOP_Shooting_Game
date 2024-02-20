@@ -16,11 +16,15 @@ public class GameManager extends Game
 
 	public void create()
 	{
+		// Initialize the entity, scene manager and sprite batch. 
 		batch = new SpriteBatch();
 		em = new EntityManager(batch);
 		sm = new SceneManager(batch, this);
 
+		// set screen to main menu
 		sm.changeScene(new MainMenu(sm));
+
+		// spawn player
 		em.SpawnPlayer();
 	}
 
@@ -61,6 +65,7 @@ public class GameManager extends Game
 						enemy.Draw();
 						enemy.Move();
 						enemy.Shoot(-1);
+						em.DrawBullet(-1);
 						if (enemy.getHealth() <= 0) 
 						{
 							eIterator.remove(); // Remove the current enemy using the iterator

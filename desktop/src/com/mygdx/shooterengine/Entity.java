@@ -12,7 +12,7 @@ public class Entity {
 	protected float posY;
 	protected CollisionRect collisionRect;
 	
-	public Entity(int damage, float speed, Texture texture, SpriteBatch sb, float x, float y) {
+	Entity(int damage, float speed, Texture texture, SpriteBatch sb, float x, float y) {
 		this.damage = damage;
 		this.texture = texture;
 		this.speed = speed;
@@ -22,6 +22,7 @@ public class Entity {
 		collisionRect = new CollisionRect(x, y, texture.getWidth(), texture.getHeight());
 	}
 	
+	// Getters and setters for x and y attribute
 	public float getX() {
 		return posX;
 	}
@@ -37,6 +38,7 @@ public class Entity {
 	public void setY(float y) {
 		posY = y;
 	}
+	// getters for speed and damage attribute
 	public float getSpeed() {
 		return speed;
 	}
@@ -44,11 +46,12 @@ public class Entity {
 		return damage;
 	}
 	
-
+	// Function to draw the entity texture
 	public void Draw() {
 		batch.draw(texture, posX, posY, texture.getWidth(), texture.getHeight());
 	}
 
+	// Getter function to return collisionRect of entity
 	public CollisionRect GetCollsionRect(){
 		return collisionRect;
 	}

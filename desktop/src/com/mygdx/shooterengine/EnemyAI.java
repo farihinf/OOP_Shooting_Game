@@ -4,15 +4,16 @@ import com.badlogic.gdx.Gdx;
 
 public class EnemyAI {
 
-	private int currentPointIndex;
-	private Enemy enemy;
-	private float[][] points = {{50f, 400f}, {300f, 400f}, {600f, 400f}, {600f, 300f}, {300f, 300f}, {50f, 300f}};
+	private int currentPointIndex; // Current index in the 2d array of points
+	private Enemy enemy;  // Enemy instance
+	private float[][] points = {{50f, 400f}, {300f, 400f}, {600f, 400f}, {600f, 300f}, {300f, 300f}, {50f, 300f}}; // The coordinates of the points
 
 	EnemyAI(Enemy e){
 		enemy = e;
 		currentPointIndex = 0;
 	}
 
+    // Function responsible for enemy movement
 	public void AiMovement() {
 		float deltaTime = Gdx.graphics.getDeltaTime();
 		float[] currentPoint = points[currentPointIndex];
@@ -26,7 +27,7 @@ public class EnemyAI {
             float moveX = (dx / distance) * enemy.getSpeed() * deltaTime;
             float moveY = (dy / distance) * enemy.getSpeed() * deltaTime;
             
-            // Move sprite
+            // Move enemy towards point
             enemy.setX(enemy.getX() + moveX);
 			enemy.setY(enemy.getY() + moveY);
         } else {

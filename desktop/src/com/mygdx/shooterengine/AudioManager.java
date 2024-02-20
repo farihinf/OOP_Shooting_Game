@@ -37,7 +37,6 @@ public class AudioManager implements AudioAsset{
 
     @Override
     public void PlaySound(String filePath) {
-        // TODO Auto-generated method stub
         soundEffect = (Sound) Gdx.audio.newSound(Gdx.files.internal(filePath));
         soundEffect.play();
     }

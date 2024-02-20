@@ -6,7 +6,7 @@ public class CollisionRect {
     private int width, height;
     private boolean collidedWith;
 
-    public CollisionRect(float x, float y, int width, int height)
+    CollisionRect(float x, float y, int width, int height)
     {
         this.x = x;
         this.y = y;
