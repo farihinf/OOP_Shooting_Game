@@ -1,93 +1,62 @@
 package com.mygdx.shooterengine;
 import com.badlogic.gdx.Gdx;
-// import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
-// import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.utils.viewport.StretchViewport;
 
 public class MainMenu extends Scene
 {
+    // Graphics
     private SpriteBatch batch;
     private Texture background;
     private Texture title_logo;
     private Texture startButton;
-    private Texture optionsButton;
+    
+    //  Screen
     private StretchViewport viewport;
     
-    private float startButton_posX;
-    private float startButton_posY;
-    private float optionsButtonX;
-    private float optionsButtonY;
+    // Button Positions
+    private float startButtonPosX;
+    private float startButtonPosY;
+
+    private final float BUTTON_WIDTH = 20;
+    private final float BUTTON_HEIGHT = 15;
     
+    // Scene Manager
     private SceneManager sceneManager;
-    
-    private Texture overlayImage;
-    private boolean showOverlay = false;
-    
-    float overlayWidth;
-    float overlayHeight;
-    float overlayX;
-    float overlayY;
+    private final int SCENE_WIDTH = 72;
+    private final int SCENE_HEIGHT = 128;
     
     MainMenu(SceneManager sceneManager) 
     {
+        this.sceneManager = sceneManager;
+
+        viewport = new StretchViewport(SCENE_WIDTH, SCENE_HEIGHT);
         batch = new SpriteBatch();
+
         background = new Texture(Gdx.files.internal("ScreenImages\\MainMenu.png"));
         title_logo = new Texture(Gdx.files.internal("ScreenImages\\Logo.png"));
         startButton = new Texture(Gdx.files.internal("ScreenImages\\StartButton.png"));
-        optionsButton = new Texture(Gdx.files.internal("ScreenImages\\OptionsButton.png"));
 
-        viewport = new StretchViewport(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
-        viewport.apply();
-        
-        overlayImage = new Texture(Gdx.files.internal("ScreenImages\\Interface.png"));
-
-        this.sceneManager = sceneManager;
+        startButtonPosX = (SCENE_WIDTH - BUTTON_WIDTH) / 2;
+        startButtonPosY = (SCENE_HEIGHT / 2) + 10 - BUTTON_HEIGHT; // Adjust Y position of start button
     }
 
-	public void initialise() 
-    {
-        handleInput();  
-
-        Gdx.gl.glClearColor(0, 0, 0, 1);
-        Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-
-        batch.setProjectionMatrix(viewport.getCamera().combined);
-        draw();
-    }
-    
     public void draw() 
     {
     	batch.begin();
 
-        batch.draw(background, 0, 0, viewport.getWorldWidth(), viewport.getWorldHeight());
+        batch.draw(background, 0, 0, SCENE_WIDTH, SCENE_HEIGHT);
 
-        float titleScale = 0.5f;
-        float titleWidth = title_logo.getWidth() * titleScale;
-        float titleHeight = title_logo.getHeight() * titleScale;
-        float title_posX = viewport.getWorldWidth() / 2 - titleWidth / 2;
-        float title_posY = viewport.getWorldHeight() - 200;
-        batch.draw(title_logo, title_posX, title_posY, titleWidth, titleHeight);
+        float logoWidth = 50;
+        float logoHeight = 20;
+        float logoPosX = (SCENE_WIDTH - logoWidth) / 2;
+        float logoPosY = SCENE_HEIGHT - 20 - logoHeight; // Adjust Y position
 
-        startButton_posX = viewport.getWorldWidth() / 2 - startButton.getWidth() / 4;
-        startButton_posY = title_posY - 100;
-        batch.draw(startButton, startButton_posX, startButton_posY, startButton.getWidth() / 2, startButton.getHeight() / 2);
+        batch.draw(title_logo, logoPosX, logoPosY, logoWidth, logoHeight);
 
-        optionsButtonX = viewport.getWorldWidth() / 2 - optionsButton.getWidth() / 4;
-        optionsButtonY = startButton_posY - 100;
-        batch.draw(optionsButton, optionsButtonX, optionsButtonY, optionsButton.getWidth() / 2, optionsButton.getHeight() / 2);
-
-        if (showOverlay) 
-        {
-            overlayWidth = viewport.getWorldWidth() * 0.8f;  // Adjust the scaling factor as needed
-            overlayHeight = viewport.getWorldHeight() * 0.8f;  // Adjust the scaling factor as needed
-            overlayX = (viewport.getWorldWidth() - overlayWidth) / 2;
-            overlayY = (viewport.getWorldHeight() - overlayHeight) / 2;
-            batch.draw(overlayImage, overlayX, overlayY, overlayWidth, overlayHeight);
-        }
+        batch.draw(startButton, startButtonPosX, startButtonPosY,BUTTON_WIDTH, BUTTON_HEIGHT);
 
         batch.end();
     }
@@ -96,33 +65,28 @@ public class MainMenu extends Scene
     {
         if (Gdx.input.isTouched()) 
         {
-            float touchX = Gdx.input.getX();
-            float touchY = Gdx.graphics.getHeight() - Gdx.input.getY();
+            float touchX = Gdx.input.getX() * (float) SCENE_WIDTH / Gdx.graphics.getWidth();
+            float touchY = (Gdx.graphics.getHeight() - Gdx.input.getY()) * (float) SCENE_HEIGHT
+                    / Gdx.graphics.getHeight();
 
-            Vector3 touchPos = new Vector3(touchX, touchY, 0);
-            viewport.unproject(touchPos);
-
-            if (isButtonClicked(startButton, startButton_posX, startButton_posY, startButton.getWidth() / 2, startButton.getHeight() / 2, touchPos.x, touchPos.y)) 
+            // Check if touch is within bounds of the start button
+            if (touchX >= startButtonPosX && touchX <= startButtonPosX + BUTTON_WIDTH &&
+                    touchY >= startButtonPosY && touchY <= startButtonPosY + BUTTON_HEIGHT) 
             {
                 sceneManager.changeScene(new GameScreen(sceneManager));
-                AudioManager.GetInstance().PlayMusic("Audio\\GameMusic.mp3");
-            }
-
-            if (isButtonClicked(optionsButton, optionsButtonX, optionsButtonY, optionsButton.getWidth() / 2, optionsButton.getHeight() / 2, touchPos.x, touchPos.y)) 
-            {
-                showOverlay = !showOverlay;
             }
         }
     }
 
-    private boolean isButtonClicked(Texture button, float buttonX, float buttonY, float buttonWidth, float buttonHeight, float touchX, float touchY) 
+    public void initialise() 
     {
-        boolean xCondition = touchX >= buttonX && touchX <= buttonX + buttonWidth;
+        handleInput();  
+        
+        Gdx.gl.glClearColor(0, 0, 0, 1);
+        Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
-        // To invert the Y-coordinate for the touch position
-        boolean yCondition = Gdx.graphics.getHeight() - touchY >= buttonY && Gdx.graphics.getHeight() - touchY <= buttonY + buttonHeight;
-
-        return xCondition && yCondition;
+        batch.setProjectionMatrix(viewport.getCamera().combined);
+        draw();
     }
 
     @Override
@@ -135,16 +99,14 @@ public class MainMenu extends Scene
 	@Override
 	public void render(float delta) 
 	{
-		// TODO Auto-generated method stub
-		
+				
 	}
 	
 	@Override
     public void dispose() 
     {
-        batch.dispose();
-        title_logo.dispose();
-        startButton.dispose();
-        optionsButton.dispose();
+        //batch.dispose();
+        //title_logo.dispose();
+        //startButton.dispose();
     }
 }

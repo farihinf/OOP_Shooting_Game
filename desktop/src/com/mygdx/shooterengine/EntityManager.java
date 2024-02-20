@@ -59,6 +59,17 @@ public class EntityManager {
 		return player;
 	}
 
+	public void restartGame()
+	{
+		if (player != null) 
+		{
+			player.setX(300f);
+			player.setY(100f);
+		}
+		enemyList.clear();
+		bulletList.clear();
+	}
+
 	public void dispose(){
 		playerTexture.dispose();
 		enemyTexture.dispose();
