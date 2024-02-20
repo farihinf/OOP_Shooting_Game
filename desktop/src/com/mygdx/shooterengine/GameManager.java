@@ -9,7 +9,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 public class GameManager extends Game 
 {
 	private SpriteBatch batch;
-	private GameScreen gamescreen;
+	private GameScene gamescreen;
 	private EntityManager em;
 	private SceneManager sm;
 	private boolean gameOver = false;
@@ -42,7 +42,7 @@ public class GameManager extends Game
 			} 
 			else 
 			{
-				gamescreen = (GameScreen) currentScreen;
+				gamescreen = (GameScene) currentScreen;
 				gamescreen.initialise();
 
 				if (!gamescreen.isPaused()) 
@@ -122,7 +122,7 @@ public class GameManager extends Game
 							}
 						}
 					}
-
+					// If player HP reaches <0, set gameOver flag to true
 					if (em.getPlayer().getHealth() <= 0) 
 					{
 						gameOver = true;
@@ -132,7 +132,7 @@ public class GameManager extends Game
 				}
 			}
 		}
-
+		// If gameOver and the current scene is not EndScene, change to EndScene
 		if (gameOver) 
 		{
 			if (!(sm.getScreen() instanceof EndScene)) 
@@ -142,6 +142,7 @@ public class GameManager extends Game
 		}
 	}
 
+	// Restart the game
 	public void restart() 
 	{
 		em.restartGame();

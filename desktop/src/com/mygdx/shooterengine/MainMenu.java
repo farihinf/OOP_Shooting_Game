@@ -38,11 +38,13 @@ public class MainMenu extends Scene
         background = new Texture(Gdx.files.internal("ScreenImages\\MainMenu.png"));
         title_logo = new Texture(Gdx.files.internal("ScreenImages\\Logo.png"));
         startButton = new Texture(Gdx.files.internal("ScreenImages\\StartButton.png"));
-
+        
+        // To calculat the X & Y coordiantes of the button on the screen relative to the dimensions of scene
         startButtonPosX = (SCENE_WIDTH - BUTTON_WIDTH) / 2;
         startButtonPosY = (SCENE_HEIGHT / 2) + 10 - BUTTON_HEIGHT; // Adjust Y position of start button
     }
 
+    // Function responsible for rendering the scene onto the Screen
     public void draw() 
     {
     	batch.begin();
@@ -52,7 +54,7 @@ public class MainMenu extends Scene
         float logoWidth = 50;
         float logoHeight = 20;
         float logoPosX = (SCENE_WIDTH - logoWidth) / 2;
-        float logoPosY = SCENE_HEIGHT - 20 - logoHeight; // Adjust Y position
+        float logoPosY = SCENE_HEIGHT - 20 - logoHeight; // Calculate & adjust Y position
 
         batch.draw(title_logo, logoPosX, logoPosY, logoWidth, logoHeight);
 
@@ -61,10 +63,14 @@ public class MainMenu extends Scene
         batch.end();
     }
 
-    private void handleInput() 
+
+    public void handleInput() 
     {
+        // Check if the screen is touched
         if (Gdx.input.isTouched()) 
         {
+            // Calculate the X & Y coordinates of the touch position relative to the scene width/height
+            // It will then convert the touch positon from Screen to Scene coordinates.
             float touchX = Gdx.input.getX() * (float) SCENE_WIDTH / Gdx.graphics.getWidth();
             float touchY = (Gdx.graphics.getHeight() - Gdx.input.getY()) * (float) SCENE_HEIGHT
                     / Gdx.graphics.getHeight();
@@ -73,11 +79,12 @@ public class MainMenu extends Scene
             if (touchX >= startButtonPosX && touchX <= startButtonPosX + BUTTON_WIDTH &&
                     touchY >= startButtonPosY && touchY <= startButtonPosY + BUTTON_HEIGHT) 
             {
-                sceneManager.changeScene(new GameScreen(sceneManager));
+                sceneManager.changeScene(new GameScene(sceneManager));
             }
         }
     }
 
+     // Function to call the handleInput and draw method
     public void initialise() 
     {
         handleInput();  
@@ -99,7 +106,7 @@ public class MainMenu extends Scene
 	@Override
 	public void render(float delta) 
 	{
-				
+
 	}
 	
 	@Override

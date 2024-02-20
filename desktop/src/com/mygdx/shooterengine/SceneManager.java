@@ -2,38 +2,35 @@ package com.mygdx.shooterengine;
 
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Screen;
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 public class SceneManager extends Game
 {
     private Scene currentScene;
-    private Texture background;
     private GameManager gameManager;
-    public MainMenu mainmenu;
     
     SceneManager(SpriteBatch batch, GameManager gameManager)
     {
-    	mainmenu = new MainMenu(this);
         this.gameManager = gameManager;
     }
 
-    
+    // Function responsibe for changing scene
     public void changeScene(Scene scene) 
 	{
+        // If current scene is not null, then it'll be dispose
 		if (currentScene != null) 
     	{
             currentScene.dispose();
         }
     	 currentScene = scene;
-         currentScene.show();
          setScreen((Screen) currentScene);
         
+        // Get the corresponding audio according to the type of Scene
         if (currentScene instanceof MainMenu)
         {
             AudioManager.GetInstance().PlayMusic("Audio\\MainMenuMusic.mp3");
         }
-        else if (currentScene instanceof GameScreen) 
+        else if (currentScene instanceof GameScene) 
         {
             AudioManager.GetInstance().PlayMusic("Audio\\GameMusic.mp3");
         }
@@ -43,6 +40,7 @@ public class SceneManager extends Game
         }
     }
 
+    // Function to return the GameManager
     public GameManager getGameManager()
     {
         return gameManager;
@@ -56,10 +54,6 @@ public class SceneManager extends Game
     
 	public void dispose() 
 	{
-		if (background != null) 
-		{
-	        background.dispose();
-	    }    
         AudioManager.Dispose();
 	}
 }

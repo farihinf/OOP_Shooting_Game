@@ -1,25 +1,23 @@
 package com.mygdx.shooterengine;
+
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputAdapter;
-import com.badlogic.gdx.graphics.Camera;
-import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.utils.viewport.StretchViewport;
-import com.badlogic.gdx.utils.viewport.Viewport;
 
-public class EndScene extends Scene
+public class EndScene extends Scene 
 {
     // Screen
-    private Camera camera;
-    private Viewport viewport;
+    private StretchViewport viewport;
 
     // Graphics
     private SpriteBatch batch;
     private Texture endBackground;
     private Texture GameOverlogo;
-    private Texture backtomainmenuButton;
+    private Texture returntoMainMenuButton;
     private Texture restartButton;
 
     // Scene Manager
@@ -28,8 +26,8 @@ public class EndScene extends Scene
     // Button Positions and Dimensions
     private float restartButtonPosX;
     private float restartButtonPosY;
-    private float backtomainmenuButtonPosX;
-    private float backtomainmenuButtonPosY;
+    private float returntoMainMenuButtonPosX;
+    private float returntoMainMenuButtonPosY;
     private final float BUTTON_WIDTH = 20;
     private final float BUTTON_HEIGHT = 15;
 
@@ -43,28 +41,27 @@ public class EndScene extends Scene
     {
         this.sceneManager = sceneManager;
 
-        camera = new OrthographicCamera();
-        viewport = new StretchViewport(SCENE_WIDTH, SCENE_HEIGHT, camera);
+        viewport = new StretchViewport(SCENE_WIDTH, SCENE_HEIGHT);
         batch = new SpriteBatch();
 
         endBackground = new Texture(Gdx.files.internal("ScreenImages\\EndScene.png"));
 
         GameOverlogo = new Texture(Gdx.files.internal("ScreenImages\\GameOverLogo.png"));
         restartButton = new Texture(Gdx.files.internal("ScreenImages\\RestartButton.png"));
-        backtomainmenuButton = new Texture(Gdx.files.internal("ScreenImages\\BackMainMenuButton.png"));
-       
+        returntoMainMenuButton = new Texture(Gdx.files.internal("ScreenImages\\ReturnToMainMenu.png"));
+
         restartButtonPosX = (SCENE_WIDTH - BUTTON_WIDTH) / 2;
         restartButtonPosY = (SCENE_HEIGHT / 2) + 10 - BUTTON_HEIGHT;
-        backtomainmenuButtonPosX = (SCENE_WIDTH - BUTTON_WIDTH) / 2;
-        backtomainmenuButtonPosY = (SCENE_HEIGHT / 2) - 20 - BUTTON_HEIGHT;
+        returntoMainMenuButtonPosX = (SCENE_WIDTH - BUTTON_WIDTH) / 2;
+        returntoMainMenuButtonPosY = (SCENE_HEIGHT / 2) - 20 - BUTTON_HEIGHT;
     }
 
-    public void draw()
-     {
+    public void draw() 
+    {
         batch.begin();
 
         batch.draw(endBackground, 0, 0, SCENE_WIDTH, SCENE_HEIGHT);
-        
+
         float logoWidth = 50;
         float logoHeight = 20;
         float logoPosX = (SCENE_WIDTH - logoWidth) / 2;
@@ -72,8 +69,9 @@ public class EndScene extends Scene
 
         batch.draw(GameOverlogo, logoPosX, logoPosY, logoWidth, logoHeight);
         batch.draw(restartButton, restartButtonPosX, restartButtonPosY, BUTTON_WIDTH, BUTTON_HEIGHT);
-        batch.draw(backtomainmenuButton, backtomainmenuButtonPosX, backtomainmenuButtonPosY, BUTTON_WIDTH, BUTTON_HEIGHT);
-        
+        batch.draw(returntoMainMenuButton, returntoMainMenuButtonPosX, returntoMainMenuButtonPosY, BUTTON_WIDTH,
+                BUTTON_HEIGHT);
+
         batch.end();
     }
 
@@ -85,14 +83,14 @@ public class EndScene extends Scene
             float touchY = (Gdx.graphics.getHeight() - Gdx.input.getY()) * (float) SCENE_HEIGHT
                     / Gdx.graphics.getHeight();
 
-            // Check if touch is within bounds of the back to buttons
+            // Check if touch is within bounds of the buttons
             if (touchX >= restartButtonPosX && touchX <= restartButtonPosX + BUTTON_WIDTH &&
-                    touchY >= restartButtonPosY && touchY <= restartButtonPosY + BUTTON_HEIGHT) 
+                    touchY >= restartButtonPosY && touchY <= restartButtonPosY + BUTTON_HEIGHT)
             {
-                sceneManager.changeScene(new GameScreen(sceneManager));
-            } 
-            else if (touchX >= backtomainmenuButtonPosX && touchX <= backtomainmenuButtonPosX + BUTTON_WIDTH &&
-                    touchY >= backtomainmenuButtonPosY && touchY <= backtomainmenuButtonPosY + BUTTON_HEIGHT)
+                sceneManager.getGameManager().restart();
+                sceneManager.changeScene(new GameScene(sceneManager));
+            } else if (touchX >= returntoMainMenuButtonPosX && touchX <= returntoMainMenuButtonPosX + BUTTON_WIDTH &&
+                    touchY >= returntoMainMenuButtonPosY && touchY <= returntoMainMenuButtonPosY + BUTTON_HEIGHT) 
             {
                 sceneManager.changeScene(new MainMenu(sceneManager));
             }
@@ -100,7 +98,7 @@ public class EndScene extends Scene
     }
 
     @Override
-    public void show()
+    public void show() 
     {
         Gdx.input.setInputProcessor(new InputAdapter() 
         {
@@ -117,6 +115,10 @@ public class EndScene extends Scene
 
     public void initialise() 
     {
+        Gdx.gl.glClearColor(0, 0, 0, 1);
+        Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+
+        batch.setProjectionMatrix(viewport.getCamera().combined);
         draw();
     }
 
@@ -127,10 +129,9 @@ public class EndScene extends Scene
     }
 
     @Override
-    public void resize(int width, int height)
+    public void resize(int width, int height) 
     {
         viewport.update(width, height, true);
-        batch.setProjectionMatrix(viewport.getCamera().combined);
     }
 
     @Override
@@ -140,6 +141,6 @@ public class EndScene extends Scene
         endBackground.dispose();
         GameOverlogo.dispose();
         restartButton.dispose();
-        backtomainmenuButton.dispose();
+        returntoMainMenuButton.dispose();
     }
 }

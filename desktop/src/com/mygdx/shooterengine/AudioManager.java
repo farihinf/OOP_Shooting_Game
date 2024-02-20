@@ -12,7 +12,8 @@ public class AudioManager implements AudioAsset{
     private static AudioManager instance = null;
 
     @Override
-    public void PlayMusic(String filePath) {
+    public void PlayMusic(String filePath)
+     {
         if(currentMusic != null){
             currentMusic.stop();
         }
@@ -36,7 +37,8 @@ public class AudioManager implements AudioAsset{
     }
 
     @Override
-    public void PlaySound(String filePath) {
+    public void PlaySound(String filePath) 
+    {
         soundEffect = (Sound) Gdx.audio.newSound(Gdx.files.internal(filePath));
         soundEffect.play();
     }

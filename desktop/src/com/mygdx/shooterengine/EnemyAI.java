@@ -2,7 +2,8 @@ package com.mygdx.shooterengine;
 
 import com.badlogic.gdx.Gdx;
 
-public class EnemyAI {
+public class EnemyAI 
+{
 
 	private int currentPointIndex; // Current index in the 2d array of points
 	private Enemy enemy;  // Enemy instance
@@ -14,7 +15,8 @@ public class EnemyAI {
 	}
 
     // Function responsible for enemy movement
-	public void AiMovement() {
+	public void AiMovement() 
+    {
 		float deltaTime = Gdx.graphics.getDeltaTime();
 		float[] currentPoint = points[currentPointIndex];
 
