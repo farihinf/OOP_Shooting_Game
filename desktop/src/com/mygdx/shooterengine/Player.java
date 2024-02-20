@@ -4,9 +4,6 @@ import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
-//class might be redundant and can be removed? Shoot/Controls add in PlayerControlManager class ***
-//ignore this class if required
-
 public class Player extends Entity implements iEntity{
 	private int health;
 
