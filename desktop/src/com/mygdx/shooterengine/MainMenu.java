@@ -63,7 +63,6 @@ public class MainMenu extends Scene
         batch.end();
     }
 
-
     public void handleInput() 
     {
         // Check if the screen is touched
@@ -80,7 +79,6 @@ public class MainMenu extends Scene
                     touchY >= startButtonPosY && touchY <= startButtonPosY + BUTTON_HEIGHT) 
             {
                 sceneManager.changeScene(new GameScene(sceneManager));
-
             }
         }
     }
@@ -107,7 +105,7 @@ public class MainMenu extends Scene
 	@Override
 	public void render(float delta) 
 	{
-        
+
 	}
 	
 	@Override
