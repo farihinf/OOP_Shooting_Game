@@ -24,7 +24,7 @@ public class EntityManager {
 		batch = sb;
 		random = new Random();
 		playerTexture = new Texture(Gdx.files.internal("EntitySprites\\player.png"));
-		enemyTexture = new Texture(Gdx.files.internal("EntitySprites\\enemy.png"));
+		enemyTexture = new Texture(Gdx.files.internal("EntitySprites\\enemy2.png"));
 		totalEnemy = 5;
 	}
 	
