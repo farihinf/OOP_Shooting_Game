@@ -12,7 +12,6 @@ public class GameManager extends Game
 	private GameScene gamescreen;
 	private EntityManager em;
 	private SceneManager sm;
-	private boolean gameOver = false;
 
 	public void create()
 	{
@@ -23,7 +22,7 @@ public class GameManager extends Game
 
 		// set screen to main menu
 		sm.changeScene(new MainMenu(sm));
-
+		sm.mainMenu.draw();
 		// spawn player
 		em.SpawnPlayer();
 	}
@@ -31,7 +30,8 @@ public class GameManager extends Game
 	public void render() 
 	{
 		Screen currentScreen = sm.getScreen();
-		if (currentScreen != null) {
+		if (currentScreen != null)
+		{
 			if (currentScreen instanceof MainMenu) 
 			{
 				((MainMenu) currentScreen).initialise();
@@ -122,23 +122,15 @@ public class GameManager extends Game
 							}
 						}
 					}
-					// If player HP reaches <0, set gameOver flag to true
+					// If player HP reaches <0, change to EndScene
 					if (em.getPlayer().getHealth() <= 0) 
 					{
-						gameOver = true;
+						sm.changeScene(new EndScene(sm));
 					}
 
 					batch.end();
 				}
 			}
-		}
-		// If gameOver and the current scene is not EndScene, change to EndScene
-		if (gameOver) 
-		{
-			if (!(sm.getScreen() instanceof EndScene)) 
-			{
-            	sm.changeScene(new EndScene(sm));
-        	}
 		}
 	}
 

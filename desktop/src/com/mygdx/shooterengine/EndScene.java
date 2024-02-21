@@ -18,14 +18,11 @@ public class EndScene extends Scene
     private Texture endBackground;
     private Texture GameOverlogo;
     private Texture returntoMainMenuButton;
-    private Texture restartButton;
 
     // Scene Manager
     private SceneManager sceneManager;
 
     // Button Positions and Dimensions
-    private float restartButtonPosX;
-    private float restartButtonPosY;
     private float returntoMainMenuButtonPosX;
     private float returntoMainMenuButtonPosY;
     private final float BUTTON_WIDTH = 20;
@@ -45,15 +42,11 @@ public class EndScene extends Scene
         batch = new SpriteBatch();
 
         endBackground = new Texture(Gdx.files.internal("ScreenImages\\EndScene.png"));
-
         GameOverlogo = new Texture(Gdx.files.internal("ScreenImages\\GameOverLogo.png"));
-        restartButton = new Texture(Gdx.files.internal("ScreenImages\\RestartButton.png"));
         returntoMainMenuButton = new Texture(Gdx.files.internal("ScreenImages\\ReturnToMainMenu.png"));
 
-        restartButtonPosX = (SCENE_WIDTH - BUTTON_WIDTH) / 2;
-        restartButtonPosY = (SCENE_HEIGHT / 2) + 10 - BUTTON_HEIGHT;
         returntoMainMenuButtonPosX = (SCENE_WIDTH - BUTTON_WIDTH) / 2;
-        returntoMainMenuButtonPosY = (SCENE_HEIGHT / 2) - 20 - BUTTON_HEIGHT;
+        returntoMainMenuButtonPosY = (SCENE_HEIGHT / 2) - BUTTON_HEIGHT;
     }
 
     public void draw() 
@@ -68,7 +61,6 @@ public class EndScene extends Scene
         float logoPosY = SCENE_HEIGHT - 20 - logoHeight; // Adjust Y position
 
         batch.draw(GameOverlogo, logoPosX, logoPosY, logoWidth, logoHeight);
-        batch.draw(restartButton, restartButtonPosX, restartButtonPosY, BUTTON_WIDTH, BUTTON_HEIGHT);
         batch.draw(returntoMainMenuButton, returntoMainMenuButtonPosX, returntoMainMenuButtonPosY, BUTTON_WIDTH,
                 BUTTON_HEIGHT);
 
@@ -77,19 +69,13 @@ public class EndScene extends Scene
 
     public void handleInput() 
     {
-        if (Gdx.input.isTouched()) 
+        if (Gdx.input.isTouched())
         {
             float touchX = Gdx.input.getX() * (float) SCENE_WIDTH / Gdx.graphics.getWidth();
             float touchY = (Gdx.graphics.getHeight() - Gdx.input.getY()) * (float) SCENE_HEIGHT
                     / Gdx.graphics.getHeight();
 
-            // Check if touch is within bounds of the buttons
-            if (touchX >= restartButtonPosX && touchX <= restartButtonPosX + BUTTON_WIDTH &&
-                    touchY >= restartButtonPosY && touchY <= restartButtonPosY + BUTTON_HEIGHT)
-            {
-                sceneManager.getGameManager().restart();
-                sceneManager.changeScene(new GameScene(sceneManager));
-            } else if (touchX >= returntoMainMenuButtonPosX && touchX <= returntoMainMenuButtonPosX + BUTTON_WIDTH &&
+            if (touchX >= returntoMainMenuButtonPosX && touchX <= returntoMainMenuButtonPosX + BUTTON_WIDTH &&
                     touchY >= returntoMainMenuButtonPosY && touchY <= returntoMainMenuButtonPosY + BUTTON_HEIGHT) 
             {
                 sceneManager.changeScene(new MainMenu(sceneManager));
@@ -100,8 +86,8 @@ public class EndScene extends Scene
     @Override
     public void show() 
     {
-        Gdx.input.setInputProcessor(new InputAdapter() 
-        {
+        Gdx.input.setInputProcessor(new InputAdapter()
+         {
             @Override
             public boolean touchDown(int screenX, int screenY, int pointer, int button) 
             {
@@ -140,7 +126,6 @@ public class EndScene extends Scene
         batch.dispose();
         endBackground.dispose();
         GameOverlogo.dispose();
-        restartButton.dispose();
         returntoMainMenuButton.dispose();
     }
 }

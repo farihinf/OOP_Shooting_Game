@@ -6,11 +6,14 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 public class SceneManager extends Game
 {
+    private SceneManager sceneManager;
     private Scene currentScene;
     private GameManager gameManager;
+    public MainMenu mainMenu;
     
     SceneManager(SpriteBatch batch, GameManager gameManager)
     {
+        mainMenu = new MainMenu(sceneManager);
         this.gameManager = gameManager;
     }
 
