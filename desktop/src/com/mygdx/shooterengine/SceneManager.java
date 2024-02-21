@@ -4,7 +4,8 @@ import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
-public class SceneManager extends Game {
+public class SceneManager extends Game 
+{
     private SceneManager sceneManager;
     private Scene currentScene;
     private GameManager gameManager;

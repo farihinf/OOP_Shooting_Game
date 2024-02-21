@@ -118,7 +118,8 @@ public class GameScene extends Scene {
     public void handleInput() 
     {
         // Check if the screen is touched
-        if (Gdx.input.isTouched()) {
+        if (Gdx.input.isTouched())
+        {
             // Calculate the X & Y coordinates of the touch position relative to the scene
             // width/height
             // It will then convert the touch positon from Screen to Scene coordinates.
