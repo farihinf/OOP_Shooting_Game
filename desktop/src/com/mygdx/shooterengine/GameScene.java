@@ -87,8 +87,7 @@ public class GameScene extends Scene {
             batch.draw(background, 0, backgroundOffset + SCENE_HEIGHT, SCENE_WIDTH, SCENE_HEIGHT);
             // To draw the background just above the first one, which creates the scrolling
             // effect
-        } else 
-        {
+        } else {
             batch.draw(background, 0, 0, SCENE_WIDTH, SCENE_HEIGHT);
         }
 
@@ -116,7 +115,8 @@ public class GameScene extends Scene {
         batch.end();
     }
 
-    public void handleInput() {
+    public void handleInput() 
+    {
         // Check if the screen is touched
         if (Gdx.input.isTouched()) {
             // Calculate the X & Y coordinates of the touch position relative to the scene
@@ -145,8 +145,10 @@ public class GameScene extends Scene {
         Gdx.input.setInputProcessor(new InputAdapter() {
             @Override
             public boolean touchDown(int screenX, int screenY, int pointer, int button) {
-                // Sets the touch position using the screen coordinates. It sets the Y coordinate
-                // to adjust for the difference in coordinate systems between screen coordinates and OpenGL coordinates.
+                // Sets the touch position using the screen coordinates. It sets the Y
+                // coordinate
+                // to adjust for the difference in coordinate systems between screen coordinates
+                // and OpenGL coordinates.
                 touchPos.set(screenX, Gdx.graphics.getHeight() - screenY, 0);
 
                 // Calls the function to process the touch input

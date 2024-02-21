@@ -41,7 +41,7 @@ public class MainMenu extends Scene
         
         // To calculat the X & Y coordiantes of the button on the screen relative to the dimensions of scene
         startButtonPosX = (SCENE_WIDTH - BUTTON_WIDTH) / 2;
-        startButtonPosY = (SCENE_HEIGHT / 2) + 10 - BUTTON_HEIGHT; // Adjust Y position of start button
+        startButtonPosY = (SCENE_HEIGHT / 2) + 5 - BUTTON_HEIGHT; // Adjust Y position of start button
     }
 
     // Function responsible for rendering the scene onto the Screen

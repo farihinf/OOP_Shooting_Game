@@ -17,39 +17,44 @@ public class SceneManager extends Game {
     }
 
     // Function responsibe for changing scene
-    public void changeScene(Scene scene) {
-        if (currentScene != null) {
+    public void changeScene(Scene scene) 
+    {
+        if (currentScene != null) 
+        {
             currentScene.dispose();
-            if (currentScene instanceof MainMenu) {
-                currentScene = new MainMenu(this);
-            } else if (currentScene instanceof GameScene) {
-                currentScene = new GameScene(this);
-            }
         }
         currentScene = scene;
         setScreen((Screen) currentScene);
 
         // Get the corresponding audio according to the type of Scene
-        if (currentScene instanceof MainMenu) {
+        if (currentScene instanceof MainMenu) 
+        {
             AudioManager.GetInstance().PlayMusic("Audio\\MainMenuMusic.mp3");
-        } else if (currentScene instanceof GameScene) {
+        } 
+        else if (currentScene instanceof GameScene) 
+        {
             AudioManager.GetInstance().PlayMusic("Audio\\GameMusic.mp3");
-        } else if (currentScene instanceof EndScene) {
+        } 
+        else if (currentScene instanceof EndScene) 
+        {
             AudioManager.GetInstance().PlayMusic("Audio\\GameOver.mp3");
         }
     }
 
     // Function to return the GameManager
-    public GameManager getGameManager() {
+    public GameManager getGameManager() 
+    {
         return gameManager;
     }
 
     @Override
-    public void create() {
+    public void create() 
+    {
 
     }
 
-    public void dispose() {
+    public void dispose() 
+    {
         AudioManager.Dispose();
     }
 }
