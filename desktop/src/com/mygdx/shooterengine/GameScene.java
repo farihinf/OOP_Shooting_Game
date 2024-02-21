@@ -87,7 +87,8 @@ public class GameScene extends Scene {
             batch.draw(background, 0, backgroundOffset + SCENE_HEIGHT, SCENE_WIDTH, SCENE_HEIGHT);
             // To draw the background just above the first one, which creates the scrolling
             // effect
-        } else {
+        } else 
+        {
             batch.draw(background, 0, 0, SCENE_WIDTH, SCENE_HEIGHT);
         }
 

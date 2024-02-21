@@ -20,7 +20,6 @@ public class SceneManager extends Game {
     public void changeScene(Scene scene) {
         if (currentScene != null) {
             currentScene.dispose();
-
             if (currentScene instanceof MainMenu) {
                 currentScene = new MainMenu(this);
             } else if (currentScene instanceof GameScene) {

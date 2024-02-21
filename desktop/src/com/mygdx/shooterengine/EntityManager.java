@@ -85,6 +85,7 @@ public class EntityManager {
 		{
 			player.setX(300f);
 			player.setY(100f);
+			player.setHealth();
 		}
 		enemyList.clear();
 		bulletList.clear();

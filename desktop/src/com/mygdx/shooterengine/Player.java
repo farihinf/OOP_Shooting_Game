@@ -21,6 +21,11 @@ public class Player extends Entity implements iEntity{
 		return health;
 	}
 
+	public void setHealth()
+	{
+		health = 100;
+	}
+
 	// function to move player, using playercontrolmaanger
 	@Override
 	public void Move() {
