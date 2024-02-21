@@ -11,6 +11,7 @@ public class Bullet extends Entity{
     Bullet(int damage, float speed, Texture texture, SpriteBatch sb, float x, float y) {
 		super(damage, speed, texture, sb, x, y);
         //collisionRect = new CollisionRect(this.posX, this.posY, this.texture.getWidth(), this.texture.getHeight());
+        this.texture = new Texture("EntitySprites\\Bullet2.png");
 	}
 
     public void UpdateBullet(int direction)
