@@ -6,17 +6,21 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 public class Bullet extends Entity{
 
+	// Inheritance from Entity
     Bullet(int damage, float speed, Texture texture, SpriteBatch sb, float x, float y) {
 		super(damage, speed, texture, sb, x, y);
         this.texture = new Texture("EntitySprites\\Bullet2.png");
 	}
 
+
+	// Update the position of the bullet
     public void UpdateBullet(int direction)
     {
         this.collisionRect.attachRect(posX, posY);
         posY += direction * speed * Gdx.graphics.getDeltaTime();
     }
 
+	// Check the position of the bullet, if bullet is out of the map, it will be removed. 
     public boolean OutOfBounds()
     {
         if (posY > Gdx.graphics.getHeight() || posY < 0){

@@ -58,7 +58,7 @@ public class EndScene extends Scene
         float logoWidth = 50;
         float logoHeight = 20;
         float logoPosX = (SCENE_WIDTH - logoWidth) / 2;
-        float logoPosY = SCENE_HEIGHT - 20 - logoHeight; // Adjust Y position
+        float logoPosY = SCENE_HEIGHT - 20 - logoHeight; // Calculate & adjust Y position
 
         batch.draw(GameOverlogo, logoPosX, logoPosY, logoWidth, logoHeight);
         batch.draw(returntoMainMenuButton, returntoMainMenuButtonPosX, returntoMainMenuButtonPosY, BUTTON_WIDTH,
@@ -75,6 +75,7 @@ public class EndScene extends Scene
             float touchY = (Gdx.graphics.getHeight() - Gdx.input.getY()) * (float) SCENE_HEIGHT
                     / Gdx.graphics.getHeight();
 
+             // Check if touch is within bounds of the return button
             if (touchX >= returntoMainMenuButtonPosX && touchX <= returntoMainMenuButtonPosX + BUTTON_WIDTH &&
                     touchY >= returntoMainMenuButtonPosY && touchY <= returntoMainMenuButtonPosY + BUTTON_HEIGHT) 
             {
@@ -86,6 +87,8 @@ public class EndScene extends Scene
     @Override
     public void show() 
     {
+        // Sets the input processor to a new instance of InputAdapter, which allows
+        // handling of input events
         Gdx.input.setInputProcessor(new InputAdapter()
          {
             @Override
@@ -99,6 +102,7 @@ public class EndScene extends Scene
         });
     }
 
+    // Function to call the handleInput and draw method
     public void initialise() 
     {
         Gdx.gl.glClearColor(0, 0, 0, 1);
@@ -114,6 +118,8 @@ public class EndScene extends Scene
 
     }
 
+    // Function to ensures that the viewport and rendering setup are adjusted appropriately when the window size changes,
+    // which helps to maintain the correct aspect ratio and scaling of the scene
     @Override
     public void resize(int width, int height) 
     {

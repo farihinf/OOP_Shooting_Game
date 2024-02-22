@@ -3,6 +3,7 @@ package com.mygdx.shooterengine;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
+/* Parent class for the entities to inherit from (player, bullet and enemy) */
 public class Entity {
 	protected int damage;
 	protected Texture texture;

@@ -96,6 +96,8 @@ public class MainMenu extends Scene
         draw();
     }
 
+    // Function to ensures that the viewport and rendering setup are adjusted appropriately when the window size changes,
+    // which helps to maintain the correct aspect ratio and scaling of the scene
     @Override
     public void resize(int width, int height) 
     {

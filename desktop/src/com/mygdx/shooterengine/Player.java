@@ -4,6 +4,10 @@ import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
+/* Player class that inherits from Entity and implements the iEntity interface. 
+* Contains player functions and attributes
+* Uses playermovementmanager to dictate movement
+Unlike Enemy, player stores its own bullet list in its own class */
 public class Player extends Entity implements iEntity{
 	private int health;
 
