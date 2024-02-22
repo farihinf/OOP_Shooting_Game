@@ -61,8 +61,7 @@ public class GameScene extends Scene {
         resumeButton = new Texture(Gdx.files.internal("ScreenImages\\ResumeButton.png"));
         overlayTexture = new Texture(Gdx.files.internal("ScreenImages\\PauseBackGround.jpg"));
 
-        // To calculat the X & Y coordiantes of the buttons on the screen relative to
-        // the dimensions of scene
+        // To calculat the X & Y coordiantes of the buttons on the screen relative to the dimensions of scene
         backtoMainMenuButtonPosX = (SCENE_WIDTH - BUTTON_WIDTH) / 2;
         backtoMainMenuButtonPosY = (SCENE_HEIGHT / 2) - 20 - BUTTON_HEIGHT;
         resumeButtonPosX = (SCENE_WIDTH - BUTTON_WIDTH) / 2;
@@ -73,28 +72,24 @@ public class GameScene extends Scene {
     public void draw() {
         batch.begin();
 
-        // If game is not paused,the background will scroll upwards and is drawn twice
-        // so as to create a seamless scrolling effect
+        // If game is not paused,the background will scroll upwards and is drawn twice so as to create a seamless scrolling effect
         if (!isPaused()) {
             backgroundOffset--; // This will cause the background to move upwards pixel by pixel
             if (backgroundOffset % SCENE_HEIGHT == 0) // Check if the background has already scrolled by an entire
                                                       // Screen height
             {
-                backgroundOffset = 0; // Set it to 0 to ensure that the background scrolling loop seamlessly without
-                                      // running out of texture
+                backgroundOffset = 0; // Set it to 0 to ensure that the background scrolling loop seamlessly without running out of texture
             }
             batch.draw(background, 0, backgroundOffset, SCENE_WIDTH, SCENE_HEIGHT);
             batch.draw(background, 0, backgroundOffset + SCENE_HEIGHT, SCENE_WIDTH, SCENE_HEIGHT);
-            // To draw the background just above the first one, which creates the scrolling
-            // effect
+            // To draw the background just above the first one, which creates the scrolling effect
         } else {
             batch.draw(background, 0, 0, SCENE_WIDTH, SCENE_HEIGHT);
         }
 
         // If the game is paused, it will draw the Pause Interface
         if (isPaused()) {
-            // To calcualte the width & height of the pause background after scaling. (With
-            // a scaling factor)
+            // To calcualte the width & height of the pause background after scaling. (With a scaling factor)
             float scaledPauseBackgroundWidth = SCENE_WIDTH * scale;
             float scaledPauseBackgroundHeight = SCENE_HEIGHT * scale;
             batch.draw(overlayTexture, (SCENE_WIDTH - scaledPauseBackgroundWidth) / 2,
@@ -120,8 +115,7 @@ public class GameScene extends Scene {
         // Check if the screen is touched
         if (Gdx.input.isTouched())
         {
-            // Calculate the X & Y coordinates of the touch position relative to the scene
-            // width/height
+            // Calculate the X & Y coordinates of the touch position relative to the scene width/height
             // It will then convert the touch positon from Screen to Scene coordinates.
             float touchX = Gdx.input.getX() * (float) SCENE_WIDTH / Gdx.graphics.getWidth();
             float touchY = (Gdx.graphics.getHeight() - Gdx.input.getY()) * (float) SCENE_HEIGHT
@@ -146,10 +140,8 @@ public class GameScene extends Scene {
         Gdx.input.setInputProcessor(new InputAdapter() {
             @Override
             public boolean touchDown(int screenX, int screenY, int pointer, int button) {
-                // Sets the touch position using the screen coordinates. It sets the Y
-                // coordinate
-                // to adjust for the difference in coordinate systems between screen coordinates
-                // and OpenGL coordinates.
+                // Sets the touch position using the screen coordinates. It sets the Y coordinate
+                // to adjust for the difference in coordinate systems between screen coordinates and OpenGL coordinates.
                 touchPos.set(screenX, Gdx.graphics.getHeight() - screenY, 0);
 
                 // Calls the function to process the touch input
@@ -204,8 +196,7 @@ public class GameScene extends Scene {
 
     }
 
-    // Function to ensures that the viewport and rendering setup are adjusted
-    // appropriately when the window size changes,
+    // Function to ensures that the viewport and rendering setup are adjusted appropriately when the window size changes,
     // which helps to maintain the correct aspect ratio and scaling of the scene
     @Override
     public void resize(int width, int height) {
