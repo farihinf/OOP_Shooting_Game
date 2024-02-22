@@ -94,7 +94,7 @@ public class GameManager extends Game {
 									iterator.remove(); // Remove the current bullet using the iterator
 									System.out.println(bullets.GetCollsionRect() + "Hit" + enemy.GetCollsionRect());
 								}
-
+								//Bullet went out of bounds	
 								if (bullets.OutOfBounds()) {
 									iterator.remove(); // Remove the current bullet using the iterator
 									System.out.println("Bullet removed due to Out of Bounds");
