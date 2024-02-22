@@ -1,6 +1,8 @@
 package com.mygdx.shooterengine;
 
 import com.badlogic.gdx.Gdx;
+
+// Import Audio Library from LibGDX
 import com.badlogic.gdx.backends.lwjgl3.audio.Mp3.Music;
 import com.badlogic.gdx.backends.lwjgl3.audio.Mp3.Sound;
 
@@ -11,6 +13,7 @@ public class AudioManager implements AudioAsset{
     
     private static AudioManager instance = null;
 
+    // Function for play music
     @Override
     public void PlayMusic(String filePath)
      {
@@ -22,6 +25,7 @@ public class AudioManager implements AudioAsset{
         currentMusic.play();     
     }
 
+    // Function for stop music
     @Override
     public void StopMusic() {
         if(currentMusic.isPlaying()){
@@ -29,6 +33,7 @@ public class AudioManager implements AudioAsset{
         }
     }
 
+    // Function for audio to play on different instances
     public static AudioManager GetInstance(){
         if(instance == null){
             instance = new AudioManager();
@@ -36,6 +41,8 @@ public class AudioManager implements AudioAsset{
         return instance;
     }
 
+
+    // Function for path of the audio file
     @Override
     public void PlaySound(String filePath) 
     {
@@ -43,6 +50,7 @@ public class AudioManager implements AudioAsset{
         soundEffect.play();
     }
 
+    // Dispose of the Audio on different instances 
     public static void Dispose(){
         if(instance != null){
             if(instance.currentMusic != null){
