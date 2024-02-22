@@ -6,7 +6,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 public class Bullet extends Entity{
 
-	// Inheritance from Entity Manager 
+	// Inheritance from Entity
     Bullet(int damage, float speed, Texture texture, SpriteBatch sb, float x, float y) {
 		super(damage, speed, texture, sb, x, y);
         this.texture = new Texture("EntitySprites\\Bullet2.png");
