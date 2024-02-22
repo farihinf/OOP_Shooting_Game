@@ -4,6 +4,10 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
+/* Enemy class that inherits from Entity and implements iEntity interface
+ * Contain's enemy functions and attributes
+ * enemy's movement is dictated by the EnemyAI class
+ */
 public class Enemy extends Entity implements iEntity{
 	private EnemyAI ai;  
 	private int health;
@@ -39,16 +43,6 @@ public class Enemy extends Entity implements iEntity{
 			em.SetBulletList(new Bullet(this.damage, 50, this.texture, this.batch, posX, posY));
 			shootingCD = 2f;
 		}
-		/* 
-		if(!em.GetBulletList().isEmpty())
-		{
-			for(Bullet bullet : em.GetBulletList())
-			{
-				bullet.Draw();
-				bullet.UpdateBullet(direction);
-			}
-		}
-		*/
 	}
 
 	@Override

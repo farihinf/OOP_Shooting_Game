@@ -2,9 +2,11 @@ package com.mygdx.shooterengine;
 
 import com.badlogic.gdx.Gdx;
 
+/* EnemyAI manager that is attached to Enemy class 
+ * this class is in charge of dictating the movement behaviour of the Enemy instance
+*/
 public class EnemyAI 
 {
-
 	private int currentPointIndex; // Current index in the 2d array of points
 	private Enemy enemy;  // Enemy instance
 	private float[][] points = {{50f, 400f}, {300f, 400f}, {600f, 400f}, {600f, 300f}, {300f, 300f}, {50f, 300f}}; // The coordinates of the points

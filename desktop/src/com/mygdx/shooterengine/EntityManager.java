@@ -7,6 +7,9 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
+/* Entity Manager is in charge of managing entities, from spawning, drawing and rendering. It is in charge of resetting the entity states when game restarts
+ * as well as keeping track of enemies and bullets shot from enemies in a list to keep check for collission in game manager.
+ */
 public class EntityManager {
 	private Texture playerTexture;  // hold player texture
 	private Texture enemyTexture;   // hold enemy texture
