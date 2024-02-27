@@ -1,5 +1,7 @@
 package com.mygdx.shooterengine;
 import java.util.ArrayList;
+
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -13,11 +15,17 @@ public class Player extends Entity implements iEntity{
 
 	private PlayerMovementManager movement = new PlayerMovementManager();
 	private ArrayList<Bullet> bulletList = new ArrayList<>();
+	private Texture healthTexture;
+	private float initialHealthBarWidth;
 
 
 	Player(int health, int damage, float speed, Texture texture, SpriteBatch sb, float x, float y) {
 		super(damage, speed, texture, sb, x, y);
 		this.health = health;
+		healthTexture = new Texture("EntitySprites\\HealthBar.png");
+	
+		initialHealthBarWidth = Gdx.graphics.getWidth();
+
 	}
 
 	// getter function to return health
@@ -73,5 +81,15 @@ public class Player extends Entity implements iEntity{
 	// getter function to return texture of player
 	public Texture GetTexture(){
 		return texture;
+	}
+
+	@Override
+	public void Draw(){
+		batch.draw(texture, posX, posY, texture.getWidth(), texture.getHeight());
+
+        float healthBarWidth = (float) health / 100 * initialHealthBarWidth;
+
+        batch.draw(healthTexture, 0, 0, healthBarWidth, healthTexture.getHeight()/2);
+
 	}
 }
