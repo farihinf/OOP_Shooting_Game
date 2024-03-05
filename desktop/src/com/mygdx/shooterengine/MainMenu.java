@@ -29,6 +29,7 @@ public class MainMenu extends Scene
     
     // Scene Manager
     private SceneManager sceneManager;
+    private EntityManager em;
     private final int SCENE_WIDTH = 72;
     private final int SCENE_HEIGHT = 128;
     
@@ -96,6 +97,7 @@ public class MainMenu extends Scene
             {
                 // sceneManager.getGameManager().restart();
                 // sceneManager.changeScene(new GameScene(sceneManager));
+                sceneManager.changeScene(new ShipSelection(sceneManager));
                 System.out.println("button is touched");
             }
         }

@@ -10,6 +10,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 public class GameManager extends Game {
 	private SpriteBatch batch;
 	private GameScene gamescreen;
+	private ShipSelection ShipSelection;
 	private EntityManager em;
 	private SceneManager sm;
 
@@ -22,6 +23,9 @@ public class GameManager extends Game {
 		// set screen to main menu
 		sm.changeScene(new MainMenu(sm));
 		sm.mainMenu.draw();
+		//set screen to selection
+		// sm.changeScene(new MainMenu(sm));
+		// sm.mainMenu.draw();
 		// spawn player
 		em.SpawnPlayer();
 	}
@@ -31,6 +35,10 @@ public class GameManager extends Game {
 		if (currentScreen != null) {
 			if (currentScreen instanceof MainMenu) {
 				((MainMenu) currentScreen).initialise();
+
+			} else if (currentScreen instanceof ShipSelection) {
+                ((ShipSelection) currentScreen).initialise();
+
 			} else if (currentScreen instanceof EndScene) {
 				((EndScene) currentScreen).initialise();
 			} else {
@@ -60,7 +68,10 @@ public class GameManager extends Game {
 			}
 		}
 	}
-
+	public void showSelectionScreen() {
+        ShipSelection = new ShipSelection(sm);
+        sm.changeScene(ShipSelection);
+    }
 	public void enemyColChecker(){
 		Iterator<Enemy> eIterator = em.getEnemyList().iterator();
 		while (eIterator.hasNext()) {
