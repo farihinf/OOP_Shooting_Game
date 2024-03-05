@@ -29,7 +29,7 @@ public class MainMenu extends Scene
     
     // Scene Manager
     private SceneManager sceneManager;
-    private EntityManager em;
+    // private EntityManager em;
     private final int SCENE_WIDTH = 72;
     private final int SCENE_HEIGHT = 128;
     

@@ -26,8 +26,8 @@ public class ShipSelection extends Scene {
     // private EntityManager entityManager;
 
     // Button Positions and Dimensions
-    // private float returntoMainMenuButtonPosX;
-    // private float returntoMainMenuButtonPosY;
+    private float returntoMainMenuButtonPosX;
+    private float returntoMainMenuButtonPosY;
     private float selectedButtonPosX;
     private float selectedButtonPosY;
     private float arrowWidth = 15;
@@ -58,13 +58,13 @@ public class ShipSelection extends Scene {
 
         // title_logo = new Texture(Gdx.files.internal("ScreenImages\\Logo.png"));
         SelectionBg = new Texture(Gdx.files.internal("ScreenImages\\selectionBg.png"));
-        // returntoMainMenuButton = new Texture(Gdx.files.internal("ScreenImages\\ReturnToMainMenu.png"));
+        returntoMainMenuButton = new Texture(Gdx.files.internal("ScreenImages\\ReturnToMainMenu.png"));
         leftArrow = new Texture(Gdx.files.internal("ScreenImages\\leftArrow.png"));
         rightArrow = new Texture(Gdx.files.internal("ScreenImages\\rightArrow.png"));
         selectedShip = new Texture(Gdx.files.internal("ScreenImages\\selectedShip.png"));
 
-        // returntoMainMenuButtonPosX = (SCENE_WIDTH - BUTTON_WIDTH) / 2;
-        // returntoMainMenuButtonPosY = (SCENE_HEIGHT / 2) - 35 - BUTTON_HEIGHT;
+        returntoMainMenuButtonPosX = (SCENE_WIDTH - BUTTON_WIDTH) / 2 + 25;
+        returntoMainMenuButtonPosY = (SCENE_HEIGHT / 2) - 35 - BUTTON_HEIGHT;
 
         selectedButtonPosX = (SCENE_WIDTH - BUTTON_WIDTH) / 2;
         selectedButtonPosY = (SCENE_HEIGHT / 2) - 35 - BUTTON_HEIGHT;
@@ -96,8 +96,8 @@ public class ShipSelection extends Scene {
         batch.draw(leftArrow, arrowLeftPosX, arrowPosY, arrowWidth, arrowWidth);
         batch.draw(rightArrow, arrowRightPosX, arrowPosY, arrowWidth, arrowWidth);
         // batch.draw(SelectionBg, logoPosX, logoPosY, logoWidth, logoHeight);
-        // batch.draw(returntoMainMenuButton, returntoMainMenuButtonPosX, returntoMainMenuButtonPosY, BUTTON_WIDTH,
-        //         BUTTON_HEIGHT);
+        batch.draw(returntoMainMenuButton, returntoMainMenuButtonPosX, returntoMainMenuButtonPosY, BUTTON_WIDTH,
+                BUTTON_HEIGHT);
         batch.draw(selectedShip, selectedButtonPosX, selectedButtonPosY, BUTTON_WIDTH,
                 BUTTON_HEIGHT);
 
@@ -145,12 +145,12 @@ public class ShipSelection extends Scene {
             }
 
             //working main menu below
-            //  // Check if touch is within bounds of the return button go back to main menu
-            // if (touchX >= returntoMainMenuButtonPosX && touchX <= returntoMainMenuButtonPosX + BUTTON_WIDTH &&
-            //         touchY >= returntoMainMenuButtonPosY && touchY <= returntoMainMenuButtonPosY + BUTTON_HEIGHT) 
-            // {
-            //     sceneManager.changeScene(new MainMenu(sceneManager));
-            // }
+             // Check if touch is within bounds of the return button go back to main menu
+            if (touchX >= returntoMainMenuButtonPosX && touchX <= returntoMainMenuButtonPosX + BUTTON_WIDTH &&
+                    touchY >= returntoMainMenuButtonPosY && touchY <= returntoMainMenuButtonPosY + BUTTON_HEIGHT) 
+            {
+                sceneManager.changeScene(new MainMenu(sceneManager));
+            }
         }
     }
 
