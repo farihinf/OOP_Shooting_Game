@@ -41,6 +41,18 @@ public class AudioManager implements AudioAsset{
         return instance;
     }
 
+    public void AdjustVolume(float volume){
+        if(currentMusic != null){
+            currentMusic.setVolume(volume);
+        }
+    }
+
+    public void GetVolume(){
+        if(currentMusic != null){
+            currentMusic.getVolume();
+        }
+    }
+
 
     // Function for path of the audio file
     @Override

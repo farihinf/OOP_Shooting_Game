@@ -17,6 +17,9 @@ public class Player extends Entity implements iEntity{
 	private ArrayList<Bullet> bulletList = new ArrayList<>();
 	private Texture healthTexture;
 	private float initialHealthBarWidth;
+	private static float SHOOTINGCD = 0.1f;
+
+	private float shootingCD = 0;
 
 
 	Player(int health, int damage, float speed, Texture texture, SpriteBatch sb, float x, float y) {
@@ -48,8 +51,11 @@ public class Player extends Entity implements iEntity{
 	// function to shoot
 	@Override
 	public void Shoot(int direction) {
-		if (IOManager.GetInstance().isKeyJustPressed(Keys.SPACE)) {
+		shootingCD -= Gdx.graphics.getDeltaTime();
+
+		if (IOManager.GetInstance().isKeyPressed(Keys.SPACE) && shootingCD < 0) {
 			//Bullet bullet = new Bullet(10, 10, this.texture, this.batch, 100, 100);
+			shootingCD = SHOOTINGCD;
 			bulletList.add(new Bullet(this.damage, 1000, this.texture, this.batch, posX, posY));
 			AudioManager.GetInstance().PlaySound("Audio\\Shoot.mp3");
 		}
