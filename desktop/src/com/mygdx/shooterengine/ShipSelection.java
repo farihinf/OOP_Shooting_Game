@@ -70,9 +70,8 @@ public class ShipSelection extends Scene {
         selectedButtonPosY = (SCENE_HEIGHT / 2) - 35 - BUTTON_HEIGHT;
 
         ships = new Texture[] {
-            new Texture(Gdx.files.internal("EntitySprites\\player.png")),
+            // new Texture(Gdx.files.internal("EntitySprites\\player.png")),
             new Texture(Gdx.files.internal("EntitySprites\\blue.png")),
-            new Texture(Gdx.files.internal("EntitySprites\\green.png")),
             new Texture(Gdx.files.internal("EntitySprites\\red.png")),
             new Texture(Gdx.files.internal("EntitySprites\\grey.png")),
         };
