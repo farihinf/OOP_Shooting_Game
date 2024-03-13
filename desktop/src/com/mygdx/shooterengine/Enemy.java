@@ -15,11 +15,11 @@ public class Enemy extends Entity implements iEntity{
 	private EntityManager em;
 	
 	// enemy constructor
-	public Enemy(int health, int damage, float speed, Texture texture, SpriteBatch sb, float x, float y, EntityManager em) {
+	public Enemy(int health, int damage, float speed, Texture texture, SpriteBatch sb, float x, float y) {
 		super(damage, speed, texture, sb, x, y);
 		ai = new EnemyAI(this);  // Create instance of EnemyAI class for ai movement
 		this.health = health;
-		this.em = em;
+		this.em = EntityManager.getInstance();
 	}
 
 	// getter function to return health

@@ -88,7 +88,7 @@ public class MainMenu extends Scene
             if (touchX >= startButtonPosX && touchX <= startButtonPosX + BUTTON_WIDTH &&
                     touchY >= startButtonPosY && touchY <= startButtonPosY + BUTTON_HEIGHT) 
             {
-                sceneManager.getGameManager().restart();
+                GameManager.getInstance().restart();
                 sceneManager.changeScene(new GameScene(sceneManager));
             }
             // Check if touch is within bounds of the start button

@@ -13,6 +13,6 @@ public class DesktopLauncher
 
    	    config.setForegroundFPS(60);
 		config.setTitle("Shooter Engine");
-		new Lwjgl3Application(new GameManager(), config);
+		new Lwjgl3Application(GameManager.getInstance(), config);
 	}
 }

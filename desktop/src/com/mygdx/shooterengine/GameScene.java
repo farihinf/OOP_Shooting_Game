@@ -126,7 +126,7 @@ public class GameScene extends Scene {
             // Check if the touch is within the bounds of the buttons
             if (touchX >= backtoMainMenuButtonPosX && touchX <= backtoMainMenuButtonPosX + BUTTON_WIDTH &&
                     touchY >= backtoMainMenuButtonPosY && touchY <= backtoMainMenuButtonPosY + BUTTON_HEIGHT) {
-                sceneManager.getGameManager().restart();
+                GameManager.getInstance().restart();
                 sceneManager.changeScene(new MainMenu(sceneManager));
             } else if (touchX >= resumeButtonPosX && touchX <= resumeButtonPosX + BUTTON_WIDTH &&
                     touchY >= resumeButtonPosY && touchY <= resumeButtonPosY + BUTTON_HEIGHT) {

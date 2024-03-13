@@ -3,23 +3,34 @@ package com.mygdx.shooterengine;
 import java.util.Iterator;
 
 import com.badlogic.gdx.Game;
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 /* Class in charge of the overall game flow, the managing of objects such as the managers, entities and scenes */
 public class GameManager extends Game {
+	private static GameManager gmInstance;
 	private SpriteBatch batch;
 	private GameScene gamescreen;
 	private ShipSelection ShipSelection;
 	private EntityManager em;
 	private SceneManager sm;
+	private float spawnRate;
+	private static float SPAWNRATE = 0.5f;
+
+	public static GameManager getInstance(){
+		if (gmInstance == null){
+			gmInstance = new GameManager();
+		}
+		return gmInstance;
+	}
 
 	public void create() {
 		// Initialize the entity, scene manager and sprite batch.
-		batch = new SpriteBatch();
-		em = new EntityManager(batch);
-		sm = new SceneManager(batch, this);
-
+		gmInstance = GameManager.getInstance();
+		batch = SpriteBatchSingleton.getInstance();
+		em = EntityManager.getInstance();
+		sm = new SceneManager();
 		// set screen to main menu
 		sm.changeScene(new MainMenu(sm));
 		sm.mainMenu.draw();
@@ -27,6 +38,7 @@ public class GameManager extends Game {
 		// sm.changeScene(new MainMenu(sm));
 		// sm.mainMenu.draw();
 		// spawn player
+		spawnRate = 0f;
 		em.SpawnPlayer();
 	}
 
@@ -51,9 +63,10 @@ public class GameManager extends Game {
 					em.getPlayer().Shoot(1);
 					em.getPlayer().Draw();
 					em.getPlayer().Move();
-
-					if (em.getEnemyList().size() < em.getTotalEnemy()) {
+					spawnRate -= Gdx.graphics.getDeltaTime();
+					if (em.getEnemyList().size() < em.getTotalEnemy() && spawnRate < 0) {
 						em.SpawnEnemy();
+						spawnRate = SPAWNRATE;
 					}
 
 					enemyColChecker();
@@ -140,6 +153,5 @@ public class GameManager extends Game {
 	 {
 		batch.dispose();
 		sm.dispose();
-		em.dispose();
 	}
 }

@@ -2,19 +2,16 @@ package com.mygdx.shooterengine;
 
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Screen;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 public class SceneManager extends Game 
 {
     private SceneManager sceneManager;
     private Scene currentScene;
-    private GameManager gameManager;
     public MainMenu mainMenu;
 
-    SceneManager(SpriteBatch batch, GameManager gameManager) 
+    SceneManager() 
     {
         mainMenu = new MainMenu(sceneManager);
-        this.gameManager = gameManager;
     }
 
     // Function responsibe for changing scene
@@ -43,11 +40,6 @@ public class SceneManager extends Game
     }
 
     // Function to return the GameManager
-    public GameManager getGameManager() 
-    {
-        return gameManager;
-    }
-
     @Override
     public void create() 
     {

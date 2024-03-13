@@ -2,46 +2,49 @@ package com.mygdx.shooterengine;
 
 import java.util.ArrayList;
 import java.util.List;
+/*
 import java.util.Random;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch; 
+*/
+
 
 /* Entity Manager is in charge of managing entities, from spawning, drawing and rendering. It is in charge of resetting the entity states when game restarts
  * as well as keeping track of enemies and bullets shot from enemies in a list to keep check for collission in game manager.
  */
 public class EntityManager {
-	private Texture playerTexture;  // hold player texture
-	private Texture enemyTexture;   // hold enemy texture
-	private SpriteBatch batch;
+	private static EntityManager emInstance;
 	private Player player;   // hold player instance
 	private Enemy enemy;     //
+	private EntityFactory ef;
+	private int playerTextureIndex;
 
 	private List<Enemy> enemyList = new ArrayList<>();         // list of enemies on screen
 	private ArrayList<Bullet> bulletList = new ArrayList<>();  // list of bullets shot from enemies on screen
 	private int totalEnemy; // max amount of enemies 
 
-	private Random random;
-
-	EntityManager(SpriteBatch sb){
-		batch = sb;
-		random = new Random();
-		playerTexture = new Texture(Gdx.files.internal("EntitySprites\\player.png"));
-		enemyTexture = new Texture(Gdx.files.internal("EntitySprites\\enemy2.png"));
+	private EntityManager(){
+		ef = new EntityFactory();
 		totalEnemy = 5;
+	}
+
+	public static EntityManager getInstance(){
+		if (emInstance == null){
+			emInstance = new EntityManager();
+		}
+		return emInstance;
 	}
 	
 	// Function to spawn player
 	public void SpawnPlayer() {
-		player = new Player(100, 50, 200f, playerTexture, batch, 300f, 100f);
+		player = ef.createPlayer(playerTextureIndex);
 	}
 
 	// Function to spawn enemy	
 	public void SpawnEnemy() {
-		float speed = random.nextFloat() * (200f - 100f) + 100f;
-		enemy = new Enemy(100, 10, speed, enemyTexture, batch, 300f, 400f, this);
+		enemy = ef.createStandard();
 		enemyList.add(enemy);
-		//return enemy;
 	}
 
 	// Function to draw the bullets
@@ -81,6 +84,10 @@ public class EntityManager {
 		return player;
 	}
 
+	public void setTextureIndex(int index){
+		playerTextureIndex = index;
+	}
+
 	// Function to restart game by resetting the list of enemies, bullets and player position
 	public void restartGame()
 	{
@@ -92,10 +99,5 @@ public class EntityManager {
 		}
 		enemyList.clear();
 		bulletList.clear();
-	}
-
-	public void dispose(){
-		playerTexture.dispose();
-		enemyTexture.dispose();
 	}
 }

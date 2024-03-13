@@ -71,9 +71,9 @@ public class ShipSelection extends Scene {
 
         ships = new Texture[] {
             // new Texture(Gdx.files.internal("EntitySprites\\player.png")),
-            new Texture(Gdx.files.internal("EntitySprites\\blue.png")),
-            new Texture(Gdx.files.internal("EntitySprites\\red.png")),
-            new Texture(Gdx.files.internal("EntitySprites\\grey.png")),
+            new Texture(Gdx.files.internal("EntitySprites\\PlayerSprites\\player_blue.png")),
+            new Texture(Gdx.files.internal("EntitySprites\\PlayerSprites\\player_red.png")),
+            new Texture(Gdx.files.internal("EntitySprites\\PlayerSprites\\player_grey.png")),
         };
     }
 

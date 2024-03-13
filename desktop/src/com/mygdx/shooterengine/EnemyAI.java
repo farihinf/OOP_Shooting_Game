@@ -42,4 +42,8 @@ public class EnemyAI
             }
         }
 	}
+
+    public void TrackerMovement(){
+        
+    }
 }
