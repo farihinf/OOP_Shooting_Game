@@ -1,6 +1,9 @@
 package com.mygdx.shooterengine;
 
+import java.util.Random;
+
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.math.Vector2;
 
 /* EnemyAI manager that is attached to Enemy class 
  * this class is in charge of dictating the movement behaviour of the Enemy instance
@@ -10,10 +13,12 @@ public class EnemyAI
 	private int currentPointIndex; // Current index in the 2d array of points
 	private Enemy enemy;  // Enemy instance
 	private float[][] points = {{50f, 400f}, {300f, 400f}, {600f, 400f}, {600f, 300f}, {300f, 300f}, {50f, 300f}}; // The coordinates of the points
+    private Random random;
 
 	EnemyAI(Enemy e){
 		enemy = e;
 		currentPointIndex = 0;
+        random = new Random();
 	}
 
     // Function responsible for enemy movement
@@ -36,14 +41,22 @@ public class EnemyAI
 			enemy.setY(enemy.getY() + moveY);
         } else {
             // If close enough to current point, move to the next point
+            /* 
             currentPointIndex++;
             if (currentPointIndex >= points.length) {
                 currentPointIndex = 0; // Loop back to the beginning
-            }
+            } */
+            currentPointIndex = random.nextInt(points.length);
         }
 	}
 
     public void TrackerMovement(){
-        
+        float dx = EntityManager.getInstance().getPlayer().getX() - enemy.getX();
+        float dy = EntityManager.getInstance().getPlayer().getY() - enemy.getY();
+        Vector2 direction = new Vector2(dx, dy).nor();
+
+        // Move the enemy towards the player with tracking speed
+        enemy.setX(enemy.getX() + direction.x * enemy.getSpeed() * Gdx.graphics.getDeltaTime());
+        enemy.setY(enemy.getY() + direction.y * enemy.getSpeed() * Gdx.graphics.getDeltaTime());
     }
 }
