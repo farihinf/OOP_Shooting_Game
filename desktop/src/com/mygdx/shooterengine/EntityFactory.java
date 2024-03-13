@@ -37,7 +37,6 @@ public class EntityFactory {
         int health;
         int damage;
         float speed;
-        textureIndex = 0;
         switch (textureIndex){
             case 0:
                 health = 100;

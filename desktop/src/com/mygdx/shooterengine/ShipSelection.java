@@ -134,13 +134,13 @@ public class ShipSelection extends Scene {
         else if (touchX >= selectedButtonPosX && touchX <= selectedButtonPosX + BUTTON_WIDTH &&
         touchY >= selectedButtonPosY && touchY <= selectedButtonPosY + BUTTON_HEIGHT) {
     // Call the method to select the current image as the player
-            System.out.println("should update player's texture from entity?");
         // sceneManager.getEntityManager().setPlayerTexture(ships[activeIndex]);     
             // // Check if touch is within bounds of the select player button
             // else if (touchX >= (SCENE_WIDTH - 60) / 2 && touchX <= (SCENE_WIDTH + 60) / 2 &&
             //         touchY >= 20 && touchY <= 20 + 20) {
                 // Call the method to select the current image as the player
                 // entityManager.selectedShip(ships[activeIndex]);
+                EntityManager.getInstance().setTextureIndex(activeIndex);
             }
 
             //working main menu below

@@ -39,7 +39,6 @@ public class GameManager extends Game {
 		// sm.mainMenu.draw();
 		// spawn player
 		spawnRate = 0f;
-		em.SpawnPlayer();
 	}
 
 	public void render() {
