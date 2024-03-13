@@ -29,9 +29,30 @@ public class EntityFactory {
         return new Enemy(50, 10, 220, enemyTexture, batch, 300f, 400f);
     }
     public Player createPlayer(int textureIndex){
-        // temp
-        textureIndex = 2;
-        return new Player(100, 50, 200f, playerTexture[textureIndex], batch, 300f, 100f);
+        int health;
+        int damage;
+        float speed;
+        textureIndex = 0;
+        switch (textureIndex){
+            case 0:
+                health = 100;
+                damage = 50;
+                speed = 200f;
+                break;
+            case 1:
+                health = 200;
+                damage = 50;
+                speed = 150f;
+                break;
+            case 2:
+                health = 75;
+                damage = 20;
+                speed = 300f;
+                break;
+            default:
+                throw new IllegalArgumentException("Invalid texture index: " + textureIndex);    
+        }
+        return new Player(health, damage, speed, playerTexture[textureIndex], batch, 300f, 100f);
     }
 
 	public void dispose(){
