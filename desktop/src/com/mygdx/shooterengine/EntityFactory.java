@@ -6,27 +6,32 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 public class EntityFactory {
     private Texture[] playerTexture;  // hold player texture
-    private Texture enemyTexture;   // hold enemy texture
+    private Texture[] enemyTexture;   // hold enemy texture
     private SpriteBatch batch;
 
     EntityFactory(){
         playerTexture = new Texture[]{
-                new Texture(Gdx.files.internal("EntitySprites\\PlayerSprites\\player_blue.png")),
-                new Texture(Gdx.files.internal("EntitySprites\\PlayerSprites\\player_red.png")),
-                new Texture(Gdx.files.internal("EntitySprites\\PlayerSprites\\player_grey.png")),
-            };
-		enemyTexture = new Texture(Gdx.files.internal("EntitySprites\\enemy.png"));
+            new Texture(Gdx.files.internal("EntitySprites\\PlayerSprites\\player_blue.png")),
+            new Texture(Gdx.files.internal("EntitySprites\\PlayerSprites\\player_red.png")),
+            new Texture(Gdx.files.internal("EntitySprites\\PlayerSprites\\player_grey.png")),
+        };
+
+        enemyTexture = new Texture[]{
+            new Texture(Gdx.files.internal("EntitySprites\\enemy.png")),
+            new Texture(Gdx.files.internal("EntitySprites\\enemy2.png")),
+        };
+
         batch = SpriteBatchSingleton.getInstance();
     }
 
     public Enemy createStandard(){
-        return new Enemy(100, 30, 200, enemyTexture, batch, 300f, 400f);
+        return new Enemy(100, 30, 200, enemyTexture[0], batch, 300f, 400f);
     }
     public Enemy createBig(){
-        return new Enemy(200, 40, 150, enemyTexture, batch, 300f, 400f);
+        return new Enemy(200, 40, 150, enemyTexture[1], batch, 300f, 400f);
     }
     public Enemy createSmall(){
-        return new Enemy(50, 10, 220, enemyTexture, batch, 300f, 400f);
+        return new Enemy(50, 10, 220, enemyTexture[1], batch, 300f, 400f);
     }
     public Player createPlayer(int textureIndex){
         int health;
@@ -59,6 +64,8 @@ public class EntityFactory {
         for (Texture player : playerTexture) {
             player.dispose();
         }
-		enemyTexture.dispose();
+        for (Texture enemy : enemyTexture) {
+            enemy.dispose();
+        }
     }
 }

@@ -16,8 +16,9 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 public class EntityManager {
 	private static EntityManager emInstance;
 	private Player player;   // hold player instance
-	private Enemy enemy;     //
+	private Enemy enemy;     
 	private EntityFactory ef;
+	private EnemySpawnPattern enemySpawner;
 	private int playerTextureIndex;
 
 	private List<Enemy> enemyList = new ArrayList<>();         // list of enemies on screen
@@ -26,6 +27,7 @@ public class EntityManager {
 
 	private EntityManager(){
 		ef = new EntityFactory();
+		enemySpawner = new EnemySpawnPattern();
 		totalEnemy = 5;
 	}
 
@@ -41,12 +43,37 @@ public class EntityManager {
 		player = ef.createPlayer(playerTextureIndex);
 	}
 
+    public void spawnNextWave() {
+        List<EnemyConfig> waveConfigs = enemySpawner.getWaveConfigs();
+        for (EnemyConfig config : waveConfigs) {
+            for (int i = 0; i < config.getQuantity(); i++) {
+                Enemy enemy = null;
+                switch (config.getType()) {
+                    case SMALL:
+                        enemy = ef.createSmall();
+                        break;
+                    case NORMAL:
+                        enemy = ef.createStandard();
+                        break;
+                    case BIG:
+                        enemy = ef.createBig();
+                        break;
+                    // Add more cases for other enemy types as needed
+                }
+                if (enemy != null) {
+                    enemyList.add(enemy);
+                }
+            }
+        }
+    }
+
+	/* 
 	// Function to spawn enemy	
 	public void SpawnEnemy() {
 		enemy = ef.createStandard();
 		enemyList.add(enemy);
 	}
-
+*/
 	// Function to draw the bullets
 	public void DrawBullet(int direction){
 		if(!bulletList.isEmpty())

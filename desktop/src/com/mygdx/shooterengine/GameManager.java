@@ -64,11 +64,19 @@ public class GameManager extends Game {
 					em.getPlayer().Draw();
 					em.getPlayer().Move();
 					spawnRate -= Gdx.graphics.getDeltaTime();
-					if (em.getEnemyList().size() < em.getTotalEnemy() && spawnRate < 0) {
-						em.SpawnEnemy();
+					if (em.getEnemyList().size() == 0 && spawnRate < 0) {
+						em.spawnNextWave(); // Call spawnNextWave() only once
 						spawnRate = SPAWNRATE;
 					}
-
+					/* 
+					if (em.getEnemyList().size() == 0 && spawnRate < 0) {
+						for (int i = 0; i < em.getTotalEnemy(); i++){
+							em.SpawnEnemy();
+						}
+						spawnRate = SPAWNRATE;
+					}
+					*/
+					
 					enemyColChecker();
 					// If player HP reaches <0, change to EndScene
 					if (em.getPlayer().getHealth() <= 0) 

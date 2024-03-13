@@ -17,8 +17,8 @@ public class EnemyAI
 
 	EnemyAI(Enemy e){
 		enemy = e;
-		currentPointIndex = 0;
         random = new Random();
+		currentPointIndex = random.nextInt(points.length);
 	}
 
     // Function responsible for enemy movement
