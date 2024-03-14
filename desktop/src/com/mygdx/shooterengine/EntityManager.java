@@ -112,16 +112,12 @@ public class EntityManager {
 	}
 
 	public void setTextureIndex(int index){
-		System.out.println("called");
 		playerTextureIndex = index;
 	}
 
 	// Function to restart game by resetting the list of enemies, bullets and player position
 	public void restartGame()
 	{
-		if (player != null){
-			player.GetTexture().dispose();
-		}
 		SpawnPlayer();
 		enemyList.clear();
 		bulletList.clear();
