@@ -46,9 +46,7 @@ public class EndScene extends Scene
         returntoMainMenuButton = new Texture(Gdx.files.internal("ScreenImages\\ReturnToMainMenu.png"));
 
         returntoMainMenuButtonPosX = (SCENE_WIDTH - BUTTON_WIDTH) / 2;
-        // returntoMainMenuButtonPosY = (SCENE_HEIGHT / 2) - 10 - BUTTON_HEIGHT;
-        returntoMainMenuButtonPosY = (SCENE_HEIGHT / 2) + 20 - BUTTON_HEIGHT;
-
+        returntoMainMenuButtonPosY = (SCENE_HEIGHT / 2) - 10 - BUTTON_HEIGHT;
     }
 
     public void draw() 

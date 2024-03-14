@@ -92,14 +92,14 @@ public class MainMenu extends Scene
                 sceneManager.changeScene(new GameScene(sceneManager));
             }
             // Check if touch is within bounds of the start button
-            // else if (touchX >= selectButtonPosX && touchX <= selectButtonPosX + BUTTON_WIDTH &&
-            //         touchY >= selectButtonPosY && touchY <= selectButtonPosY + BUTTON_HEIGHT) 
-            // {
-            //     // sceneManager.getGameManager().restart();
-            //     // sceneManager.changeScene(new GameScene(sceneManager));
-            //     sceneManager.changeScene(new ShipSelection(sceneManager));
-            //     System.out.println("button is touched");
-            //}
+            else if (touchX >= selectButtonPosX && touchX <= selectButtonPosX + BUTTON_WIDTH &&
+                    touchY >= selectButtonPosY && touchY <= selectButtonPosY + BUTTON_HEIGHT) 
+            {
+                // sceneManager.getGameManager().restart();
+                // sceneManager.changeScene(new GameScene(sceneManager));
+                sceneManager.changeScene(new ShipSelection(sceneManager));
+                System.out.println("button is touched");
+            }
         }
     }
 

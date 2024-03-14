@@ -16,7 +16,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 public class EntityManager {
 	private static EntityManager emInstance;
 	private Player player;   // hold player instance
-	// private Enemy enemy;     
+	private Enemy enemy;     
 	private EntityFactory ef;
 	private EnemySpawnPattern enemySpawner;
 	private int playerTextureIndex;
