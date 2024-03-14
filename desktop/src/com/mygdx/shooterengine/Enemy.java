@@ -40,7 +40,7 @@ public class Enemy extends Entity implements iEntity{
 		if(shootingCD < 0)
 		{
 			// spawn bullet, and reset the shootingcd back to 2f
-			em.SetBulletList(new Bullet(this.damage, 50, this.texture, this.batch, posX, posY));
+			em.SetBulletList(new Bullet(this.damage, 300, this.texture, this.batch, posX, posY));
 			shootingCD = 2f;
 		}
 	}

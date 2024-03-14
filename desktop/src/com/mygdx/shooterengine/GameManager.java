@@ -62,6 +62,7 @@ public class GameManager extends Game {
 					em.getPlayer().Shoot(1);
 					em.getPlayer().Draw();
 					em.getPlayer().Move();
+					em.DrawBullet(-1);
 					spawnRate -= Gdx.graphics.getDeltaTime();
 					if (em.getEnemyList().size() == 0 && spawnRate < 0) {
 						em.spawnNextWave(); // Call spawnNextWave() only once
@@ -99,7 +100,6 @@ public class GameManager extends Game {
 			enemy.Draw();
 			enemy.Move();
 			enemy.Shoot(-1);
-			em.DrawBullet(-1);
 			if (enemy.getHealth() <= 0) {
 				eIterator.remove(); // Remove the current enemy using the iterator
 			}
