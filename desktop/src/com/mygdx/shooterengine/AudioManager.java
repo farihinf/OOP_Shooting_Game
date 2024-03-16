@@ -42,13 +42,16 @@ public class AudioManager implements AudioAsset{
     }
 
     public void AdjustVolume(float volume){
-        if(currentMusic != null){
+        if(currentMusic != null)
+        {
             currentMusic.setVolume(volume);
         }
     }
 
-    public void GetVolume(){
-        if(currentMusic != null){
+    public void GetVolume()
+    {
+        if(currentMusic != null)
+        {
             currentMusic.getVolume();
         }
     }

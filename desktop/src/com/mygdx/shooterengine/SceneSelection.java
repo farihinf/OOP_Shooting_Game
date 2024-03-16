@@ -8,28 +8,27 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.utils.viewport.StretchViewport;
 
-public class ShipSelection extends Scene {
+public class SceneSelection extends Scene {
     // Screen
     private StretchViewport viewport;
 
     // Graphics
     private SpriteBatch batch;
-    private Texture SelectionBg;
+    private Texture sceneSelectionBG;
     private Texture returntoMainMenuButton;
     private Texture rightArrow;
     private Texture leftArrow;
-    private Texture[] ships;
-    private Texture selectedShip;
+    private Texture[] scene;
+    private Texture confirmButton;
 
     // Scene Manager
     private SceneManager sceneManager;
-    // private EntityManager entityManager;
 
     // Button Positions and Dimensions
     private float returntoMainMenuButtonPosX;
     private float returntoMainMenuButtonPosY;
-    private float selectedButtonPosX;
-    private float selectedButtonPosY;
+    private float confirmButtonPosX;
+    private float confirmButtonPosY;
     private float arrowWidth = 15;
     private float arrowXOffset = 4; // Adjust the X-axis offset for arrows
     private final float BUTTON_WIDTH = 20;
@@ -43,71 +42,55 @@ public class ShipSelection extends Scene {
 
     private Vector3 touchPos = new Vector3();
 
-    // ShipSelection(SceneManager sceneManager, EntityManager entityManager )
-    ShipSelection(SceneManager sceneManager)
-    {
+    SceneSelection(SceneManager sceneManager) {
         this.sceneManager = sceneManager;
-        // this.entityManager = entityManager;
 
         viewport = new StretchViewport(SCENE_WIDTH, SCENE_HEIGHT);
         batch = new SpriteBatch();
 
-        // title_logo = new Texture(Gdx.files.internal("ScreenImages\\Logo.png"));
-        SelectionBg = new Texture(Gdx.files.internal("ScreenImages\\selectionBg.png"));
+        sceneSelectionBG = new Texture(Gdx.files.internal("ScreenImages\\selectionBg.png"));
         returntoMainMenuButton = new Texture(Gdx.files.internal("ScreenImages\\ReturnToMainMenu.png"));
         leftArrow = new Texture(Gdx.files.internal("ScreenImages\\leftArrow.png"));
         rightArrow = new Texture(Gdx.files.internal("ScreenImages\\rightArrow.png"));
-        selectedShip = new Texture(Gdx.files.internal("ScreenImages\\selectedShip.png"));
+        confirmButton = new Texture(Gdx.files.internal("ScreenImages\\selectedShip.png"));
 
         returntoMainMenuButtonPosX = (SCENE_WIDTH - BUTTON_WIDTH) / 2 + 25;
         returntoMainMenuButtonPosY = (SCENE_HEIGHT / 2) - 25 - BUTTON_HEIGHT;
 
-        selectedButtonPosX = (SCENE_WIDTH - BUTTON_WIDTH) / 2;
-        selectedButtonPosY = (SCENE_HEIGHT / 2) - 35 - BUTTON_HEIGHT;
+        confirmButtonPosX = (SCENE_WIDTH - BUTTON_WIDTH) / 2;
+        confirmButtonPosY = (SCENE_HEIGHT / 2) - 30 - BUTTON_HEIGHT;
 
-        ships = new Texture[] {
-                // new Texture(Gdx.files.internal("EntitySprites\\player.png")),
-                new Texture(Gdx.files.internal("EntitySprites\\PlayerSprites\\player_blue.png")),
-                new Texture(Gdx.files.internal("EntitySprites\\PlayerSprites\\player_red.png")),
-                new Texture(Gdx.files.internal("EntitySprites\\PlayerSprites\\player_grey.png")),
+        scene = new Texture[] {
+                new Texture(Gdx.files.internal("ScreenImages\\Scene\\SpaceBackground(1).png")),
+                new Texture(Gdx.files.internal("ScreenImages\\Scene\\SpaceBackground(2).png")),
         };
     }
 
     public void draw() {
         batch.begin();
 
-        batch.draw(SelectionBg, 0, 0, SCENE_WIDTH, SCENE_HEIGHT);
+        batch.draw(sceneSelectionBG, 0, 0, SCENE_WIDTH, SCENE_HEIGHT);
 
-        // float logoWidth = 50;
-        // float logoHeight = 20;
-        // float logoPosX = (SCENE_WIDTH - logoWidth) / 2;
-        // float logoPosY = SCENE_HEIGHT - 10 - logoHeight; // Calculate & adjust Y
-        // position
-
-        // draw arrows to select
-        float arrowPosY = SCENE_HEIGHT / 2 - arrowWidth / 2; // Center the arrows vertically
+        float arrowPosY = (SCENE_HEIGHT / 2 - arrowWidth / 2); // Center the arrows vertically
         float arrowLeftPosX = arrowXOffset; // Adjust the offset for the left arrow
         float arrowRightPosX = SCENE_WIDTH - arrowWidth - arrowXOffset; // Adjust the offset for the right arrow
         batch.draw(leftArrow, arrowLeftPosX, arrowPosY, arrowWidth, arrowWidth);
         batch.draw(rightArrow, arrowRightPosX, arrowPosY, arrowWidth, arrowWidth);
-        // batch.draw(SelectionBg, logoPosX, logoPosY, logoWidth, logoHeight);
         batch.draw(returntoMainMenuButton, returntoMainMenuButtonPosX, returntoMainMenuButtonPosY, BUTTON_WIDTH,
                 BUTTON_HEIGHT);
-        batch.draw(selectedShip, selectedButtonPosX, selectedButtonPosY, BUTTON_WIDTH,
+        batch.draw(confirmButton, confirmButtonPosX, confirmButtonPosY, BUTTON_WIDTH,
                 BUTTON_HEIGHT);
 
-        // draw ships
-        float imageWidth = 15;
-        float imageHeight = 30;
+        float imageWidth = 25;
+        float imageHeight = 50;
         float imagePosX = (SCENE_WIDTH - imageWidth) / 2;
         float imagePosY = (SCENE_HEIGHT - imageHeight) / 2;
-        batch.draw(ships[activeIndex], imagePosX, imagePosY, imageWidth, imageHeight);
+        batch.draw(scene[activeIndex], imagePosX, imagePosY, imageWidth, imageHeight);
 
         batch.end();
     }
 
-    public void handleInput() 
-    {
+    public void handleInput() {
         if (Gdx.input.isTouched()) {
             float touchX = Gdx.input.getX() * (float) SCENE_WIDTH / Gdx.graphics.getWidth();
             float touchY = (Gdx.graphics.getHeight() - Gdx.input.getY()) * (float) SCENE_HEIGHT
@@ -117,30 +100,21 @@ public class ShipSelection extends Scene {
             if (touchX >= 10 && touchX <= 10 + arrowWidth &&
                     touchY >= SCENE_HEIGHT / 2 - arrowWidth / 2 &&
                     touchY <= SCENE_HEIGHT / 2 + arrowWidth / 2) {
-                activeIndex = (activeIndex - 1 + ships.length) % ships.length;
+                activeIndex = (activeIndex - 1 + scene.length) % scene.length;
             }
             // Check if touch is within bounds of the right arrow
             else if (touchX >= SCENE_WIDTH - arrowWidth - 10 && touchX <= SCENE_WIDTH - 10 &&
                     touchY >= SCENE_HEIGHT / 2 - arrowWidth / 2 &&
                     touchY <= SCENE_HEIGHT / 2 + arrowWidth / 2) {
-                activeIndex = (activeIndex + 1) % ships.length;
+                activeIndex = (activeIndex + 1) % scene.length;
             }
             // Check if touch is within bounds of the select player button
-            else if (touchX >= selectedButtonPosX && touchX <= selectedButtonPosX + BUTTON_WIDTH &&
-                    touchY >= selectedButtonPosY && touchY <= selectedButtonPosY + BUTTON_HEIGHT) {
-                // Call the method to select the current image as the player
-                // sceneManager.getEntityManager().setPlayerTexture(ships[activeIndex]);
-                // // Check if touch is within bounds of the select player button
-                // else if (touchX >= (SCENE_WIDTH - 60) / 2 && touchX <= (SCENE_WIDTH + 60) / 2
-                // &&
-                // touchY >= 20 && touchY <= 20 + 20) {
-                // Call the method to select the current image as the player
-                // entityManager.selectedShip(ships[activeIndex]);
-                EntityManager.getInstance().setTextureIndex(activeIndex);
+            else if (touchX >= confirmButtonPosX && touchX <= confirmButtonPosX + BUTTON_WIDTH &&
+                    touchY >= confirmButtonPosY && touchY <= confirmButtonPosY + BUTTON_HEIGHT) 
+            {
+              
             }
 
-            // working main menu below
-            // Check if touch is within bounds of the return button go back to main menu
             if (touchX >= returntoMainMenuButtonPosX && touchX <= returntoMainMenuButtonPosX + BUTTON_WIDTH &&
                     touchY >= returntoMainMenuButtonPosY && touchY <= returntoMainMenuButtonPosY + BUTTON_HEIGHT) {
                 sceneManager.changeScene(new MainMenu(sceneManager));
@@ -149,7 +123,8 @@ public class ShipSelection extends Scene {
     }
 
     @Override
-    public void show() {
+    public void show() 
+    {
         // Sets the input processor to a new instance of InputAdapter, which allows
         // handling of input events
         Gdx.input.setInputProcessor(new InputAdapter() {
@@ -186,14 +161,13 @@ public class ShipSelection extends Scene {
     }
 
     @Override
-    public void dispose() {
+    public void dispose() 
+    {
         batch.dispose();
-        SelectionBg.dispose();
+        sceneSelectionBG.dispose();
         returntoMainMenuButton.dispose();
+        confirmButton.dispose();
         leftArrow.dispose();
         rightArrow.dispose();
-        for (Texture ships : ships) {
-            ships.dispose();
-        }
     }
 }

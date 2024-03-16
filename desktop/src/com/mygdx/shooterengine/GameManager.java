@@ -12,6 +12,7 @@ public class GameManager extends Game {
 	private static GameManager gmInstance;
 	private SpriteBatch batch;
 	private GameScene gamescreen;
+	private SceneSelection sceneSelection;
 	private ShipSelection ShipSelection;
 	private EntityManager em;
 	private SceneManager sm;
@@ -30,7 +31,7 @@ public class GameManager extends Game {
 		gmInstance = GameManager.getInstance();
 		batch = SpriteBatchSingleton.getInstance();
 		em = EntityManager.getInstance();
-		sm = new SceneManager();
+		sm = SceneManager.GetInstance();
 		// set screen to main menu
 		sm.changeScene(new MainMenu(sm));
 		sm.mainMenu.draw();
@@ -47,10 +48,16 @@ public class GameManager extends Game {
 			if (currentScreen instanceof MainMenu) {
 				((MainMenu) currentScreen).initialise();
 
-			} else if (currentScreen instanceof ShipSelection) {
+			} else if (currentScreen instanceof ShipSelection) 
+			{
                 ((ShipSelection) currentScreen).initialise();
 
-			} else if (currentScreen instanceof EndScene) {
+			} 
+			else if (currentScreen instanceof SceneSelection) 
+			{
+                ((SceneSelection) currentScreen).initialise();
+			}
+			else if (currentScreen instanceof EndScene) {
 				((EndScene) currentScreen).initialise();
 			} else {
 				gamescreen = (GameScene) currentScreen;
@@ -89,10 +96,7 @@ public class GameManager extends Game {
 			}
 		}
 	}
-	public void showSelectionScreen() {
-        ShipSelection = new ShipSelection(sm);
-        sm.changeScene(ShipSelection);
-    }
+	
 	public void enemyColChecker(){
 		Iterator<Enemy> eIterator = em.getEnemyList().iterator();
 		while (eIterator.hasNext()) {

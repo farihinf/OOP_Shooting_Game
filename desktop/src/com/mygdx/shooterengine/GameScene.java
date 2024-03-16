@@ -1,7 +1,5 @@
 package com.mygdx.shooterengine;
 
-import javax.swing.JSlider;
-
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputAdapter;
@@ -48,7 +46,8 @@ public class GameScene extends Scene {
 
     private Vector3 touchPos = new Vector3();
 
-    GameScene(SceneManager sceneManager) {
+    GameScene(SceneManager sceneManager) 
+    {
         this.sceneManager = sceneManager;
 
         camera = new OrthographicCamera();
@@ -163,7 +162,8 @@ public class GameScene extends Scene {
     }
 
     // Function to call the draw method (Essentially same as Rendering)
-    public void initialise() {
+    public void initialise() 
+    {
         draw();
     }
 
