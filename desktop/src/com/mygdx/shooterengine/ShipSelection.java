@@ -33,7 +33,7 @@ public class ShipSelection extends Scene {
     private float selectedButtonPosY;
     private float arrowWidth = 15;
     private float arrowXOffset = 4; // Adjust the X-axis offset for arrows
-    private final float BUTTON_WIDTH = 20;
+    private final float BUTTON_WIDTH = 15;
     private final float BUTTON_HEIGHT = 15;
 
     // World Parameters (Portrait Mode)
@@ -55,13 +55,13 @@ public class ShipSelection extends Scene {
 
         // title_logo = new Texture(Gdx.files.internal("ScreenImages\\Logo.png"));
         SelectionBg = new Texture(Gdx.files.internal("ScreenImages\\selectionBg.png"));
-        returntoMainMenuButton = new Texture(Gdx.files.internal("ScreenImages\\ReturnToMainMenu.png"));
+        returntoMainMenuButton = new Texture(Gdx.files.internal("ScreenImages\\ReturnMainMenu.png"));
         leftArrow = new Texture(Gdx.files.internal("ScreenImages\\leftArrow.png"));
         rightArrow = new Texture(Gdx.files.internal("ScreenImages\\rightArrow.png"));
         selectedShip = new Texture(Gdx.files.internal("ScreenImages\\selectedShip.png"));
 
         returntoMainMenuButtonPosX = (SCENE_WIDTH - BUTTON_WIDTH) / 2 + 25;
-        returntoMainMenuButtonPosY = (SCENE_HEIGHT / 2) - 25 - BUTTON_HEIGHT;
+        returntoMainMenuButtonPosY = (SCENE_HEIGHT / 2) - 25 - BUTTON_HEIGHT - 15;
 
         selectedButtonPosX = (SCENE_WIDTH - BUTTON_WIDTH) / 2;
         selectedButtonPosY = (SCENE_HEIGHT / 2) - 40 - BUTTON_HEIGHT;

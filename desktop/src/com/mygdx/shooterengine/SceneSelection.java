@@ -49,7 +49,7 @@ public class SceneSelection extends Scene {
         batch = new SpriteBatch();
 
         sceneSelectionBG = new Texture(Gdx.files.internal("ScreenImages\\selectionBg.png"));
-        returntoMainMenuButton = new Texture(Gdx.files.internal("ScreenImages\\ReturnToMainMenu.png"));
+        returntoMainMenuButton = new Texture(Gdx.files.internal("ScreenImages\\ReturnMainMenu.png"));
         leftArrow = new Texture(Gdx.files.internal("ScreenImages\\leftArrow.png"));
         rightArrow = new Texture(Gdx.files.internal("ScreenImages\\rightArrow.png"));
         confirmButton = new Texture(Gdx.files.internal("ScreenImages\\selectedShip.png"));

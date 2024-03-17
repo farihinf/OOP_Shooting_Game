@@ -33,7 +33,7 @@ public class MainMenu extends Scene
 
     // Scene Manager
     private SceneManager sceneManager;
-    private SceneSelection sceneSelection;
+    // private SceneSelection sceneSelection;
     // private EntityManager em;
     private final int SCENE_WIDTH = 72;
     private final int SCENE_HEIGHT = 128;
@@ -46,7 +46,7 @@ public class MainMenu extends Scene
         viewport = new StretchViewport(SCENE_WIDTH, SCENE_HEIGHT);
         batch = new SpriteBatch();
 
-        background = new Texture(Gdx.files.internal("ScreenImages\\MainMenu.png"));
+        background = new Texture(Gdx.files.internal("ScreenImages\\Interface.png"));
         title_logo = new Texture(Gdx.files.internal("ScreenImages\\Logo.png"));
         startButton = new Texture(Gdx.files.internal("ScreenImages\\StartButton.png"));
         selectionButton = new Texture(Gdx.files.internal("ScreenImages\\shipselect.png"));

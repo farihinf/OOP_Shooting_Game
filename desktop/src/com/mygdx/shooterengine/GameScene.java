@@ -60,7 +60,7 @@ public class GameScene extends Scene {
         pauselogo = new Texture(Gdx.files.internal("ScreenImages\\PauseLogo.png"));
         back2mainmenuButton = new Texture(Gdx.files.internal("ScreenImages\\BackMainMenuButton.png"));
         resumeButton = new Texture(Gdx.files.internal("ScreenImages\\ResumeButton.png"));
-        overlayTexture = new Texture(Gdx.files.internal("ScreenImages\\PauseBackGround.jpg"));
+        overlayTexture = new Texture(Gdx.files.internal("ScreenImages\\Interface.png"));
 
         // To calculat the X & Y coordiantes of the buttons on the screen relative to the dimensions of scene
         backtoMainMenuButtonPosX = (SCENE_WIDTH - BUTTON_WIDTH) / 2;
