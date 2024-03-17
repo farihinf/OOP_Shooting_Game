@@ -91,7 +91,12 @@ public class Player extends Entity implements iEntity{
 
 	@Override
 	public void Draw(){
-		batch.draw(texture, posX, posY, texture.getWidth(), texture.getHeight());
+		float scaleFactorX = 0.5f; // Adjust this value as needed
+    	float scaleFactorY = 0.5f; // Adjust this value as needed
+		float scaledWidth = texture.getWidth() * scaleFactorX;
+    	float scaledHeight = texture.getHeight() * scaleFactorY;
+
+		batch.draw(texture, posX, posY, scaledWidth, scaledHeight);
 
         float healthBarWidth = (float) health / 100 * initialHealthBarWidth;
 

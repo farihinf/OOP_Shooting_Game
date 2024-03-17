@@ -20,6 +20,7 @@ public class ShipSelection extends Scene {
     private Texture leftArrow;
     private Texture[] ships;
     private Texture selectedShip;
+    private Texture[] shipStats;
 
     // Scene Manager
     private SceneManager sceneManager;
@@ -63,13 +64,19 @@ public class ShipSelection extends Scene {
         returntoMainMenuButtonPosY = (SCENE_HEIGHT / 2) - 25 - BUTTON_HEIGHT;
 
         selectedButtonPosX = (SCENE_WIDTH - BUTTON_WIDTH) / 2;
-        selectedButtonPosY = (SCENE_HEIGHT / 2) - 35 - BUTTON_HEIGHT;
+        selectedButtonPosY = (SCENE_HEIGHT / 2) - 40 - BUTTON_HEIGHT;
 
         ships = new Texture[] {
                 // new Texture(Gdx.files.internal("EntitySprites\\player.png")),
                 new Texture(Gdx.files.internal("EntitySprites\\PlayerSprites\\player_blue.png")),
                 new Texture(Gdx.files.internal("EntitySprites\\PlayerSprites\\player_red.png")),
                 new Texture(Gdx.files.internal("EntitySprites\\PlayerSprites\\player_grey.png")),
+        };
+
+        shipStats = new Texture[]{
+                new Texture(Gdx.files.internal("ScreenImages\\statblue.png")),
+                new Texture(Gdx.files.internal("ScreenImages\\statred.png")),
+                new Texture(Gdx.files.internal("ScreenImages\\statgrey.png")),
         };
     }
 
@@ -78,19 +85,12 @@ public class ShipSelection extends Scene {
 
         batch.draw(SelectionBg, 0, 0, SCENE_WIDTH, SCENE_HEIGHT);
 
-        // float logoWidth = 50;
-        // float logoHeight = 20;
-        // float logoPosX = (SCENE_WIDTH - logoWidth) / 2;
-        // float logoPosY = SCENE_HEIGHT - 10 - logoHeight; // Calculate & adjust Y
-        // position
-
         // draw arrows to select
         float arrowPosY = SCENE_HEIGHT / 2 - arrowWidth / 2; // Center the arrows vertically
         float arrowLeftPosX = arrowXOffset; // Adjust the offset for the left arrow
         float arrowRightPosX = SCENE_WIDTH - arrowWidth - arrowXOffset; // Adjust the offset for the right arrow
         batch.draw(leftArrow, arrowLeftPosX, arrowPosY, arrowWidth, arrowWidth);
         batch.draw(rightArrow, arrowRightPosX, arrowPosY, arrowWidth, arrowWidth);
-        // batch.draw(SelectionBg, logoPosX, logoPosY, logoWidth, logoHeight);
         batch.draw(returntoMainMenuButton, returntoMainMenuButtonPosX, returntoMainMenuButtonPosY, BUTTON_WIDTH,
                 BUTTON_HEIGHT);
         batch.draw(selectedShip, selectedButtonPosX, selectedButtonPosY, BUTTON_WIDTH,
@@ -100,8 +100,14 @@ public class ShipSelection extends Scene {
         float imageWidth = 15;
         float imageHeight = 30;
         float imagePosX = (SCENE_WIDTH - imageWidth) / 2;
-        float imagePosY = (SCENE_HEIGHT - imageHeight) / 2;
+        float imagePosY = (SCENE_HEIGHT - imageHeight) / 2 + 25;
         batch.draw(ships[activeIndex], imagePosX, imagePosY, imageWidth, imageHeight);
+
+        float statsImageWidth = 25; // Adjust as needed
+        float statsImageHeight = 40; // Adjust as needed
+        float statsImagePosX = imagePosX + (imageWidth - statsImageWidth) / 2; // Center horizontally
+        float statsImagePosY = imagePosY - statsImageHeight - 5; // Position below the ship
+        batch.draw(shipStats[activeIndex], statsImagePosX, statsImagePosY, statsImageWidth, statsImageHeight);
 
         batch.end();
     }
@@ -128,14 +134,6 @@ public class ShipSelection extends Scene {
             // Check if touch is within bounds of the select player button
             else if (touchX >= selectedButtonPosX && touchX <= selectedButtonPosX + BUTTON_WIDTH &&
                     touchY >= selectedButtonPosY && touchY <= selectedButtonPosY + BUTTON_HEIGHT) {
-                // Call the method to select the current image as the player
-                // sceneManager.getEntityManager().setPlayerTexture(ships[activeIndex]);
-                // // Check if touch is within bounds of the select player button
-                // else if (touchX >= (SCENE_WIDTH - 60) / 2 && touchX <= (SCENE_WIDTH + 60) / 2
-                // &&
-                // touchY >= 20 && touchY <= 20 + 20) {
-                // Call the method to select the current image as the player
-                // entityManager.selectedShip(ships[activeIndex]);
                 EntityManager.getInstance().setTextureIndex(activeIndex);
             }
 
@@ -194,6 +192,9 @@ public class ShipSelection extends Scene {
         rightArrow.dispose();
         for (Texture ships : ships) {
             ships.dispose();
+        }
+        for (Texture shipStats : shipStats) {
+            shipStats.dispose();
         }
     }
 }
