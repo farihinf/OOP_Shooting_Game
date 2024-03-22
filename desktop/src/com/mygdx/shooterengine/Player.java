@@ -56,7 +56,7 @@ public class Player extends Entity implements iEntity{
 		if (IOManager.GetInstance().isKeyPressed(Keys.SPACE) && shootingCD < 0) {
 			//Bullet bullet = new Bullet(10, 10, this.texture, this.batch, 100, 100);
 			shootingCD = SHOOTINGCD;
-			bulletList.add(new Bullet(this.damage, 1000, this.texture, this.batch, posX, posY));
+			bulletList.add(new Bullet(this.damage, 1000, this.texture, this.batch, posX + (texture.getWidth() / 2), posY));
 			AudioManager.GetInstance().PlaySound("Audio\\Shoot.mp3");
 		}
 
@@ -96,7 +96,7 @@ public class Player extends Entity implements iEntity{
 		float scaledWidth = texture.getWidth() * scaleFactorX;
     	float scaledHeight = texture.getHeight() * scaleFactorY;
 
-		batch.draw(texture, posX, posY, scaledWidth, scaledHeight);
+		batch.draw(texture, posX, posY, texture.getWidth(), texture.getHeight());
 
         float healthBarWidth = (float) health / 100 * initialHealthBarWidth;
 
