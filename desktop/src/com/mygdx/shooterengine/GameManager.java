@@ -8,12 +8,11 @@ import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 /* Class in charge of the overall game flow, the managing of objects such as the managers, entities and scenes */
-public class GameManager extends Game {
+public class GameManager extends Game 
+{
 	private static GameManager gmInstance;
 	private SpriteBatch batch;
 	private GameScene gamescreen;
-	private SceneSelection sceneSelection;
-	private ShipSelection ShipSelection;
 	private EntityManager em;
 	private SceneManager sm;
 	private float spawnRate;
@@ -53,10 +52,6 @@ public class GameManager extends Game {
                 ((ShipSelection) currentScreen).initialise();
 
 			} 
-			else if (currentScreen instanceof SceneSelection) 
-			{
-                ((SceneSelection) currentScreen).initialise();
-			}
 			else if (currentScreen instanceof EndScene) {
 				((EndScene) currentScreen).initialise();
 			} else {

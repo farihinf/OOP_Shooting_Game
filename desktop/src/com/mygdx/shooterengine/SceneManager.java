@@ -1,24 +1,17 @@
 package com.mygdx.shooterengine;
 
 import com.badlogic.gdx.Game;
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
-import com.badlogic.gdx.graphics.Texture;
 
 public class SceneManager extends Game 
 {
     private static SceneManager sceneManager;
-    private Texture[] sceneTexture;
     private Scene currentScene;
     public MainMenu mainMenu;
     
     SceneManager() 
     {
         mainMenu = new MainMenu(sceneManager);
-        sceneTexture = new Texture[]{
-            new Texture(Gdx.files.internal("ScreenImages\\Scene\\SpaceBackground(1).png")),
-            new Texture(Gdx.files.internal("ScreenImages\\Scene\\SpaceBackground(2).png")),
-        };
     }
 
     public static SceneManager GetInstance() 

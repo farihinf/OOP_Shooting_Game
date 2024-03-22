@@ -6,15 +6,13 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.utils.viewport.StretchViewport;
 
-public class MainMenu extends Scene 
-{
+public class MainMenu extends Scene {
     // Graphics
     private SpriteBatch batch;
     private Texture background;
     private Texture title_logo;
     private Texture startButton;
     private Texture selectionButton;
-    private Texture mapSelectButton;
 
     // Screen
     private StretchViewport viewport;
@@ -24,12 +22,9 @@ public class MainMenu extends Scene
     private float startButtonPosY;
     private float selectButtonPosX;
     private float selectButtonPosY;
-    private float mapSelectButtonPosX;
-    private float mapSelectButtonPosY;
 
     private final float BUTTON_WIDTH = 20;
     private final float BUTTON_HEIGHT = 15;
-    private int selectedMapIndex;
 
     // Scene Manager
     private SceneManager sceneManager;
@@ -41,7 +36,6 @@ public class MainMenu extends Scene
     MainMenu(SceneManager sceneManager) 
     {
         this.sceneManager = sceneManager;
-        selectedMapIndex = 0;
 
         viewport = new StretchViewport(SCENE_WIDTH, SCENE_HEIGHT);
         batch = new SpriteBatch();
@@ -50,21 +44,17 @@ public class MainMenu extends Scene
         title_logo = new Texture(Gdx.files.internal("ScreenImages\\Logo.png"));
         startButton = new Texture(Gdx.files.internal("ScreenImages\\StartButton.png"));
         selectionButton = new Texture(Gdx.files.internal("ScreenImages\\shipselect.png"));
-        mapSelectButton = new Texture(Gdx.files.internal("ScreenImages\\MapSelectionButton.png"));
 
         // To calculat the X & Y coordiantes of the button on the screen relative to the
         // dimensions of scene
         startButtonPosX = (SCENE_WIDTH - BUTTON_WIDTH) / 2;
         startButtonPosY = (SCENE_HEIGHT / 2) + 5 - BUTTON_HEIGHT; // Adjust Y position of start button
         selectButtonPosX = (SCENE_WIDTH - BUTTON_WIDTH) / 4 + 13;
-        selectButtonPosY = (SCENE_HEIGHT / 2) - 15 - BUTTON_HEIGHT;
-        mapSelectButtonPosX = (SCENE_WIDTH - BUTTON_WIDTH) / 2;
-        mapSelectButtonPosY = (SCENE_HEIGHT / 2) - 35 - BUTTON_HEIGHT; 
+        selectButtonPosY = (SCENE_HEIGHT / 2) - 25 - BUTTON_HEIGHT;
     }
 
     // Function responsible for rendering the scene onto the Screen
-    public void draw() 
-    {
+    public void draw() {
         batch.begin();
 
         batch.draw(background, 0, 0, SCENE_WIDTH, SCENE_HEIGHT);
@@ -78,13 +68,11 @@ public class MainMenu extends Scene
 
         batch.draw(startButton, startButtonPosX, startButtonPosY, BUTTON_WIDTH, BUTTON_HEIGHT);
         batch.draw(selectionButton, selectButtonPosX, selectButtonPosY, BUTTON_WIDTH, BUTTON_HEIGHT);
-        batch.draw(mapSelectButton, mapSelectButtonPosX, mapSelectButtonPosY, BUTTON_WIDTH, BUTTON_HEIGHT);
 
         batch.end();
     }
 
-    public void handleInput() 
-    {
+    public void handleInput() {
         // Check if the screen is touched
         if (Gdx.input.isTouched()) {
             // Calculate the X & Y coordinates of the touch position relative to the scene
@@ -107,10 +95,6 @@ public class MainMenu extends Scene
                 // sceneManager.changeScene(new GameScene(sceneManager));
                 sceneManager.changeScene(new ShipSelection(sceneManager));
                 System.out.println("Ship have changed!");
-            }
-            else if (touchX >= mapSelectButtonPosX && touchX <= mapSelectButtonPosX + BUTTON_WIDTH &&
-            touchY >= mapSelectButtonPosY && touchY <= mapSelectButtonPosY + BUTTON_HEIGHT) {
-                sceneManager.changeScene(new SceneSelection(sceneManager));
             }
         }
     }
@@ -135,14 +119,12 @@ public class MainMenu extends Scene
     }
 
     @Override
-    public void render(float delta) 
-    {
+    public void render(float delta) {
 
     }
 
     @Override
-    public void dispose() 
-    {
+    public void dispose() {
 
     }
 }

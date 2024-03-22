@@ -64,7 +64,7 @@ public class GameScene extends Scene {
 
         // To calculat the X & Y coordiantes of the buttons on the screen relative to the dimensions of scene
         backtoMainMenuButtonPosX = (SCENE_WIDTH - BUTTON_WIDTH) / 2;
-        backtoMainMenuButtonPosY = (SCENE_HEIGHT / 2) - 20 - BUTTON_HEIGHT;
+        backtoMainMenuButtonPosY = (SCENE_HEIGHT / 2) - 10 - BUTTON_HEIGHT;
         resumeButtonPosX = (SCENE_WIDTH - BUTTON_WIDTH) / 2;
         resumeButtonPosY = (SCENE_HEIGHT / 2) + 10 - BUTTON_HEIGHT;
     }
