@@ -28,7 +28,7 @@ public class GameManager extends Game
 	public void create() {
 		// Initialize the entity, scene manager and sprite batch.
 		gmInstance = GameManager.getInstance();
-		batch = SpriteBatchSingleton.getInstance();
+		batch = EntitySpriteBatchSingleton.getInstance();
 		em = EntityManager.getInstance();
 		sm = SceneManager.GetInstance();
 		// set screen to main menu

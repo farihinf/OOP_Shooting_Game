@@ -21,7 +21,7 @@ public class EntityFactory {
             new Texture(Gdx.files.internal("EntitySprites\\enemy2.png")),
         };
 
-        batch = SpriteBatchSingleton.getInstance();
+        batch = EntitySpriteBatchSingleton.getInstance();
     }
 
     public Enemy createStandard(){

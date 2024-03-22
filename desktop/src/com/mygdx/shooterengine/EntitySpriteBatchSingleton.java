@@ -1,12 +1,13 @@
 package com.mygdx.shooterengine;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
-public class SpriteBatchSingleton
+
+public class EntitySpriteBatchSingleton
 {
     private static SpriteBatch spriteBatchInstance;
 
     // Private constructor to prevent instantiation from outside
-    private SpriteBatchSingleton() 
+    private EntitySpriteBatchSingleton() 
     {
     }
 
