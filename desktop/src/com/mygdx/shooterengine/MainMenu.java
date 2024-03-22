@@ -40,8 +40,8 @@ public class MainMenu extends Scene {
         viewport = new StretchViewport(SCENE_WIDTH, SCENE_HEIGHT);
         batch = new SpriteBatch();
 
-        background = new Texture(Gdx.files.internal("ScreenImages\\Interface.png"));
-        title_logo = new Texture(Gdx.files.internal("ScreenImages\\Logo.png"));
+        background = new Texture(Gdx.files.internal("ScreenImages\\SpaceBackground.png"));
+        title_logo = new Texture(Gdx.files.internal("ScreenImages\\LogoSpace.png"));
         startButton = new Texture(Gdx.files.internal("ScreenImages\\StartButton.png"));
         selectionButton = new Texture(Gdx.files.internal("ScreenImages\\shipselect.png"));
 
@@ -59,8 +59,8 @@ public class MainMenu extends Scene {
 
         batch.draw(background, 0, 0, SCENE_WIDTH, SCENE_HEIGHT);
 
-        float logoWidth = 50;
-        float logoHeight = 20;
+        float logoWidth = 60;
+        float logoHeight = 30;
         float logoPosX = (SCENE_WIDTH - logoWidth) / 2;
         float logoPosY = SCENE_HEIGHT - 20 - logoHeight; // Calculate & adjust Y position
 
