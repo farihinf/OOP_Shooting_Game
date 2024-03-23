@@ -1,6 +1,7 @@
 package com.mygdx.shooterengine;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 /*
 import java.util.Random;
@@ -16,12 +17,14 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 public class EntityManager {
 	private static EntityManager emInstance;
 	private Player player;   // hold player instance
+
 	private EntityFactory ef;
 	private EnemySpawnPattern enemySpawner;
 	private int playerTextureIndex;
 
 	private List<Enemy> enemyList = new ArrayList<>();         // list of enemies on screen
 	private ArrayList<Bullet> bulletList = new ArrayList<>();  // list of bullets shot from enemies on screen
+	private ArrayList<Pickup> pickupList = new ArrayList<>();  // list of pickups on screen
 	private int totalEnemy; // max amount of enemies 
 
 	private EntityManager(){
@@ -66,6 +69,12 @@ public class EntityManager {
         }
     }
 
+	public void SpawnPickup(float x, float y){
+		Pickup pickup = ef.createPickup(x, y);
+		pickupList.add(pickup);
+	}
+	
+
 	/* 
 	// Function to spawn enemy	
 	public void SpawnEnemy() {
@@ -81,6 +90,19 @@ public class EntityManager {
 			{
 				bullet.Draw();
 				bullet.UpdateBullet(direction);
+			}
+		}
+	}
+
+	public void DrawPickups(){
+		Iterator<Pickup> eIterator = pickupList.iterator();
+		while (eIterator.hasNext()) {
+			Pickup pickup = eIterator.next();
+			pickup.Draw();
+			pickup.Update();
+
+			if (pickup.ToRemove()) {
+				eIterator.remove();
 			}
 		}
 	}
@@ -112,6 +134,10 @@ public class EntityManager {
 
 	public void setTextureIndex(int index){
 		playerTextureIndex = index;
+	}
+
+	public ArrayList<Pickup> getPickupList(){
+		return pickupList;
 	}
 
 	// Function to restart game by resetting the list of enemies, bullets and player position

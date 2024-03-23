@@ -46,6 +46,14 @@ public class Entity {
 	public int getDamage(){
 		return damage;
 	}
+
+	public void setSpeed(float speed){
+		this.speed += speed;
+	}
+
+	public void setDamage(int damage){
+		this.damage += damage;
+	}
 	
 	// Function to draw the entity texture
 	public void Draw() {

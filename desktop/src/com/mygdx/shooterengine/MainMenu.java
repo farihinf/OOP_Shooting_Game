@@ -12,7 +12,6 @@ public class MainMenu extends Scene {
     private Texture background;
     private Texture title_logo;
     private Texture startButton;
-    private Texture selectionButton;
 
     // Screen
     private StretchViewport viewport;

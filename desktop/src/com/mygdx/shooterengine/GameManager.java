@@ -65,6 +65,7 @@ public class GameManager extends Game
 					em.getPlayer().Draw();
 					em.getPlayer().Move();
 					em.DrawBullet(-1);
+					em.DrawPickups();
 					spawnRate -= Gdx.graphics.getDeltaTime();
 					if (em.getEnemyList().size() == 0 && spawnRate < 0) {
 						em.spawnNextWave(); // Call spawnNextWave() only once
@@ -79,7 +80,7 @@ public class GameManager extends Game
 					}
 					*/
 					
-					enemyColChecker();
+					ColChecker();
 					// If player HP reaches <0, change to EndScene
 					if (em.getPlayer().getHealth() <= 0) 
 					{
@@ -92,7 +93,7 @@ public class GameManager extends Game
 		}
 	}
 	
-	public void enemyColChecker(){
+	public void ColChecker(){
 		Iterator<Enemy> eIterator = em.getEnemyList().iterator();
 		while (eIterator.hasNext()) {
 			Enemy enemy = eIterator.next();
@@ -101,12 +102,17 @@ public class GameManager extends Game
 			enemy.Shoot(-1);
 			if (enemy.getHealth() <= 0) {
 				em.getPlayer().SetScore(10);
+				//spawn the drops
+				em.SpawnPickup(enemy.getX(), enemy.getY());
 				eIterator.remove(); // Remove the current enemy using the iterator
 			}
 
 			// Collision with player
 			if (enemy.GetCollsionRect().CollidesWith(em.getPlayer().GetCollsionRect())) {
-				em.getPlayer().TakeDamage(50);
+				em.getPlayer().TakeDamage(20);
+				if(enemy.GetEnemyVar() == EnemyVar.CHASER){
+					eIterator.remove();
+				}
 				System.out.println(enemy.GetCollsionRect() + "Hit" + em.getPlayer().GetCollsionRect());
 			}
 
@@ -121,7 +127,7 @@ public class GameManager extends Game
 					}
 
 					if (eBullet.GetCollsionRect().CollidesWith(em.getPlayer().GetCollsionRect())) {
-						em.getPlayer().TakeDamage(eBullet.damage);
+						//em.getPlayer().TakeDamage(eBullet.damage);
 						enemyI.remove();
 						System.out.println(
 								eBullet.GetCollsionRect() + "Hit" + em.getPlayer().GetCollsionRect());
@@ -145,6 +151,26 @@ public class GameManager extends Game
 						iterator.remove(); // Remove the current bullet using the iterator
 						System.out.println("Bullet removed due to Out of Bounds");
 					}
+				}
+			}
+		}
+
+		Iterator<Pickup> pIterator = em.getPickupList().iterator();
+		while (pIterator.hasNext()) {
+			Pickup pickup = pIterator.next();
+			if(pickup.GetCollsionRect().CollidesWith(em.getPlayer().GetCollsionRect()))
+			{
+				if(pickup.getPickupType() == PickupType.DAMAGE){
+					pIterator.remove();
+					em.getPlayer().setDamage(10);
+				}
+				else if(pickup.getPickupType() == PickupType.HEALTH){
+					pIterator.remove();
+					em.getPlayer().setHealth(10);
+				}
+				else if(pickup.getPickupType() == PickupType.SPEED){
+					pIterator.remove();
+					em.getPlayer().setSpeed(10f);
 				}
 			}
 		}

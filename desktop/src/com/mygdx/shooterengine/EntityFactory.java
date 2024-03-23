@@ -3,11 +3,14 @@ package com.mygdx.shooterengine;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import java.util.Random;
 
 public class EntityFactory {
     private Texture[] playerTexture;  // hold player texture
     private Texture[] enemyTexture;   // hold enemy texture
+    private Texture[] pickupTexture;
     private SpriteBatch batch;
+    private Random random = new Random();
 
     EntityFactory(){
         playerTexture = new Texture[]{
@@ -21,17 +24,41 @@ public class EntityFactory {
             new Texture(Gdx.files.internal("EntitySprites\\enemy2.png")),
         };
 
+        pickupTexture = new Texture[]{
+            new Texture(Gdx.files.internal("EntitySprites\\enemy.png")),
+            new Texture(Gdx.files.internal("EntitySprites\\enemy2.png")),
+            new Texture(Gdx.files.internal("EntitySprites\\Bullet2.png"))
+        };
+
         batch = EntitySpriteBatchSingleton.getInstance();
     }
 
     public Enemy createStandard(){
-        return new Enemy(100, 10, 200, enemyTexture[0], batch, 300f, 400f);
+        float whichEnemy = random.nextInt(4);
+        if (whichEnemy == 0) {
+            return new Enemy(100, 10, 100, enemyTexture[0], batch, 300f, 400f, EnemyVar.CHASER);
+        }
+        else{
+            return new Enemy(100, 10, 200, enemyTexture[0], batch, 300f, 400f, EnemyVar.SHOOTER);
+        }
     }
     public Enemy createBig(){
-        return new Enemy(200, 10, 150, enemyTexture[1], batch, 300f, 400f);
+        float whichEnemy = random.nextInt(4);
+        if (whichEnemy == 0) {
+            return new Enemy(100, 10, 100, enemyTexture[1], batch, 300f, 400f, EnemyVar.CHASER);
+        }
+        else{
+            return new Enemy(100, 10, 200, enemyTexture[1], batch, 300f, 400f, EnemyVar.SHOOTER);
+        }
     }
     public Enemy createSmall(){
-        return new Enemy(50, 10, 220, enemyTexture[1], batch, 300f, 400f);
+        float whichEnemy = random.nextInt(4);
+        if (whichEnemy == 0) {
+            return new Enemy(100, 10, 100, enemyTexture[1], batch, 300f, 400f, EnemyVar.CHASER);
+        }
+        else{
+            return new Enemy(100, 10, 200, enemyTexture[1], batch, 300f, 400f, EnemyVar.SHOOTER);
+        }
     }
     public Player createPlayer(int textureIndex){
         int health;
@@ -57,6 +84,21 @@ public class EntityFactory {
                 throw new IllegalArgumentException("Invalid texture index: " + textureIndex);    
         }
         return new Player(health, damage, speed, playerTexture[textureIndex], batch, 300f, 100f);
+    }
+
+    public Pickup createPickup(float x, float y){
+        float whichPickup = random.nextInt(3);
+        if (whichPickup == 0){
+            return new Pickup(0, 0, pickupTexture[0], batch, x, y, PickupType.HEALTH);
+        }
+        else if (whichPickup == 1){
+            return new Pickup(0, 0, pickupTexture[1], batch, x, y, PickupType.DAMAGE);
+        }
+        else if (whichPickup == 2){
+            return new Pickup(0, 0, pickupTexture[2], batch, x, y, PickupType.SPEED);
+        }
+
+        return null;
     }
 
 	public void dispose(){

@@ -82,6 +82,10 @@ public class Player extends Entity implements iEntity{
 		System.out.println("Health: " + health);
 	}
 
+	public void setHealth(int health){
+		this.health += health;
+	}
+
 	// getter function to return bullet list
 	public ArrayList<Bullet> GetBulletList()
 	{
@@ -95,7 +99,6 @@ public class Player extends Entity implements iEntity{
 
 	public void SetScore(int num){
 		score += num;
-		System.out.println(score);
 	}
 
 	@Override

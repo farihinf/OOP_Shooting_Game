@@ -37,7 +37,8 @@ public class GameScene extends Scene {
 
     // Timing
     private int backgroundOffset;
-    private boolean pause = false;
+    private boolean pause = true;
+    private boolean intro = true;
 
     // World Parameters (Portrait Mode)
     private final int SCENE_WIDTH = 72;
@@ -108,6 +109,25 @@ public class GameScene extends Scene {
                     BUTTON_HEIGHT);
             batch.draw(resumeButton, resumeButtonPosX, resumeButtonPosY, BUTTON_WIDTH, BUTTON_HEIGHT);
         }
+
+        if (intro) {
+            // To calcualte the width & height of the pause background after scaling. (With a scaling factor)
+            float scaledPauseBackgroundWidth = SCENE_WIDTH * scale;
+            float scaledPauseBackgroundHeight = SCENE_HEIGHT * scale;
+            batch.draw(overlayTexture, (SCENE_WIDTH - scaledPauseBackgroundWidth) / 2,
+                    (SCENE_HEIGHT - scaledPauseBackgroundHeight) / 2, scaledPauseBackgroundWidth,
+                    scaledPauseBackgroundHeight); // To calculate the center position of the interface
+
+            float logoWidth = 50;
+            float logoHeight = 20;
+            float logoPosX = (SCENE_WIDTH - logoWidth) / 2;
+            float logoPosY = SCENE_HEIGHT - 20 - logoHeight; // Calculate & adjust Y position
+
+            batch.draw(pauselogo, logoPosX, logoPosY, logoWidth, logoHeight);
+            batch.draw(resumeButton, resumeButtonPosX, resumeButtonPosY, BUTTON_WIDTH, BUTTON_HEIGHT);
+        }
+
+
         batch.end();
     }
 
@@ -130,6 +150,8 @@ public class GameScene extends Scene {
             } else if (touchX >= resumeButtonPosX && touchX <= resumeButtonPosX + BUTTON_WIDTH &&
                     touchY >= resumeButtonPosY && touchY <= resumeButtonPosY + BUTTON_HEIGHT) {
                 resume();
+                if(intro)
+                    intro = !intro;
             }
         }
     }
@@ -153,7 +175,7 @@ public class GameScene extends Scene {
             @Override
             public boolean keyDown(int key) {
                 // Check if the ESC key is pressed
-                if (key == Input.Keys.ESCAPE) {
+                if (key == Input.Keys.ESCAPE && !intro) {
                     togglePause();
                 }
                 return true;
