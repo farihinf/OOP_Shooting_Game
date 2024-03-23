@@ -20,8 +20,6 @@ public class MainMenu extends Scene {
     // Button Positions
     private float startButtonPosX;
     private float startButtonPosY;
-    private float selectButtonPosX;
-    private float selectButtonPosY;
 
     private final float BUTTON_WIDTH = 20;
     private final float BUTTON_HEIGHT = 15;
@@ -43,14 +41,11 @@ public class MainMenu extends Scene {
         background = new Texture(Gdx.files.internal("ScreenImages\\SpaceBackground.png"));
         title_logo = new Texture(Gdx.files.internal("ScreenImages\\LogoSpace.png"));
         startButton = new Texture(Gdx.files.internal("ScreenImages\\StartButton.png"));
-        selectionButton = new Texture(Gdx.files.internal("ScreenImages\\shipselect.png"));
 
         // To calculat the X & Y coordiantes of the button on the screen relative to the
         // dimensions of scene
         startButtonPosX = (SCENE_WIDTH - BUTTON_WIDTH) / 2;
         startButtonPosY = (SCENE_HEIGHT / 2) + 5 - BUTTON_HEIGHT; // Adjust Y position of start button
-        selectButtonPosX = (SCENE_WIDTH - BUTTON_WIDTH) / 4 + 13;
-        selectButtonPosY = (SCENE_HEIGHT / 2) - 25 - BUTTON_HEIGHT;
     }
 
     // Function responsible for rendering the scene onto the Screen
@@ -67,7 +62,6 @@ public class MainMenu extends Scene {
         batch.draw(title_logo, logoPosX, logoPosY, logoWidth, logoHeight);
 
         batch.draw(startButton, startButtonPosX, startButtonPosY, BUTTON_WIDTH, BUTTON_HEIGHT);
-        batch.draw(selectionButton, selectButtonPosX, selectButtonPosY, BUTTON_WIDTH, BUTTON_HEIGHT);
 
         batch.end();
     }
@@ -85,16 +79,9 @@ public class MainMenu extends Scene {
             // Check if touch is within bounds of the start button
             if (touchX >= startButtonPosX && touchX <= startButtonPosX + BUTTON_WIDTH &&
                     touchY >= startButtonPosY && touchY <= startButtonPosY + BUTTON_HEIGHT) {
-                GameManager.getInstance().restart();
-                sceneManager.changeScene(new GameScene(sceneManager));
-            }
-            // Check if touch is within bounds of the start button
-            else if (touchX >= selectButtonPosX && touchX <= selectButtonPosX + BUTTON_WIDTH &&
-                    touchY >= selectButtonPosY && touchY <= selectButtonPosY + BUTTON_HEIGHT) {
-                // sceneManager.getGameManager().restart();
-                // sceneManager.changeScene(new GameScene(sceneManager));
+                //GameManager.getInstance().restart();
+                //sceneManager.changeScene(new GameScene(sceneManager));
                 sceneManager.changeScene(new ShipSelection(sceneManager));
-                System.out.println("Ship have changed!");
             }
         }
     }

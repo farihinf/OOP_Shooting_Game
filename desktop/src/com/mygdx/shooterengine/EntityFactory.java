@@ -25,10 +25,10 @@ public class EntityFactory {
     }
 
     public Enemy createStandard(){
-        return new Enemy(100, 30, 200, enemyTexture[0], batch, 300f, 400f);
+        return new Enemy(100, 10, 200, enemyTexture[0], batch, 300f, 400f);
     }
     public Enemy createBig(){
-        return new Enemy(200, 40, 150, enemyTexture[1], batch, 300f, 400f);
+        return new Enemy(200, 10, 150, enemyTexture[1], batch, 300f, 400f);
     }
     public Enemy createSmall(){
         return new Enemy(50, 10, 220, enemyTexture[1], batch, 300f, 400f);

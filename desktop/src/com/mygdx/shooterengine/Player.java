@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 /* Player class that inherits from Entity and implements the iEntity interface. 
@@ -17,7 +18,9 @@ public class Player extends Entity implements iEntity{
 	private ArrayList<Bullet> bulletList = new ArrayList<>();
 	private Texture healthTexture;
 	private float initialHealthBarWidth;
-	private static float SHOOTINGCD = 0.1f;
+	private static float SHOOTINGCD = 0.8f;
+	private int score;
+	private BitmapFont textRender;
 
 	private float shootingCD = 0;
 
@@ -28,7 +31,8 @@ public class Player extends Entity implements iEntity{
 		healthTexture = new Texture("EntitySprites\\HealthBar.png");
 	
 		initialHealthBarWidth = Gdx.graphics.getWidth();
-
+		score = 0;
+		textRender = new BitmapFont();
 	}
 
 	// getter function to return health
@@ -89,18 +93,19 @@ public class Player extends Entity implements iEntity{
 		return texture;
 	}
 
+	public void SetScore(int num){
+		score += num;
+		System.out.println(score);
+	}
+
 	@Override
 	public void Draw(){
-		float scaleFactorX = 0.5f; // Adjust this value as needed
-    	float scaleFactorY = 0.5f; // Adjust this value as needed
-		float scaledWidth = texture.getWidth() * scaleFactorX;
-    	float scaledHeight = texture.getHeight() * scaleFactorY;
-
 		batch.draw(texture, posX, posY, texture.getWidth(), texture.getHeight());
 
         float healthBarWidth = (float) health / 100 * initialHealthBarWidth;
 
-        batch.draw(healthTexture, 0, 0, healthBarWidth, healthTexture.getHeight()/2);
+        batch.draw(healthTexture, 0, 0, healthBarWidth, healthTexture.getHeight());
 
+		textRender.draw(batch, "" + score, Gdx.graphics.getWidth() / 2f, healthTexture.getHeight() + 20);
 	}
 }

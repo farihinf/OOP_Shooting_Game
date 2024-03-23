@@ -135,6 +135,8 @@ public class ShipSelection extends Scene {
             else if (touchX >= selectedButtonPosX && touchX <= selectedButtonPosX + BUTTON_WIDTH &&
                     touchY >= selectedButtonPosY && touchY <= selectedButtonPosY + BUTTON_HEIGHT) {
                 EntityManager.getInstance().setTextureIndex(activeIndex);
+                GameManager.getInstance().restart();
+                sceneManager.changeScene(new GameScene(sceneManager));
             }
 
             // working main menu below

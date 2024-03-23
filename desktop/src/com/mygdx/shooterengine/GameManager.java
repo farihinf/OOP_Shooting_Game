@@ -100,6 +100,7 @@ public class GameManager extends Game
 			enemy.Move();
 			enemy.Shoot(-1);
 			if (enemy.getHealth() <= 0) {
+				em.getPlayer().SetScore(10);
 				eIterator.remove(); // Remove the current enemy using the iterator
 			}
 
