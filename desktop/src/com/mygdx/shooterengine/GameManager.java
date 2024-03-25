@@ -66,6 +66,7 @@ public class GameManager extends Game
 					em.getPlayer().Move();
 					em.DrawBullet(-1);
 					em.DrawPickups();
+					PopUpText.getInstance().DrawPopUpText();
 					spawnRate -= Gdx.graphics.getDeltaTime();
 					if (em.getEnemyList().size() == 0 && spawnRate < 0) {
 						em.spawnNextWave(); // Call spawnNextWave() only once
@@ -160,17 +161,20 @@ public class GameManager extends Game
 			Pickup pickup = pIterator.next();
 			if(pickup.GetCollsionRect().CollidesWith(em.getPlayer().GetCollsionRect()))
 			{
-				if(pickup.getPickupType() == PickupType.DAMAGE){
-					pIterator.remove();
+				if(pickup.getPickupType() == PickupType.DAMAGE){		
 					em.getPlayer().setDamage(10);
+					PopUpText.getInstance().PopUp(batch, "+10 Damage!", 0, 1, 0, pickup.getX(), pickup.getY());
+					pIterator.remove();
 				}
 				else if(pickup.getPickupType() == PickupType.HEALTH){
-					pIterator.remove();
 					em.getPlayer().setHealth(10);
+					PopUpText.getInstance().PopUp(batch, "+10 Health!", 0, 1, 0, pickup.getX(), pickup.getY());
+					pIterator.remove();
 				}
 				else if(pickup.getPickupType() == PickupType.SPEED){
-					pIterator.remove();
 					em.getPlayer().setSpeed(10f);
+					PopUpText.getInstance().PopUp(batch, "+10 Speed!", 0, 1, 0, pickup.getX(), pickup.getY());
+					pIterator.remove();
 				}
 			}
 		}

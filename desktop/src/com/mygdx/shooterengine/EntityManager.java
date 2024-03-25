@@ -146,5 +146,7 @@ public class EntityManager {
 		SpawnPlayer();
 		enemyList.clear();
 		bulletList.clear();
+		pickupList.clear();
+		PopUpText.getInstance().CleanList();
 	}
 }
