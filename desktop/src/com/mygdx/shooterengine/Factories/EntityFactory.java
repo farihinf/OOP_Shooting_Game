@@ -1,8 +1,15 @@
-package com.mygdx.shooterengine;
+package com.mygdx.shooterengine.Factories;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.mygdx.shooterengine.Entities.Enemy;
+import com.mygdx.shooterengine.Entities.EntitySpriteBatchSingleton;
+import com.mygdx.shooterengine.Entities.Pickup;
+import com.mygdx.shooterengine.Enums.EnemyVar;
+import com.mygdx.shooterengine.Enums.PickupType;
+import com.mygdx.shooterengine.Player.Player;
+
 import java.util.Random;
 
 public class EntityFactory {
@@ -12,7 +19,7 @@ public class EntityFactory {
     private SpriteBatch batch;
     private Random random = new Random();
 
-    EntityFactory(){
+    public EntityFactory(){
         playerTexture = new Texture[]{
             new Texture(Gdx.files.internal("EntitySprites\\PlayerSprites\\player_blue.png")),
             new Texture(Gdx.files.internal("EntitySprites\\PlayerSprites\\player_red.png")),

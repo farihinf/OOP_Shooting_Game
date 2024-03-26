@@ -1,4 +1,4 @@
-package com.mygdx.shooterengine;
+package com.mygdx.shooterengine.Entities;
 
 public class CollisionRect {
 

@@ -1,10 +1,11 @@
-package com.mygdx.shooterengine;
+package com.mygdx.shooterengine.Managers;
 
 import com.badlogic.gdx.Gdx;
 
 // Import Audio Library from LibGDX
 import com.badlogic.gdx.backends.lwjgl3.audio.Mp3.Music;
 import com.badlogic.gdx.backends.lwjgl3.audio.Mp3.Sound;
+import com.mygdx.shooterengine.Interfaces.AudioAsset;
 
 public class AudioManager implements AudioAsset{
 

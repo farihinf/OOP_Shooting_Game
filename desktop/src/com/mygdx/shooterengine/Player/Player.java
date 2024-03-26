@@ -1,4 +1,4 @@
-package com.mygdx.shooterengine;
+package com.mygdx.shooterengine.Player;
 import java.util.ArrayList;
 
 import com.badlogic.gdx.Gdx;
@@ -6,6 +6,11 @@ import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.mygdx.shooterengine.Entities.Bullet;
+import com.mygdx.shooterengine.Entities.Entity;
+import com.mygdx.shooterengine.Interfaces.iEntity;
+import com.mygdx.shooterengine.Managers.AudioManager;
+import com.mygdx.shooterengine.Managers.IOManager;
 
 /* Player class that inherits from Entity and implements the iEntity interface. 
 * Contains player functions and attributes
@@ -25,7 +30,7 @@ public class Player extends Entity implements iEntity{
 	private float shootingCD = 0;
 
 
-	Player(int health, int damage, float speed, Texture texture, SpriteBatch sb, float x, float y) {
+	public Player(int health, int damage, float speed, Texture texture, SpriteBatch sb, float x, float y) {
 		super(damage, speed, texture, sb, x, y);
 		this.health = health;
 		healthTexture = new Texture("EntitySprites\\HealthBar.png");

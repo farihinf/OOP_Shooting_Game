@@ -1,4 +1,4 @@
-package com.mygdx.shooterengine;
+package com.mygdx.shooterengine.Entities;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 

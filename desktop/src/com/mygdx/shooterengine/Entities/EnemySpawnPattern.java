@@ -1,7 +1,9 @@
-package com.mygdx.shooterengine;
+package com.mygdx.shooterengine.Entities;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import com.mygdx.shooterengine.Enums.EnemyType;
 
 public class EnemySpawnPattern {
     private List<EnemyConfig> waveConfigs;
@@ -21,27 +23,5 @@ public class EnemySpawnPattern {
     public List<EnemyConfig> getWaveConfigs() {
         return waveConfigs;
     }
-}
-
-class EnemyConfig {
-    private int quantity;
-    private EnemyType type;
-
-    public EnemyConfig(int quantity, EnemyType type) {
-        this.quantity = quantity;
-        this.type = type;
-    }
-
-    public int getQuantity() {
-        return quantity;
-    }
-
-    public EnemyType getType() {
-        return type;
-    }
-}
-
-enum EnemyType {
-    SMALL, NORMAL, BIG
 }
 

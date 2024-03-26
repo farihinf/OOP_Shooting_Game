@@ -1,4 +1,4 @@
-package com.mygdx.shooterengine;
+package com.mygdx.shooterengine.Entities;
 
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -13,7 +13,7 @@ public class Entity {
 	protected float posY;
 	protected CollisionRect collisionRect;
 	
-	Entity(int damage, float speed, Texture texture, SpriteBatch sb, float x, float y) {
+	protected Entity(int damage, float speed, Texture texture, SpriteBatch sb, float x, float y) {
 		this.damage = damage;
 		this.texture = texture;
 		this.speed = speed;

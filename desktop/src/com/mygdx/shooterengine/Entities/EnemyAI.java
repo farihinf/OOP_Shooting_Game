@@ -1,9 +1,10 @@
-package com.mygdx.shooterengine;
+package com.mygdx.shooterengine.Entities;
 
 import java.util.Random;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Vector2;
+import com.mygdx.shooterengine.Managers.EntityManager;
 
 /* EnemyAI manager that is attached to Enemy class 
  * this class is in charge of dictating the movement behaviour of the Enemy instance

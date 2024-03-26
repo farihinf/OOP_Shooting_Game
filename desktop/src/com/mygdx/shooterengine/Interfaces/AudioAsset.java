@@ -1,4 +1,4 @@
-package com.mygdx.shooterengine;
+package com.mygdx.shooterengine.Interfaces;
 
 //Interface for Audio
 public interface AudioAsset {

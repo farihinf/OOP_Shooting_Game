@@ -1,7 +1,11 @@
-package com.mygdx.shooterengine;
+package com.mygdx.shooterengine.Managers;
 
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Screen;
+import com.mygdx.shooterengine.Scene.EndScene;
+import com.mygdx.shooterengine.Scene.GameScene;
+import com.mygdx.shooterengine.Scene.MainMenu;
+import com.mygdx.shooterengine.Scene.Scene;
 
 public class SceneManager extends Game 
 {

@@ -1,10 +1,11 @@
-package com.mygdx.shooterengine;
+package com.mygdx.shooterengine.Scene;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.utils.viewport.StretchViewport;
+import com.mygdx.shooterengine.Managers.SceneManager;
 
 public class MainMenu extends Scene {
     // Graphics
@@ -30,7 +31,7 @@ public class MainMenu extends Scene {
     private final int SCENE_WIDTH = 72;
     private final int SCENE_HEIGHT = 128;
 
-    MainMenu(SceneManager sceneManager) 
+    public MainMenu(SceneManager sceneManager) 
     {
         this.sceneManager = sceneManager;
 

@@ -1,4 +1,4 @@
-package com.mygdx.shooterengine;
+package com.mygdx.shooterengine.Managers;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -9,6 +9,15 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch; 
 */
+
+import com.mygdx.shooterengine.Entities.Bullet;
+import com.mygdx.shooterengine.PopUpText;
+import com.mygdx.shooterengine.Entities.Enemy;
+import com.mygdx.shooterengine.Entities.EnemyConfig;
+import com.mygdx.shooterengine.Entities.EnemySpawnPattern;
+import com.mygdx.shooterengine.Entities.Pickup;
+import com.mygdx.shooterengine.Factories.EntityFactory;
+import com.mygdx.shooterengine.Player.Player;
 
 
 /* Entity Manager is in charge of managing entities, from spawning, drawing and rendering. It is in charge of resetting the entity states when game restarts

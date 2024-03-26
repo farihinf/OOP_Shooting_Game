@@ -1,4 +1,4 @@
-package com.mygdx.shooterengine;
+package com.mygdx.shooterengine.Managers;
 
 import java.util.Iterator;
 
@@ -6,6 +6,17 @@ import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.mygdx.shooterengine.PopUpText;
+import com.mygdx.shooterengine.Entities.Bullet;
+import com.mygdx.shooterengine.Entities.Enemy;
+import com.mygdx.shooterengine.Entities.EntitySpriteBatchSingleton;
+import com.mygdx.shooterengine.Entities.Pickup;
+import com.mygdx.shooterengine.Enums.EnemyVar;
+import com.mygdx.shooterengine.Enums.PickupType;
+import com.mygdx.shooterengine.Scene.EndScene;
+import com.mygdx.shooterengine.Scene.GameScene;
+import com.mygdx.shooterengine.Scene.MainMenu;
+import com.mygdx.shooterengine.Scene.ShipSelection;
 
 /* Class in charge of the overall game flow, the managing of objects such as the managers, entities and scenes */
 public class GameManager extends Game 

@@ -1,15 +1,16 @@
-package com.mygdx.shooterengine;
+package com.mygdx.shooterengine.Entities;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.mygdx.shooterengine.Enums.PickupType;
 
 public class Pickup extends Entity {
     private float lifetimeTimer = 5f;
     private PickupType pickupType;
     private boolean toRemove;
     
-    Pickup(int damage, float speed, Texture texture, SpriteBatch sb, float x, float y, PickupType pickupType) {
+    public Pickup(int damage, float speed, Texture texture, SpriteBatch sb, float x, float y, PickupType pickupType) {
         super(damage, speed, texture, sb, x, y);
         lifetimeTimer = 5f;
         this.pickupType = pickupType;
@@ -33,8 +34,4 @@ public class Pickup extends Entity {
         return pickupType;
     }
     
-}
-
-enum PickupType{
-    HEALTH, DAMAGE, SPEED
 }

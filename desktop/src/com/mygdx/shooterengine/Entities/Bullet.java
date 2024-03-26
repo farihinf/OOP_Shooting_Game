@@ -1,4 +1,4 @@
-package com.mygdx.shooterengine;
+package com.mygdx.shooterengine.Entities;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
@@ -7,7 +7,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 public class Bullet extends Entity{
 
 	// Inheritance from Entity
-    Bullet(int damage, float speed, Texture texture, SpriteBatch sb, float x, float y) {
+    public Bullet(int damage, float speed, Texture texture, SpriteBatch sb, float x, float y) {
 		super(damage, speed, texture, sb, x, y);
         this.texture = new Texture("EntitySprites\\Bullet2.png");
         this.posX -= this.texture.getWidth() / 2;

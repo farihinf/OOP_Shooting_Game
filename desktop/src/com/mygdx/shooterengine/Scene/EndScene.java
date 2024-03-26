@@ -1,4 +1,4 @@
-package com.mygdx.shooterengine;
+package com.mygdx.shooterengine.Scene;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputAdapter;
@@ -7,6 +7,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.utils.viewport.StretchViewport;
+import com.mygdx.shooterengine.Managers.SceneManager;
 
 public class EndScene extends Scene 
 {
@@ -34,7 +35,7 @@ public class EndScene extends Scene
 
     private Vector3 touchPos = new Vector3();
 
-    EndScene(SceneManager sceneManager) 
+    public EndScene(SceneManager sceneManager) 
     {
         this.sceneManager = sceneManager;
 

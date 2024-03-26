@@ -1,6 +1,7 @@
-package com.mygdx.shooterengine;
+package com.mygdx.shooterengine.Player;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.Keys;
+import com.mygdx.shooterengine.Managers.IOManager;
 
 public class PlayerMovementManager{
     //responsible for moving the player based on input

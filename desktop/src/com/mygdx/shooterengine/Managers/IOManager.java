@@ -1,4 +1,4 @@
-package com.mygdx.shooterengine;
+package com.mygdx.shooterengine.Managers;
 import com.badlogic.gdx.Gdx;
 
 public class IOManager {

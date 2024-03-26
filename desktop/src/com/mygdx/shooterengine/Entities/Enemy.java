@@ -1,8 +1,11 @@
-package com.mygdx.shooterengine;
+package com.mygdx.shooterengine.Entities;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.mygdx.shooterengine.Managers.EntityManager;
+import com.mygdx.shooterengine.Enums.EnemyVar;
+import com.mygdx.shooterengine.Interfaces.iEntity;
 
 /* Enemy class that inherits from Entity and implements iEntity interface
  * Contain's enemy functions and attributes
@@ -65,8 +68,4 @@ public class Enemy extends Entity implements iEntity{
 		return enemyVar;
 	}
 
-}
-
-enum EnemyVar{
-	CHASER, SHOOTER
 }

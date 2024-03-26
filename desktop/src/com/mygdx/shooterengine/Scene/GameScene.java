@@ -1,4 +1,4 @@
-package com.mygdx.shooterengine;
+package com.mygdx.shooterengine.Scene;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
@@ -10,6 +10,8 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.utils.viewport.StretchViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
+import com.mygdx.shooterengine.Managers.GameManager;
+import com.mygdx.shooterengine.Managers.SceneManager;
 
 public class GameScene extends Scene {
     // Screen
@@ -196,7 +198,7 @@ public class GameScene extends Scene {
     }
 
     // Check if the game is in pause state
-    boolean isPaused() {
+    public boolean isPaused() {
         return pause;
     }
 
