@@ -27,14 +27,14 @@ public class EntityFactory {
         };
 
         enemyTexture = new Texture[]{
-            new Texture(Gdx.files.internal("EntitySprites\\enemy.png")),
-            new Texture(Gdx.files.internal("EntitySprites\\enemy2.png")),
+            new Texture(Gdx.files.internal("EntitySprites\\Entity\\enemy.png")),
+            new Texture(Gdx.files.internal("EntitySprites\\Entity\\enemy2.png")),
         };
 
         pickupTexture = new Texture[]{
-            new Texture(Gdx.files.internal("EntitySprites\\enemy.png")),
-            new Texture(Gdx.files.internal("EntitySprites\\enemy2.png")),
-            new Texture(Gdx.files.internal("EntitySprites\\Bullet2.png"))
+            new Texture(Gdx.files.internal("EntitySprites\\Entity\\Health.png")),
+            new Texture(Gdx.files.internal("EntitySprites\\Entity\\Damage.png")),
+            new Texture(Gdx.files.internal("EntitySprites\\Entity\\Speed.png"))
         };
 
         batch = EntitySpriteBatchSingleton.getInstance();
@@ -43,7 +43,7 @@ public class EntityFactory {
     public Enemy createStandard(){
         float whichEnemy = random.nextInt(4);
         if (whichEnemy == 0) {
-            return new Enemy(100, 10, 100, enemyTexture[0], batch, 300f, 400f, EnemyVar.CHASER);
+            return new Enemy(100, 10, 100, enemyTexture[1], batch, 300f, 400f, EnemyVar.CHASER);
         }
         else{
             return new Enemy(100, 10, 200, enemyTexture[0], batch, 300f, 400f, EnemyVar.SHOOTER);
@@ -55,7 +55,7 @@ public class EntityFactory {
             return new Enemy(100, 10, 100, enemyTexture[1], batch, 300f, 400f, EnemyVar.CHASER);
         }
         else{
-            return new Enemy(100, 10, 200, enemyTexture[1], batch, 300f, 400f, EnemyVar.SHOOTER);
+            return new Enemy(100, 10, 200, enemyTexture[0], batch, 300f, 400f, EnemyVar.SHOOTER);
         }
     }
     public Enemy createSmall(){
@@ -64,7 +64,7 @@ public class EntityFactory {
             return new Enemy(100, 10, 100, enemyTexture[1], batch, 300f, 400f, EnemyVar.CHASER);
         }
         else{
-            return new Enemy(100, 10, 200, enemyTexture[1], batch, 300f, 400f, EnemyVar.SHOOTER);
+            return new Enemy(100, 10, 200, enemyTexture[0], batch, 300f, 400f, EnemyVar.SHOOTER);
         }
     }
     public Player createPlayer(int textureIndex){

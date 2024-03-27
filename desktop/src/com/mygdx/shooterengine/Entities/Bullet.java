@@ -9,7 +9,7 @@ public class Bullet extends Entity{
 	// Inheritance from Entity
     public Bullet(int damage, float speed, Texture texture, SpriteBatch sb, float x, float y) {
 		super(damage, speed, texture, sb, x, y);
-        this.texture = new Texture("EntitySprites\\Bullet2.png");
+        this.texture = new Texture("EntitySprites\\Entity\\Bullet2.png");
         this.posX -= this.texture.getWidth() / 2;
 	}
 

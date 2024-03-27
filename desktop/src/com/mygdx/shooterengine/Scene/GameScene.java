@@ -1,5 +1,7 @@
 package com.mygdx.shooterengine.Scene;
 
+import org.lwjgl.glfw.GLFWNativeX11;
+
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputAdapter;
@@ -25,6 +27,7 @@ public class GameScene extends Scene {
     private Texture back2mainmenuButton;
     private Texture resumeButton;
     private Texture overlayTexture;
+    private Texture introTexture;
 
     // Scene Manager
     private SceneManager sceneManager;
@@ -34,6 +37,8 @@ public class GameScene extends Scene {
     private float backtoMainMenuButtonPosY;
     private float resumeButtonPosX;
     private float resumeButtonPosY;
+    private float introButtonPosX;
+    private float introButtonPosY;
     private final float BUTTON_WIDTH = 20;
     private final float BUTTON_HEIGHT = 15;
 
@@ -57,19 +62,22 @@ public class GameScene extends Scene {
         viewport = new StretchViewport(SCENE_WIDTH, SCENE_HEIGHT, camera);
         batch = new SpriteBatch();
 
-        background = new Texture(Gdx.files.internal("ScreenImages\\SpaceShooter_Background.png"));
+        background = new Texture(Gdx.files.internal("ScreenImages\\PauseBackGround.jpg"));
         backgroundOffset = 0;
 
         pauselogo = new Texture(Gdx.files.internal("ScreenImages\\PauseLogo.png"));
         back2mainmenuButton = new Texture(Gdx.files.internal("ScreenImages\\BackMainMenuButton.png"));
         resumeButton = new Texture(Gdx.files.internal("ScreenImages\\ResumeButton.png"));
         overlayTexture = new Texture(Gdx.files.internal("ScreenImages\\Interface.png"));
+        introTexture = new Texture(Gdx.files.internal("ScreenImages\\intro.png"));
 
         // To calculat the X & Y coordiantes of the buttons on the screen relative to the dimensions of scene
         backtoMainMenuButtonPosX = (SCENE_WIDTH - BUTTON_WIDTH) / 2;
         backtoMainMenuButtonPosY = (SCENE_HEIGHT / 2) - 10 - BUTTON_HEIGHT;
         resumeButtonPosX = (SCENE_WIDTH - BUTTON_WIDTH) / 2;
         resumeButtonPosY = (SCENE_HEIGHT / 2) + 10 - BUTTON_HEIGHT;
+        introButtonPosX = (SCENE_WIDTH - BUTTON_WIDTH) / 2;
+        introButtonPosY = 0f;
     }
 
     // Function responsible for rendering the scene onto the Screen
@@ -114,19 +122,10 @@ public class GameScene extends Scene {
 
         if (intro) {
             // To calcualte the width & height of the pause background after scaling. (With a scaling factor)
-            float scaledPauseBackgroundWidth = SCENE_WIDTH * scale;
-            float scaledPauseBackgroundHeight = SCENE_HEIGHT * scale;
-            batch.draw(overlayTexture, (SCENE_WIDTH - scaledPauseBackgroundWidth) / 2,
-                    (SCENE_HEIGHT - scaledPauseBackgroundHeight) / 2, scaledPauseBackgroundWidth,
-                    scaledPauseBackgroundHeight); // To calculate the center position of the interface
+            batch.draw(introTexture, 0, 0, SCENE_WIDTH, SCENE_HEIGHT);
 
-            float logoWidth = 50;
-            float logoHeight = 20;
-            float logoPosX = (SCENE_WIDTH - logoWidth) / 2;
-            float logoPosY = SCENE_HEIGHT - 20 - logoHeight; // Calculate & adjust Y position
-
-            batch.draw(pauselogo, logoPosX, logoPosY, logoWidth, logoHeight);
-            batch.draw(resumeButton, resumeButtonPosX, resumeButtonPosY, BUTTON_WIDTH, BUTTON_HEIGHT);
+            //batch.draw(pauselogo, logoPosX, logoPosY, logoWidth, logoHeight);
+            batch.draw(resumeButton, introButtonPosX, introButtonPosY, BUTTON_WIDTH, BUTTON_HEIGHT);
         }
 
 
@@ -150,10 +149,13 @@ public class GameScene extends Scene {
                 GameManager.getInstance().restart();
                 sceneManager.changeScene(new MainMenu(sceneManager));
             } else if (touchX >= resumeButtonPosX && touchX <= resumeButtonPosX + BUTTON_WIDTH &&
-                    touchY >= resumeButtonPosY && touchY <= resumeButtonPosY + BUTTON_HEIGHT) {
+                    touchY >= resumeButtonPosY && touchY <= resumeButtonPosY + BUTTON_HEIGHT && !intro) {
                 resume();
-                if(intro)
-                    intro = !intro;
+            } else if(touchX >= introButtonPosX && touchX <= introButtonPosX + BUTTON_WIDTH &&
+                    touchY >= introButtonPosY && touchY <= introButtonPosY + BUTTON_HEIGHT && intro){
+                resume();
+                intro = !intro;
+
             }
         }
     }
