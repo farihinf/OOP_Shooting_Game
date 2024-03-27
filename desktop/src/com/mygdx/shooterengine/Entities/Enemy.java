@@ -17,6 +17,7 @@ public class Enemy extends Entity implements iEntity{
 	private float shootingCD = 2f;
 	private EntityManager em;
 	private EnemyType enemyType;
+	private int time;
 	// enemy constructor
 	public Enemy(int health, int damage, float speed, Texture texture, SpriteBatch sb, float x, float y, EnemyType enemyType) {
 		super(damage, speed, texture, sb, x, y);
@@ -24,6 +25,10 @@ public class Enemy extends Entity implements iEntity{
 		this.health = health;
 		this.em = EntityManager.getInstance();
 		this.enemyType = enemyType;
+		time = (int) em.getGameTime() / 30;
+		damage += 5 * time;
+		speed += 5 * time;
+		health += 5 * time;
 	}
 
 	// getter function to return health

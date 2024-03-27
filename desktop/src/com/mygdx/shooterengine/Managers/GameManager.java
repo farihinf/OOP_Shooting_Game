@@ -60,6 +60,7 @@ public class GameManager extends Game
 
 				if (!gamescreen.isPaused()) {
 					batch.begin();
+					em.setGameTime(Gdx.graphics.getDeltaTime());
 
 					em.getPlayer().Shoot(1);
 					em.getPlayer().Draw();

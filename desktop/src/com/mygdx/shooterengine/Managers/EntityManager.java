@@ -38,6 +38,8 @@ public class EntityManager {
 	private int currWaveIndex;
 	private List<EnemyConfig> waveConfigs;
 
+	private float gameTime = 0f;
+
 	private EntityManager(){
 		ef = new EntityFactory();
 		enemySpawner = new EnemySpawnPattern();
@@ -161,6 +163,14 @@ public class EntityManager {
 
 	public ArrayList<Pickup> getPickupList(){
 		return pickupList;
+	}
+
+	public float getGameTime(){
+		return gameTime;
+	}
+
+	public void setGameTime(float time){
+		gameTime += time;
 	}
 
 	// Function to restart game by resetting the list of enemies, bullets and player position
