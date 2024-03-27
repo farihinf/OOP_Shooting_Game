@@ -49,7 +49,7 @@ public class CollisionManager {
 					}
 
 					if (eBullet.GetCollsionRect().CollidesWith(em.getPlayer().GetCollsionRect())) {
-						//em.getPlayer().TakeDamage(eBullet.damage);
+						em.getPlayer().TakeDamage(eBullet.getDamage());
 						enemyI.remove();
 						System.out.println(
 								eBullet.GetCollsionRect() + "Hit" + em.getPlayer().GetCollsionRect());
