@@ -28,6 +28,7 @@ public class Player extends Entity implements iEntity{
 	private BitmapFont textRender;
 	private int currIndex;
 	private float shootingCD = 0;
+	private float healthbarWidth;
 
 	private int maxHealth;
 
@@ -35,6 +36,7 @@ public class Player extends Entity implements iEntity{
 	public Player(int health, int damage, float speed, Texture texture, SpriteBatch sb, float x, float y, int currentIndex) {
 		super(damage, speed, texture, sb, x, y);
 		this.health = health;
+		healthbarWidth = health;
 		this.maxHealth = health;
 		healthTexture = new Texture("EntitySprites\\HealthBar.png");
 	
@@ -132,11 +134,15 @@ public class Player extends Entity implements iEntity{
 		score += num;
 	}
 
+	public void SetHealthBar(int num){
+		healthbarWidth += num;
+	}
+
 	@Override
 	public void Draw(){
 		batch.draw(texture, posX, posY, texture.getWidth(), texture.getHeight());
 
-        float healthBarWidth = (float) health / 100 * initialHealthBarWidth;
+        float healthBarWidth = (float) health / healthbarWidth * initialHealthBarWidth;
 
         batch.draw(healthTexture, 0, 0, healthBarWidth, healthTexture.getHeight());
 

@@ -99,6 +99,7 @@ public class CollisionManager {
 				else if(pickup.getPickupType() == PickupType.HEALTH){
 					if (em.getPlayer().getHealth() != em.getPlayer().getMaxHealth() * 2){
 						em.getPlayer().setHealth(10);
+						em.getPlayer().SetHealthBar(10);
 						PopUpText.getInstance().PopUp(EntitySpriteBatchSingleton.getInstance(), "+10 Health!", 0, 1, 0, pickup.getX(), pickup.getY());
 						pIterator.remove();
 					}
