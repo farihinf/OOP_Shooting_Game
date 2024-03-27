@@ -57,6 +57,8 @@ public class EntityManager {
 	public void SpawnPlayer() {
 		player = ef.createPlayer(playerTextureIndex);
 	}
+
+	// Function to spawn enemies
     public void spawnNextWave() {
         // Iterate over waveConfigs until 5 enemies are spawned
         while (enemyList.size() < 5 && currWaveIndex < waveConfigs.size()) {
