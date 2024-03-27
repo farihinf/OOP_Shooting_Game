@@ -11,11 +11,13 @@ public class EnemySpawnPattern {
     public EnemySpawnPattern() {
         waveConfigs = new ArrayList<>();
         // Add your wave configurations here
-        waveConfigs.add(new EnemyConfig(3, EnemyType.SHOOTER));
+        waveConfigs.add(new EnemyConfig(3, EnemyType.BIG));
         waveConfigs.add(new EnemyConfig(2, EnemyType.CHASER));
         waveConfigs.add(new EnemyConfig(5, EnemyType.SHOOTER));
-        waveConfigs.add(new EnemyConfig(4, EnemyType.CHASER));
+        waveConfigs.add(new EnemyConfig(2, EnemyType.CHASER));
+        waveConfigs.add(new EnemyConfig(3, EnemyType.BIG));
         waveConfigs.add(new EnemyConfig(1, EnemyType.SHOOTER));
+        waveConfigs.add(new EnemyConfig(2, EnemyType.CHASER));  
 
     }
 

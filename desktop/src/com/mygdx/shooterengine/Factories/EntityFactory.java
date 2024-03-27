@@ -33,6 +33,8 @@ public class EntityFactory {
         enemyTexture = new Texture[]{
             new Texture(Gdx.files.internal("EntitySprites\\Entity\\enemy.png")),
             new Texture(Gdx.files.internal("EntitySprites\\Entity\\enemy2.png")),
+            new Texture(Gdx.files.internal("EntitySprites\\Entity\\BigEnemy.png"))
+
         };
 
         pickupTexture = new Texture[]{
@@ -61,7 +63,7 @@ public class EntityFactory {
     }
 
     public Enemy createBig(){
-        return new Enemy(150, 25, 50f, enemyTexture[1], batch, 300f, 500f, EnemyType.SHOOTER);
+        return new Enemy(150, 25, 50f, enemyTexture[2], batch, 300f, 500f, EnemyType.SHOOTER);
     }
 
     public Player createPlayer(int textureIndex){

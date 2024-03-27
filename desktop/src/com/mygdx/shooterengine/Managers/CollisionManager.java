@@ -117,6 +117,8 @@ public class CollisionManager {
 				}
 			}
 		}
+
+
 	}
 
     public static CollisionManager GetInstance(){
