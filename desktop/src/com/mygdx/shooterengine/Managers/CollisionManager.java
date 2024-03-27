@@ -63,15 +63,17 @@ public class CollisionManager {
 				// Bullet Collision with Enemy
 				while (iterator.hasNext()) {
 					Bullet bullets = iterator.next();
-					if (bullets.GetCollsionRect().CollidesWith(enemy.GetCollsionRect())) {
-						enemy.TakeDamage(bullets.getDamage());
-						iterator.remove(); // Remove the current bullet using the iterator
-						System.out.println(bullets.GetCollsionRect() + "Hit" + enemy.GetCollsionRect());
-					}
 
 					if (bullets.OutOfBounds()) {
 						iterator.remove(); // Remove the current bullet using the iterator
 						System.out.println("Bullet removed due to Out of Bounds");
+						break;
+					}
+
+					if (bullets.GetCollsionRect().CollidesWith(enemy.GetCollsionRect())) {
+						enemy.TakeDamage(bullets.getDamage());
+						iterator.remove(); // Remove the current bullet using the iterator
+						System.out.println(bullets.GetCollsionRect() + "Hit" + enemy.GetCollsionRect());
 					}
 				}
 			}
