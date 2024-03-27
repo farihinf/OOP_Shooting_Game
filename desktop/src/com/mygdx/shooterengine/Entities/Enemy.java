@@ -4,7 +4,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.mygdx.shooterengine.Managers.EntityManager;
-import com.mygdx.shooterengine.Enums.EnemyVar;
+import com.mygdx.shooterengine.Enums.EnemyType;
 import com.mygdx.shooterengine.Interfaces.iEntity;
 
 /* Enemy class that inherits from Entity and implements iEntity interface
@@ -16,15 +16,14 @@ public class Enemy extends Entity implements iEntity{
 	private int health;
 	private float shootingCD = 2f;
 	private EntityManager em;
-	private EnemyVar enemyVar;
-	
+	private EnemyType enemyType;
 	// enemy constructor
-	public Enemy(int health, int damage, float speed, Texture texture, SpriteBatch sb, float x, float y, EnemyVar enemyVar) {
+	public Enemy(int health, int damage, float speed, Texture texture, SpriteBatch sb, float x, float y, EnemyType enemyType) {
 		super(damage, speed, texture, sb, x, y);
 		ai = new EnemyAI(this);  // Create instance of EnemyAI class for ai movement
 		this.health = health;
 		this.em = EntityManager.getInstance();
-		this.enemyVar = enemyVar;
+		this.enemyType = enemyType;
 	}
 
 	// getter function to return health
@@ -34,10 +33,10 @@ public class Enemy extends Entity implements iEntity{
 	
 	@Override
 	public void Move() {
-		if(enemyVar == EnemyVar.SHOOTER){
+		if(enemyType == EnemyType.SHOOTER){
 			ai.AiMovement();  // calls AiMovement function from enemyAi
 		}
-		else if(enemyVar == EnemyVar.CHASER){
+		else if(enemyType == EnemyType.CHASER){
 			ai.TrackerMovement();
 		}
 		
@@ -46,7 +45,7 @@ public class Enemy extends Entity implements iEntity{
 
 	@Override
 	public void Shoot(int direction) {
-		if (enemyVar == EnemyVar.SHOOTER) {
+		if (enemyType == EnemyType.SHOOTER) {
 			shootingCD -= Gdx.graphics.getDeltaTime();
 			// if shootingcd is less than 0, enemy can shoot again
 			if(shootingCD < 0)
@@ -64,8 +63,8 @@ public class Enemy extends Entity implements iEntity{
 		System.out.println(health);
 	}
 
-	public EnemyVar GetEnemyVar(){
-		return enemyVar;
+	public EnemyType GetEnemyType(){
+		return enemyType;
 	}
 
 }

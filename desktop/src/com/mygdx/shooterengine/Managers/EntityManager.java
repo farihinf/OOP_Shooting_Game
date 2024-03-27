@@ -35,11 +35,15 @@ public class EntityManager {
 	private ArrayList<Bullet> bulletList = new ArrayList<>();  // list of bullets shot from enemies on screen
 	private ArrayList<Pickup> pickupList = new ArrayList<>();  // list of pickups on screen
 	private int totalEnemy; // max amount of enemies 
+	private int currWaveIndex;
+	private List<EnemyConfig> waveConfigs;
 
 	private EntityManager(){
 		ef = new EntityFactory();
 		enemySpawner = new EnemySpawnPattern();
 		totalEnemy = 5;
+		waveConfigs = enemySpawner.getWaveConfigs();
+		currWaveIndex = 0;
 	}
 
 	public static EntityManager getInstance(){
@@ -53,30 +57,38 @@ public class EntityManager {
 	public void SpawnPlayer() {
 		player = ef.createPlayer(playerTextureIndex);
 	}
-
     public void spawnNextWave() {
-        List<EnemyConfig> waveConfigs = enemySpawner.getWaveConfigs();
-        for (EnemyConfig config : waveConfigs) {
-            for (int i = 0; i < config.getQuantity(); i++) {
+        // Iterate over waveConfigs until 5 enemies are spawned
+        while (enemyList.size() < 5 && currWaveIndex < waveConfigs.size()) {
+            EnemyConfig config = waveConfigs.get(currWaveIndex);
+            int enemiesToSpawn = Math.min(config.getQuantity(), 5 - enemyList.size());
+            for (int i = 0; i < enemiesToSpawn; i++) {
                 Enemy enemy = null;
                 switch (config.getType()) {
-                    case SMALL:
-                        enemy = ef.createSmall();
+                    case SHOOTER:
+                        enemy = ef.createShooter();
                         break;
-                    case NORMAL:
-                        enemy = ef.createStandard();
+                    case CHASER:
+                        enemy = ef.createChaser();
                         break;
                     case BIG:
                         enemy = ef.createBig();
                         break;
-                    // Add more cases for other enemy types as needed
                 }
                 if (enemy != null) {
                     enemyList.add(enemy);
                 }
             }
+            // Move to the next wave configuration
+            currWaveIndex++;
+        }
+        
+        // If no more enemies to spawn and all waves are finished, reset
+        if (enemyList.size() == 0 && currWaveIndex >= waveConfigs.size()) {
+            currWaveIndex = 0;
         }
     }
+
 
 	public void SpawnPickup(float x, float y){
 		Pickup pickup = ef.createPickup(x, y);

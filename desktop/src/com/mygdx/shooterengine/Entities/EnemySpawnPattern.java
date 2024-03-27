@@ -11,13 +11,12 @@ public class EnemySpawnPattern {
     public EnemySpawnPattern() {
         waveConfigs = new ArrayList<>();
         // Add your wave configurations here
-        // Example: Wave 1 - 3 big enemies, 2 small enemies
-        waveConfigs.add(new EnemyConfig(2, EnemyType.BIG));
-        waveConfigs.add(new EnemyConfig(3, EnemyType.NORMAL));
-        // Example: Wave 2 - 3 normal enemies, 2 big enemies
-        //waveConfigs.add(new EnemyConfig(3, EnemyType.NORMAL));
-        //waveConfigs.add(new EnemyConfig(2, EnemyType.BIG));
-        // Add more wave configurations as needed
+        waveConfigs.add(new EnemyConfig(3, EnemyType.SHOOTER));
+        waveConfigs.add(new EnemyConfig(2, EnemyType.CHASER));
+        waveConfigs.add(new EnemyConfig(5, EnemyType.SHOOTER));
+        waveConfigs.add(new EnemyConfig(4, EnemyType.CHASER));
+        waveConfigs.add(new EnemyConfig(1, EnemyType.SHOOTER));
+
     }
 
     public List<EnemyConfig> getWaveConfigs() {

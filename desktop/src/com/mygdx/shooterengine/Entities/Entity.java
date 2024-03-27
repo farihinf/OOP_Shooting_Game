@@ -8,15 +8,20 @@ public class Entity {
 	protected int damage;
 	protected Texture texture;
 	protected float speed;
+	protected float maxSpeed;
+	protected int maxDamage;
+	protected float maxHealth;
 	protected SpriteBatch batch;
 	protected float posX;
 	protected float posY;
 	protected CollisionRect collisionRect;
 	
 	protected Entity(int damage, float speed, Texture texture, SpriteBatch sb, float x, float y) {
+		this.maxDamage = damage;
 		this.damage = damage;
 		this.texture = texture;
 		this.speed = speed;
+		this.maxSpeed = speed;
 		this.batch = sb;
 		this.posX = x;
 		this.posY = y;
@@ -46,7 +51,12 @@ public class Entity {
 	public int getDamage(){
 		return damage;
 	}
-
+	public int getMaxDamage(){
+		return maxDamage;
+	}
+	public float getMaxSpeed(){
+		return maxSpeed;
+	}
 	public void setSpeed(float speed){
 		this.speed += speed;
 	}

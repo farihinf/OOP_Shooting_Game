@@ -29,10 +29,13 @@ public class Player extends Entity implements iEntity{
 	private int currIndex;
 	private float shootingCD = 0;
 
+	private int maxHealth;
+
 
 	public Player(int health, int damage, float speed, Texture texture, SpriteBatch sb, float x, float y, int currentIndex) {
 		super(damage, speed, texture, sb, x, y);
 		this.health = health;
+		this.maxHealth = health;
 		healthTexture = new Texture("EntitySprites\\HealthBar.png");
 	
 		initialHealthBarWidth = Gdx.graphics.getWidth();
@@ -45,10 +48,8 @@ public class Player extends Entity implements iEntity{
 	public int getHealth(){
 		return health;
 	}
-
-	public void setHealth()
-	{
-		health = 100;
+	public int getMaxHealth(){
+		return maxHealth;
 	}
 
 	// function to move player, using playercontrolmaanger

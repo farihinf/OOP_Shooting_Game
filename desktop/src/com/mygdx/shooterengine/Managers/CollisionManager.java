@@ -7,7 +7,7 @@ import com.mygdx.shooterengine.Entities.Bullet;
 import com.mygdx.shooterengine.Entities.Enemy;
 import com.mygdx.shooterengine.Entities.EntitySpriteBatchSingleton;
 import com.mygdx.shooterengine.Entities.Pickup;
-import com.mygdx.shooterengine.Enums.EnemyVar;
+import com.mygdx.shooterengine.Enums.EnemyType;
 import com.mygdx.shooterengine.Enums.PickupType;
 
 public class CollisionManager {
@@ -32,7 +32,7 @@ public class CollisionManager {
 			// Collision with player
 			if (enemy.GetCollsionRect().CollidesWith(em.getPlayer().GetCollsionRect())) {
 				em.getPlayer().TakeDamage(20);
-				if(enemy.GetEnemyVar() == EnemyVar.CHASER){
+				if(enemy.GetEnemyType() == EnemyType.CHASER){
 					eIterator.remove();
 				}
 				System.out.println(enemy.GetCollsionRect() + "Hit" + em.getPlayer().GetCollsionRect());
@@ -82,20 +82,38 @@ public class CollisionManager {
 			Pickup pickup = pIterator.next();
 			if(pickup.GetCollsionRect().CollidesWith(em.getPlayer().GetCollsionRect()))
 			{
-				if(pickup.getPickupType() == PickupType.DAMAGE){		
-					em.getPlayer().setDamage(10);
-					PopUpText.getInstance().PopUp(EntitySpriteBatchSingleton.getInstance(), "+10 Damage!", 0, 1, 0, pickup.getX(), pickup.getY());
-					pIterator.remove();
+				if(pickup.getPickupType() == PickupType.DAMAGE){	
+					if (em.getPlayer().getDamage() != em.getPlayer().getMaxDamage() * 2){
+						em.getPlayer().setDamage(10);
+						PopUpText.getInstance().PopUp(EntitySpriteBatchSingleton.getInstance(), "+10 Damage!", 0, 1, 0, pickup.getX(), pickup.getY());
+						pIterator.remove();
+					}
+					else{
+						PopUpText.getInstance().PopUp(EntitySpriteBatchSingleton.getInstance(), "MAX DAMAGE!", 0, 1, 0, pickup.getX(), pickup.getY());
+						pIterator.remove();
+					}
 				}
 				else if(pickup.getPickupType() == PickupType.HEALTH){
-					em.getPlayer().setHealth(10);
-					PopUpText.getInstance().PopUp(EntitySpriteBatchSingleton.getInstance(), "+10 Health!", 0, 1, 0, pickup.getX(), pickup.getY());
-					pIterator.remove();
+					if (em.getPlayer().getHealth() != em.getPlayer().getMaxHealth() * 2){
+						em.getPlayer().setHealth(10);
+						PopUpText.getInstance().PopUp(EntitySpriteBatchSingleton.getInstance(), "+10 Health!", 0, 1, 0, pickup.getX(), pickup.getY());
+						pIterator.remove();
+					}
+					else{
+						PopUpText.getInstance().PopUp(EntitySpriteBatchSingleton.getInstance(), "MAX HEALTH!", 0, 1, 0, pickup.getX(), pickup.getY());
+						pIterator.remove();
+					}
 				}
 				else if(pickup.getPickupType() == PickupType.SPEED){
-					em.getPlayer().setSpeed(10f);
-					PopUpText.getInstance().PopUp(EntitySpriteBatchSingleton.getInstance(), "+10 Speed!", 0, 1, 0, pickup.getX(), pickup.getY());
-					pIterator.remove();
+					if (em.getPlayer().getSpeed() != em.getPlayer().getMaxSpeed() * 2){
+						em.getPlayer().setSpeed(10f);
+						PopUpText.getInstance().PopUp(EntitySpriteBatchSingleton.getInstance(), "+10 Speed!", 0, 1, 0, pickup.getX(), pickup.getY());
+						pIterator.remove();
+					}
+					else{
+						PopUpText.getInstance().PopUp(EntitySpriteBatchSingleton.getInstance(), "MAX SPEED!", 0, 1, 0, pickup.getX(), pickup.getY());
+						pIterator.remove();
+					}
 				}
 			}
 		}
