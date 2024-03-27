@@ -42,15 +42,11 @@ public class EnemyAI
 			enemy.setY(enemy.getY() + moveY);
         } else {
             // If close enough to current point, move to the next point
-            /* 
-            currentPointIndex++;
-            if (currentPointIndex >= points.length) {
-                currentPointIndex = 0; // Loop back to the beginning
-            } */
             currentPointIndex = random.nextInt(points.length);
         }
 	}
 
+    // Movement function for Enemy Movement towards player
     public void TrackerMovement(){
         float dx = EntityManager.getInstance().getPlayer().getX() - enemy.getX();
         float dy = EntityManager.getInstance().getPlayer().getY() - enemy.getY();

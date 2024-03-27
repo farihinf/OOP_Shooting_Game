@@ -15,15 +15,16 @@ import java.util.Random;
 public class EntityFactory {
     private Texture[] playerTexture;  // hold player texture
     private Texture[] enemyTexture;   // hold enemy texture
-    private Texture[] pickupTexture;
-    private float maxSpeed = 125f;
-    private float minSpeed = 80f;
-    private float maxX = 600f;
-    private float minX = 50f;
-    private SpriteBatch batch;
+    private Texture[] pickupTexture; // hold pickup texture
+    private float maxSpeed = 125f;  // max speed of enemies
+    private float minSpeed = 80f;  // min speed of enemies
+    private float maxX = 600f;   // max X axis (boundary)
+    private float minX = 50f;   // min X axis (boundary)
+    private SpriteBatch batch;  
     private Random random = new Random();
 
     public EntityFactory(){
+        // Load textures
         playerTexture = new Texture[]{
             new Texture(Gdx.files.internal("EntitySprites\\PlayerSprites\\player_blue.png")),
             new Texture(Gdx.files.internal("EntitySprites\\PlayerSprites\\player_red.png")),
@@ -46,10 +47,12 @@ public class EntityFactory {
         batch = EntitySpriteBatchSingleton.getInstance();
     }
 
+    // create Shooter Enemy Type
     public Enemy createShooter(){
         return new Enemy(500, 10, 200, enemyTexture[0], batch, 300f, 500f, EnemyType.SHOOTER);
     }
 
+    // create Chaser Enemy type
     public Enemy createChaser() {
         Random random = new Random();
         
@@ -62,10 +65,12 @@ public class EntityFactory {
         return new Enemy(500, 10, randomSpeed, enemyTexture[1], batch, randomX, 500f, EnemyType.CHASER);
     }
 
+    // create Big Enemy type
     public Enemy createBig(){
         return new Enemy(800, 25, 50f, enemyTexture[2], batch, 300f, 500f, EnemyType.SHOOTER);
     }
 
+    // create Player based on chosen plane
     public Player createPlayer(int textureIndex){
         int health;
         int damage;
@@ -92,6 +97,7 @@ public class EntityFactory {
         return new Player(health, damage, speed, playerTexture[textureIndex], batch, 300f, 100f, textureIndex);
     }
 
+    // Create pickup randomly
     public Pickup createPickup(float x, float y){
         float whichPickup = random.nextInt(3);
         if (whichPickup == 0){
@@ -113,6 +119,9 @@ public class EntityFactory {
         }
         for (Texture enemy : enemyTexture) {
             enemy.dispose();
+        }
+        for (Texture pickup : pickupTexture) {
+            pickup.dispose();
         }
     }
 }
