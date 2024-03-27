@@ -82,6 +82,7 @@ public class CollisionManager {
 			Pickup pickup = pIterator.next();
 			if(pickup.GetCollsionRect().CollidesWith(em.getPlayer().GetCollsionRect()))
 			{
+				// Pickup bonuses for player, pop up text will appear if player got the bonus or the bonus is maxed out 
 				if(pickup.getPickupType() == PickupType.DAMAGE){	
 					if (em.getPlayer().getDamage() != em.getPlayer().getMaxDamage() * 2){
 						em.getPlayer().setDamage(10);
