@@ -23,7 +23,7 @@ public class Player extends Entity implements iEntity{
 	private ArrayList<Bullet> bulletList = new ArrayList<>();
 	private Texture healthTexture;
 	private float initialHealthBarWidth;
-	private static float SHOOTINGCD = 1f;
+	private static float SHOOTINGCD = 0.1f;
 	private int score;
 	private BitmapFont textRender;
 	private int currIndex;

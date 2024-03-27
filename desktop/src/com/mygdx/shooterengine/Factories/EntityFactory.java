@@ -47,7 +47,7 @@ public class EntityFactory {
     }
 
     public Enemy createShooter(){
-        return new Enemy(100, 10, 200, enemyTexture[0], batch, 300f, 500f, EnemyType.SHOOTER);
+        return new Enemy(500, 10, 200, enemyTexture[0], batch, 300f, 500f, EnemyType.SHOOTER);
     }
 
     public Enemy createChaser() {
@@ -59,11 +59,11 @@ public class EntityFactory {
         // Generate random x position within a range
         float randomX = random.nextFloat() * (maxX - minX) + minX;
         
-        return new Enemy(100, 10, randomSpeed, enemyTexture[1], batch, randomX, 500f, EnemyType.CHASER);
+        return new Enemy(500, 10, randomSpeed, enemyTexture[1], batch, randomX, 500f, EnemyType.CHASER);
     }
 
     public Enemy createBig(){
-        return new Enemy(150, 25, 50f, enemyTexture[2], batch, 300f, 500f, EnemyType.SHOOTER);
+        return new Enemy(800, 25, 50f, enemyTexture[2], batch, 300f, 500f, EnemyType.SHOOTER);
     }
 
     public Player createPlayer(int textureIndex){
