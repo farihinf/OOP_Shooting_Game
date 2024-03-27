@@ -74,7 +74,7 @@ public class EntityFactory {
         switch (textureIndex){
             case 0:
                 health = 100;
-                damage = 50;
+                damage = 30;
                 speed = 200f;
                 break;
             case 1:
@@ -90,7 +90,7 @@ public class EntityFactory {
             default:
                 throw new IllegalArgumentException("Invalid texture index: " + textureIndex);    
         }
-        return new Player(health, damage, speed, playerTexture[textureIndex], batch, 300f, 100f);
+        return new Player(health, damage, speed, playerTexture[textureIndex], batch, 300f, 100f, textureIndex);
     }
 
     public Pickup createPickup(float x, float y){

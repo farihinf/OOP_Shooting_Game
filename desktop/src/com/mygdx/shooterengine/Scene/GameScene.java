@@ -1,7 +1,5 @@
 package com.mygdx.shooterengine.Scene;
 
-import org.lwjgl.glfw.GLFWNativeX11;
-
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputAdapter;

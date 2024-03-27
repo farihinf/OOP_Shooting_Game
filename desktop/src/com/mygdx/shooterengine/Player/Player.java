@@ -23,20 +23,21 @@ public class Player extends Entity implements iEntity{
 	private ArrayList<Bullet> bulletList = new ArrayList<>();
 	private Texture healthTexture;
 	private float initialHealthBarWidth;
-	private static float SHOOTINGCD = 0.8f;
+	private static float SHOOTINGCD = 1f;
 	private int score;
 	private BitmapFont textRender;
-
+	private int currIndex;
 	private float shootingCD = 0;
 
 
-	public Player(int health, int damage, float speed, Texture texture, SpriteBatch sb, float x, float y) {
+	public Player(int health, int damage, float speed, Texture texture, SpriteBatch sb, float x, float y, int currentIndex) {
 		super(damage, speed, texture, sb, x, y);
 		this.health = health;
 		healthTexture = new Texture("EntitySprites\\HealthBar.png");
 	
 		initialHealthBarWidth = Gdx.graphics.getWidth();
 		score = 0;
+		currIndex = currentIndex;
 		textRender = new BitmapFont();
 	}
 
@@ -60,14 +61,38 @@ public class Player extends Entity implements iEntity{
 	// function to shoot
 	@Override
 	public void Shoot(int direction) {
-		shootingCD -= Gdx.graphics.getDeltaTime();
+		if(currIndex == 0){
+			shootingCD -= Gdx.graphics.getDeltaTime();
 
-		if (IOManager.GetInstance().isKeyPressed(Keys.SPACE) && shootingCD < 0) {
-			//Bullet bullet = new Bullet(10, 10, this.texture, this.batch, 100, 100);
-			shootingCD = SHOOTINGCD;
-			bulletList.add(new Bullet(this.damage, 1000, this.texture, this.batch, posX + (texture.getWidth() / 2), posY));
-			AudioManager.GetInstance().PlaySound("Audio\\Shoot.mp3");
+			if (IOManager.GetInstance().isKeyPressed(Keys.SPACE) && shootingCD < 0) {
+				//Bullet bullet = new Bullet(10, 10, this.texture, this.batch, 100, 100);
+				shootingCD = SHOOTINGCD;
+				bulletList.add(new Bullet(this.damage, 1000, this.texture, this.batch, posX, posY));
+				bulletList.add(new Bullet(this.damage, 1000, this.texture, this.batch, posX + (texture.getWidth()), posY));
+				AudioManager.GetInstance().PlaySound("Audio\\Shoot.mp3");
+			}
 		}
+		else if(currIndex == 1){
+			shootingCD -= Gdx.graphics.getDeltaTime();
+
+			if (IOManager.GetInstance().isKeyPressed(Keys.SPACE) && shootingCD < 0) {
+				//Bullet bullet = new Bullet(10, 10, this.texture, this.batch, 100, 100);
+				shootingCD = SHOOTINGCD;
+				bulletList.add(new Bullet(this.damage, 1000, this.texture, this.batch, posX + (texture.getWidth() / 2), posY));
+				AudioManager.GetInstance().PlaySound("Audio\\Shoot.mp3");
+			}
+		}
+		else if(currIndex == 2) {
+			shootingCD -= Gdx.graphics.getDeltaTime();
+
+			if (IOManager.GetInstance().isKeyPressed(Keys.SPACE) && shootingCD < 0) {
+				//Bullet bullet = new Bullet(10, 10, this.texture, this.batch, 100, 100);
+				shootingCD = SHOOTINGCD / 4;
+				bulletList.add(new Bullet(this.damage, 1000, this.texture, this.batch, posX + (texture.getWidth() / 2), posY));
+				AudioManager.GetInstance().PlaySound("Audio\\Shoot.mp3");
+			}
+		}
+		
 
 		if(!bulletList.isEmpty())
 		{
